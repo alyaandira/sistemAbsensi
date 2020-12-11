@@ -190,6 +190,9 @@
                 <!-- Start Top Leader Table -->
                 <!-- *************************************************************** -->
                 <div class="row">
+                    <div>
+                    <h1>Adli Ganteng</h1>
+                    </div>
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
