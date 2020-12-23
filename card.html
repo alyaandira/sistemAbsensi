@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+      
+      <section id="sushi-menu">
+        <ul id="gallery">
+          <li class="card">
+            <a target="" href="http://www.natures-health-foods.com/images/Sushi-RollSalmonAvacado.jpg" class="image" title="NO FAMINE SALMON"><img src="images/bluemarble.jpg"></a>
+            <h3 class="card-header">Mobile Programming</h3>
+            <p class="card-description">Senin <br> 10.00-12.00 </p>
+            <button class="order-now">Isi Absensi</button>
+
+          <li class="card">
+            <a target="" href="http://www.natures-health-foods.com/images/Sushi-RollTuna.jpg" class="image" title="TUNA LAGUNA"><img src="images/bluemarble.jpg" ></a>
+            <h3 class="card-header">Digital Forensik</h3>
+            <p class="card-description">Rabu <br> 14.30-16.30</p>
+            <button class="order-now">Isi Absensi</button>
+      
+          <li class="card">
+            <a target="" href="http://www.natures-health-foods.com/images/Sushi-RollSalmonAvacado.jpg" class="image" title="NO FAMINE SALMON"><img src="images/bluemarble.jpg"></a>
+            <h3 class="card-header">Kecerdasan Buatan</h3>
+            <p class="card-description">Jum'at<br> 08.00-10.30</p>
+            <button class="order-now">Isi Absensi</button>
+          </li>
+        </ul>
+      </section>
+</body>
+</html>
+
+<style>
+   * {
+  margin: 0;
+  padding: 0;
+}
+
+/* Sushi Gallery */
+#gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 0;
+  grid-auto-rows: auto;
+  max-width: 950px;
+  text-align: center;
+  margin: 30px auto;
+}
+
+.card {
+  position: relative;
+  top: 0;
+  box-sizing: border-box;
+  list-style-type: none;
+  background: rgb(183, 208, 216);
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 45px;
+  margin: 10px;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+.card:hover {
+  top: -5px;
+  box-shadow: 0 15px 10px -10px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.card-header {
+  font: 700 16px "Roboto";
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.card-description {
+  font: 300 14px "Roboto";
+  text-align: center;
+  line-height: 20px;
+}
+
+.order-now {
+  position: relative;
+  top: 0;
+  left: 0;
+  padding: 14px 22px;
+  margin-top: 25px;
+  border: 0 none;
+  outline: none;
+  border-radius: 50px;
+  background: url(images/bluemarble.jpg) no-repeat;
+  font: 700 12px "Overpass";
+  color: rgb(0, 0, 0);
+  text-transform: uppercase;
+  cursor: pointer;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+}
+.order-now:hover {
+  background: #ffffff;
+}
+
+img {
+  width: 125px;
+  height: 125px;
+  margin-bottom: 15px;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Lightbox section */
+img.mfp-img {
+  height: 500px;
+  width: 500px;
+  padding: 150px;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+img.mfp-img:hover {
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+.mfp-figure:after {
+  border-radius: 50%;
+}
+
+.mfp-counter {
+  display: none;
+}
+
+.mfp-title {
+  font: 700 26px "Roboto";
+  color: #000;
+  text-align: center;
+  padding-right: 0;
+  position: relative;
+  bottom: 375px;
+}
+
+/* Media queries */
+@media (max-width: 660px) {
+  #gallery {
+    grid-template-columns: repeat(1, 1fr);
+    display: block;
+    max-width: 300px;
+  }
+}
+@media (max-width: 965px) {
+  #gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 520px) {
+  .sushi-header__header {
+    font-size: 2em;
+  }
+}
+</style>
+
+<script>
+    $(".image").magnificPopup({
+  type: "image",
+  removalDelay: 300,
+
+  gallery: {
+    enabled: true,
+    preload: [0, 2]
+  }
+});
+
+$(document).ready(function() {
+  var $orderNowBtn = $(".order-now");
+  var $card = $(".card");
+
+  $orderNowBtn.on("click", function() {
+    $(this).parent($card).css("transform", "rotateY(180deg)");
+  });
+    
+    console.log('hi');
+});
+
+</script>

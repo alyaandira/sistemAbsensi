@@ -30,7 +30,7 @@ session_unset();
 
     <?php
     if (isset($_POST["user_name"])) {
-        include 'db-component\employee-login.php';
+        include '.\.\db-component\employee-login.php';
     }
     ?>
     <!-- <img src="./source/image/image.jpg" alt=""> -->

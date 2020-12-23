@@ -3,8 +3,8 @@
 // ====== All PHP variables regarding database configuration are listed down here ======
 $hostname = "localhost";
 $username = "root";
-$password = "";
-$dbName = "sispeg";
+$password = ">zVe6S8[@w*pISjU";
+$dbName = "SistemAbsensi";
 
 // Departement Tables
 $department_table = "department";

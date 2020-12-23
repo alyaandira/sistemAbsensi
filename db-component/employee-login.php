@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 include './db-component/config.php';
 $input_employee_NIP = $_POST["user_name"];
