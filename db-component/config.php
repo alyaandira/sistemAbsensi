@@ -3,33 +3,69 @@
 // ====== All PHP variables regarding database configuration are listed down here ======
 $hostname = "localhost";
 $username = "root";
-$password = ">zVe6S8[@w*pISjU";
-$dbName = "SistemAbsensi";
+$password = "";
+$dbName = "sistem_absensi";
 
-// Departement Tables
-$department_table = "department";
-$department_id = "department_id";
-$department_name = "department_name";
-//listdown semua table row nya (data)
+// Tabel Absensi
+$absensi_table = "absensi";
+$absensi_id = "absensi_id";
+$absensi_status = "absensi_status";
+$mhs_nim = "mhs_nim";
+$pert_kode = "pert_kode";
 
-// Employee Tables
-$employee_table = "employee";
-$employee_NIP = "employee_NIP";
-$employee_fullname = "employee_fullname";
-$employee_password = "employee_password";
-$employee_email = "employee_email";
-$employee_address = "employee_address";
-$position_id = "position_id";
+// Tabel Admin
+$admin_table = "admin";
+$admin_username = "admin_username";
+$admin_pass = "admin_pass";
 
-// Position Tables
-$position_table = "position";
-$position_id = "position_id";
-$position_name = "position_name";
-$department_id = "department_id";
 
-// Presence Tables
-$presence_table = "presence";
-$presence_id = "presence_id";
-$presence_dateTime = "presence_dateTime";
-$presence_status = "presence_status";
-$employee_NIP = "employee_NIP";
+// Tabel Daftar
+$daftar_table = "daftar";
+$daftar_id = "daftar_id";
+$matkul_kode = "matkul_kode";
+$mhs_nim = "mhs_nim";
+
+
+// Tabel Dosen
+$dosen_table = "dosen";
+$dosen_nip = "dosen_nip";
+$dosen_nama = "dosen_nama";
+$dosen_password = "dosen_password";
+
+
+// Tabel Mhs
+$mhs_table = "mahasiswa";
+$mhs_nim = "mhs_nim";
+$mhs_nama = "mhs_nama";
+$mhs_password = "mhs_password";
+
+
+// Tabel Matkul
+$matkul_table = "mata_kuliah";
+$matkul_kode = "matkul_kode";
+$matkul_nama = "matkul_nama";
+
+
+// Tabel Mengajar
+$mengajar_table = "mengajar";
+$mengajar_id = "mengajar_id";
+$matkul_kode = "matkul_kode";
+$dosen_nip = "dosen_nip";
+
+
+// Tabel Pertemuan
+$pertemuan_table = "pertemuan";
+$pert_kode = "pert_kode";
+$matkul_kode = "matkul_kode";
+$kelas_id = "kelas_id";
+$dosen_nip = "dosen_nip";
+$waktuMulai = "waktuMulai";
+$waktuAkhir = "waktuAkhir";
+$batasWaktu = "batasWaktu";
+
+
+// Tabel RKelas
+$ruangkelas_table = "ruang_kelas";
+$kelas_id = "kelas_id";
+$kelas_nama = "kelas_nama";
+$dosen_nip = "dosen_nip";

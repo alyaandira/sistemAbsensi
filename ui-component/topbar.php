@@ -54,7 +54,7 @@
                  <li class="nav-item dropdown">
                      <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                          <img src="./assets/images/users/profile-pic.jpg" alt="user" class="rounded-circle" width="40">
-                         <span class="ml-2 d-none d-lg-inline-block"><span>Hello,</span> <span class="text-dark"><?php echo $_SESSION["currentUsername"];?> </span> <i data-feather="chevron-down" class="svg-icon"></i></span>
+                         <span class="ml-2 d-none d-lg-inline-block"><span>Hello,</span> <span class="text-dark"> <?php echo $_SESSION["currentUsername"]; ?></span> <i data-feather="chevron-down" class="svg-icon"></i></span>
                      </a>
                      <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
                          <a class="dropdown-item" href="login.php"><i data-feather="power" class="svg-icon mr-2 ml-1"></i>

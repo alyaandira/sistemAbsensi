@@ -30,7 +30,20 @@ session_unset();
 
     <?php
     if (isset($_POST["user_name"])) {
-        include '.\.\db-component\employee-login.php';
+
+        if (isset($_POST["user_type"])) {
+
+            if ($_POST["user_type"] == "Mahasiswa") {
+                include '.\.\db-component\mhs-login.php';
+            } elseif ($_POST["user_type"] == "Dosen") {
+                include '.\.\db-component\dosen-login.php';
+            } elseif ($_POST["user_type"] == "Admin") {
+                include '.\.\db-component\admin-login.php';
+                var_dump("include alien");
+            }
+        } else {
+            echo "select user type (ubah ini jadi izitoast)";
+        }
     }
     ?>
     <!-- <img src="./source/image/image.jpg" alt=""> -->
@@ -56,9 +69,26 @@ session_unset();
                                 <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
                                 <input type="password" name="user_pass" id="your_pass" placeholder="Password" />
                             </div>
+                            <div class="form-group">
+                                <input type="radio" id="radio_mhs" name="user_type" value="Mahasiswa">
+                                <label for="radio_mhs">Mahasiswa</label><br>
+                            </div>
+                            <div class="form-group">
+
+                                <input type="radio" id="radio_dosen" name="user_type" value="Dosen">
+                                <label for="radio_dosen">Dosen</label><br>
+                            </div>
+
+                            <div class="form-group">
+
+                                <input type="radio" id="radio_admin" name="user_type" value="Admin">
+                                <label for="radio_admin">Admin</label><br>
+                            </div>
+
                             <div class="form-group form-button">
                                 <input type="submit" name="signin" id="signin" class="form-submit" value="Log in" />
                             </div>
+
                         </form>
                     </div>
                 </div>
