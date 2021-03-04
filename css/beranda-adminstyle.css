@@ -1,0 +1,38 @@
+/* class container-table tambahkan
+padding horizontal : 20px
+padding vertical : bebas, rasa2
+
+
+
+1. class selection pake .
+2. id selection pake #
+3. tag selection
+4. universal/global selection
+*/
+/* 
+#kotak1{
+    background-color: red;
+}
+
+.kotakbareng1{
+    background-color: green;
+
+}
+
+.kotakbareng2{
+    background-color: yellow;
+
+} */
+
+.container-table{
+    padding: 20px 20px !important;
+    margin: 20px 20px !important;
+    /* background-color: rgb(0, 0, 0, 0.1); */
+    box-shadow: 2px 2px 5px rgb(0, 0, 0, 0.3);
+    border-radius: 20px;
+    transition: 0.2s all;
+}
+
+.container-table:hover{
+    box-shadow: 4px 4px 5px rgb(0, 0, 0, 0.5);
+}

@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,64 +9,93 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Alya Andira Lubis">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon.png">
+    <title>Sistem Absensi - Beranda Admin</title>
+    <!-- Custom CSS -->
+    <link href="./assets/extra-libs/c3/c3.min.css" rel="stylesheet">
+    <link href="./assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
+    <link href="./assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <link href="./dist/css/style.min.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <title>Beranda - Administrator</title>
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/beranda-adminstyle.css">
+    <!-- <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="./css/table-style.css"> -->
 </head>
 
 <body>
-    <h1>Admin Panel</h1>
-    <?php
+    <!-- Preloader - style you can find in spinners.css -->
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
 
-    if (isset($_POST["ClassModal_Kode"])) {
-        var_dump($_POST["ClassModal_Kode"]);
-        var_dump($_POST["ClassModal_Nama"]);
+        <?php
+        include '././ui-component/topbar-admin.php';
+        include '././ui-component/sidebar-admin.php';
+        ?>
 
-        //include db-component untuk update
-        //tengok SQL untuk update table
-        //pasangkan template dashboard ke beranda-admin.php
-    }elseif(isset($_POST["deleteClass"])){
-        var_dump($_POST["deleteClass"]);
-        //include db-component untuk delete kelas
-        // ini advanced sikit soalnya harus delete semua record pertemuan, daftar murid
-        // cemana kau assign murid ke kelas ? pikirin business logic flow nya
-        // business logic ga code, logika, siapa bagaimana 
-        // contoh, mhs yg pilih sendiri untuk daftar, atau ditambah kan dosen, atau admin
-        // biasanya admin
-        // klo admin berarti kau bisa select kelas nya, terus assign murid nya, susah co
-        // ga susah, ribet aja, dibukak code tiap hari tq
-        // kalo mhs yg assign?
-        // kenak comment dosen, dimana logic nya, mhs yg daftar kelas tanpa verifikasi
-        // makanya kubilang piker dan konfirmasi sendiri ama dosenmu, flow nya kau yg ngator, aku bantu nge code aja
-        // soalnya kami elearning gitu, tp lebi bagus admin aja
-        // konfirmasi sendiri ama dosenmu ga mau
-        // yauda bebaswkwkkwkwkwkw canda lo
-        // bandal
-        // https://sweetalert2.github.io/
-        // klo perlu
-    }
+        <!-- Page wrapper  -->
+        <div class="page-wrapper">
+            <!-- Bread crumb and right sidebar toggle -->
+            <div> Halaman Admin </div>
+            <h1>Admin Panel</h1>
+
+            
+            <?php
+
+            if (isset($_POST["ClassModal_Kode"])) {
+                var_dump($_POST["ClassModal_Kode"]);
+                var_dump($_POST["ClassModal_Nama"]);
+
+                //include db-component untuk update
+                //tengok SQL untuk update table
+                //pasangkan template dashboard ke beranda-admin.php
+            } elseif (isset($_POST["deleteClass"])) {
+                var_dump($_POST["deleteClass"]);
+            }
 
 
-    include '././db-component/GetAllClass.php';
 
-    if (empty($FetchedClassList)) {
-        echo "<p>No class has been registered</p>";
-    } else {
+            include '././db-component/GetAllClass.php';
 
-        echo "
-        <table style='width:100%'>
-        <tr>
-            <th>No</th>
-            <th>Name</th>
-            <th>Kode</th>
-            <th>Action</th>
-        </tr>";
+            if (empty($FetchedClassList)) {
+                echo "<p>No class has been registered</p>";
+            } else {
 
-        //belajar tentang foreach
-        foreach ($FetchedClassList as $key => $value) {
-            $nomor = $key + 1;
-            echo "
+                echo "
+        <div class='container-table'>
+            <table class='table table-sm table-hover'>
+                <thead class='thead-dark'>
+                    <tr>
+                        <th>No</th>
+                        <th>Name</th>
+                        <th>Kode</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>"
+              ;
+
+                //belajar tentang foreach
+                foreach ($FetchedClassList as $key => $value) {
+                    $nomor = $key + 1;
+                    echo "
             <tr>
                 <td>$nomor</td>
                 <td id='matkulNama_$key'>$value[matkul_nama]</td>
@@ -77,11 +110,11 @@
                     
                 </td>
             </tr>";
-        } //end of foreach
-        echo "</table>";
-    }
+                } //end of foreach
+                echo "</table>";
+            }
 
-    ?>
+            ?>
 
 </body>
 
@@ -169,3 +202,15 @@
         }
     }
 </script>
+
+</div>
+<!-- End Container fluid  -->
+</div>
+<!-- End Page wrapper  -->
+</div>
+<!-- End Wrapper -->
+<?php
+include '././ui-component/dependenciesImport.php';
+?>
+
+</html>
