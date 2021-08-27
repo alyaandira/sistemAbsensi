@@ -71,15 +71,14 @@ header("location: login.php");
                 <?php
                 include './db-component/GetMatkulByMengajar.php';
 
-                var_dump($matkulList);
+                // var_dump($matkulList);
                 ?>
                 <table class="table table-sm">
                     <thead>
                         <tr>    
                             <h1> DAFTAR MATA KULIAH </h1>
-                            <th scope="col">ID Mengajar</th>
-                            <th scope="col">Kode Matkul</th>
-                            <th scope="col">NIP Dosen</th>
+                            <th scope="col">Kode Mata Kuliah</th>
+                            <th scope="col">Nama Mata Kuliah</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -87,14 +86,13 @@ header("location: login.php");
                         //  <a target="" href="http://www.natures-health-foods.com/images/Sushi-RollSalmonAvacado.jpg" class="image_card">
                         //  <img src="images/bluemarble.jpg"></a>
                         foreach ($matkulList as $class) {
-                            $IDmengajar = $class[$mengajar_id];
                             $matkulKode = $class[$matkul_kode];
-                            $dosenNIP = $class[$dosen_nip];
+                            // $IDmengajar = $class[$mengajar_id];
+                            $matkulNama = $class[$matkul_nama];
                             echo "
                             <tr>
-                                <td>$IDmengajar</td>
                                 <td>$matkulKode</td>
-                                <td>$dosenNIP</td>
+                                <td>$matkulNama</td>
                             </tr>";
                         }
                         ?>

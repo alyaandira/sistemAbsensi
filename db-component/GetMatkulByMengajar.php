@@ -10,18 +10,14 @@ if ($conn->connect_error) {
 
 $NIP = $_SESSION["currentNIP"];
 
-$SQL_query = "SELECT * FROM $mengajar_table WHERE ".
-"$dosen_nip = '$NIP'";
-// "LEFT JOIN mata_kuliah ".
-// "ON mengajar.matkul_kode = mata_kuliah.matkul_kode ".
-// 4097901
-$result = mysqli_query($conn, $SQL_query);
-// SELECT mata_kuliah.matkul_nama, mata_kuliah.matkul_kode FROM
-// mengajar LEFT JOIN mata_kuliah
-// ON mengajar.matkul_kode = mata_kuliah.matkul_kode
-// HAVING mengajar.dosen_nip = 4097901
+// $SQL_query = "SELECT * FROM $mengajar_table WHERE ".
+$SQL_query = "SELECT mata_kuliah.matkul_nama, mata_kuliah.matkul_kode, `dosen_nip` FROM mengajar ". 
+"LEFT JOIN mata_kuliah ". 
+"ON mengajar.matkul_kode = mata_kuliah.matkul_kode ". 
+"HAVING `dosen_nip` = '$NIP' ";
 
-// SELECT * FROM mengajar LEFT JOIN mata_kuliah ON mengajar.matkul_kode = mata_kuliah.matkul_kode HAVING `dosen_nip` = 4097901
+// "$dosen_nip = '$NIP'";
+$result = mysqli_query($conn, $SQL_query);
 
 if ($result) {
   $row_count = $result->num_rows;
