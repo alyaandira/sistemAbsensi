@@ -36,7 +36,7 @@ if ($result) {
     // var_dump($_SESSION["currentUsername"]);
     // var_dump($_SESSION["currentNIP"]);
     // redirect to home page
-    header("Location: beranda.php");
+    header("Location: beranda-dosen.php");
     // exit;
   } else {
     echo
