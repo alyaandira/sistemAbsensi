@@ -63,7 +63,6 @@ session_start();
                 echo "
                     <li class='card'>
                         <h3 class='card-header'>$namaMatkul</h3>
-                        <p class='card-description'>Hari<br> 08.00-10.30</p>
                         <form method='POST' action='pindaiAbsensi.php'>
                           <button type='submit' class='order-now' value='$kodeMatkul' name='btn-select-kelas'>Isi Absensi</button>
                         </form>

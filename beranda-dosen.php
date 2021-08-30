@@ -3,17 +3,18 @@ session_start();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html dir="ltr" lang="en">
 
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Alya Andira Lubis">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon.png">
-    <title>Sistem Absensi - Beranda Dosen</title>
+    <title>Sistem Absensi - Beranda</title>
     <!-- Custom CSS -->
     <link href="./assets/extra-libs/c3/c3.min.css" rel="stylesheet">
     <link href="./assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
@@ -32,6 +33,7 @@ session_start();
 	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="./css/table-style.css"> -->
+
 </head>
 
 <body>
@@ -50,13 +52,12 @@ session_start();
         include '././ui-component/sidebar-dosen.php';
         ?>
 
-        <!-- Page wrapper  -->
-        <div class="page-wrapper">
+<div class="page-wrapper">
             <!-- Bread crumb and right sidebar toggle -->
             <div> Halaman Dosen </div>
             <h1>Dosen Panel</h1>
 
-            
+
             <?php
 
             if (isset($_POST["ClassModal_Kode"])) {
@@ -79,42 +80,45 @@ session_start();
             } else {
 
                 echo "
-        <div class='container-table'>
-            <table class='table table-sm table-hover'>
-                <thead class='thead-dark'>
-                    <tr>
-                        <th>No</th>
-                        <th>Name</th>
-                        <th>Kode</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>"
-              ;
+                <div class='container-table'>
+                    <table class='table table-sm table-hover'>
+                        <thead class='thead-dark'>
+                            <tr>
+                                <th>No</th>
+                                <th>Name</th>
+                                <th>Kode</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>";
 
                 //belajar tentang foreach
                 foreach ($FetchedClassList as $key => $value) {
                     $nomor = $key + 1;
                     echo "
-            <tr>
-                <td>$nomor</td>
-                <td id='matkulNama_$key'>$value[matkul_nama]</td>
-                <td id='matkulkode_$key'>$value[matkul_kode]</td>
-                <td style='text-align:center;'>
-                    <form method='POST'>
-                        <button name='deleteClass' value='$value[matkul_kode]' class='btn btn-danger'>Delete</button>
-                        <button onclick='fillupUpdateClassModal(&#39;$key&#39;);' class='btn btn-warning' data-toggle='modal' data-target='#update_class_modal' type='button'>
-                            Update
-                        </button>
-                    </form>
-                    
-                </td>
-            </tr>";
+                            <tr>
+                                <td>$nomor</td>
+                                <td id='matkulNama_$key'>$value[matkul_nama]</td>
+                                <td id='matkulkode_$key'>$value[matkul_kode]</td>
+                                <td style='text-align:center;'>
+                                    <form method='POST'>
+                                        <button name='deleteClass' value='$value[matkul_kode]' class='btn btn-danger'>Delete</button>
+                                        <button onclick='fillupUpdateClassModal(&#39;$key&#39;);' class='btn btn-warning' data-toggle='modal' data-target='#update_class_modal' type='button'>
+                                            Update
+                                        </button>
+                                    </form>
+                                    
+                                </td>
+                            </tr>";
                 } //end of foreach
-                echo "</table>";
+                echo
+                "   </tbody>
+                    </table>
+                </div>";
             }
 
             ?>
+        </div>
 
 </body>
 
@@ -151,8 +155,9 @@ session_start();
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
 
 </html>
 
@@ -203,14 +208,6 @@ session_start();
     }
 </script>
 
-</div>
-<!-- End Container fluid  -->
-</div>
-<!-- End Page wrapper  -->
-</div>
-<!-- End Wrapper -->
-<?php
-include '././ui-component/dependenciesImport.php';
-?>
-
-</html>
+    <?php
+    include '././ui-component/dependenciesImport.php';
+    ?>
