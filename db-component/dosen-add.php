@@ -1,8 +1,8 @@
 <?php
 include "././db-component/config.php";
-$input_dosen_nip= $_POST["DosenModal_NIP"];
+$input_dosen_nip = $_POST["DosenModal_NIP"];
 $input_dosen_nama = $_POST["DosenModal_Nama"];
-$input_dosen_pass= $_POST["DosenModal_Password"];
+$input_dosen_pass = $_POST["DosenModal_Password"];
 
 
 // Create connection
@@ -17,17 +17,18 @@ $result = mysqli_query($conn, $SQL_query);
 
 
 if ($result) {
-  $row_count = $result->num_rows;
-  $FetchedDosenList = [];
-
-  if ($row_count > 0) {
-    $FetchedDosenList = $result -> fetch_all(MYSQLI_ASSOC);
-  } 
+  echo
+  "<script>
+  iziToast.success({
+      title: 'Success',
+      message: 'Berhasil ditambahkan',
+  });
+</script>";
 } else {
   $error_message = $conn->error;
   echo ("Error is = " . $error_message);
   echo
-    "<script>
+  "<script>
         iziToast.error({
             title: 'Error',
             message: 'SQL error',

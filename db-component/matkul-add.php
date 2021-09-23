@@ -1,6 +1,6 @@
 <?php
 include "././db-component/config.php";
-$input_class_kode= $_POST["ClassModal_Kode"];
+$input_class_kode = $_POST["ClassModal_Kode"];
 $input_class_nama = $_POST["ClassModal_Nama"];
 
 // Create connection
@@ -16,17 +16,18 @@ $result = mysqli_query($conn, $SQL_query);
 
 
 if ($result) {
-  $row_count = $result->num_rows;
-  $FetchedClassList = [];
-
-  if ($row_count > 0) {
-    $FetchedClassList = $result -> fetch_all(MYSQLI_ASSOC);
-  } 
+  echo
+  "<script>
+      iziToast.success({
+          title: 'Success',
+          message: 'Berhasil ditambahkan',
+      });
+  </script>";
 } else {
   $error_message = $conn->error;
   echo ("Error is = " . $error_message);
   echo
-    "<script>
+  "<script>
         iziToast.error({
             title: 'Error',
             message: 'SQL error',
