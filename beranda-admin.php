@@ -54,23 +54,44 @@ session_start();
         <div class="page-wrapper">
             <!-- Bread crumb and right sidebar toggle -->
             <div> Halaman Admin </div>
-            <h1>Admin Panel</h1>
+            <h1>Class Management</h1>
 
-            
+
             <?php
 
-            if (isset($_POST["ClassModal_Kode"])) {
+            // if (isset($_POST["ClassModal_Kode"])) {
+            //     var_dump($_POST["ClassModal_Kode"]);
+            //     var_dump($_POST["ClassModal_Nama"]);
+
+            //     //include db-component untuk update
+            //     //tengok SQL untuk update table
+            //     //pasangkan template dashboard ke beranda-admin.php
+            // } elseif (isset($_POST["deleteClass"])) {
+            //     var_dump($_POST["deleteClass"]);
+            // }
+
+            // add class
+            if (isset($_POST["ClassModal_ActionType"])) {
+
+                var_dump($_POST["ClassModal_ActionType"]);
+                var_dump($_POST["ClassModal_PrimaryKey"]);
                 var_dump($_POST["ClassModal_Kode"]);
                 var_dump($_POST["ClassModal_Nama"]);
 
-                //include db-component untuk update
-                //tengok SQL untuk update table
-                //pasangkan template dashboard ke beranda-admin.php
-            } elseif (isset($_POST["deleteClass"])) {
-                var_dump($_POST["deleteClass"]);
+                if ($_POST["ClassModal_ActionType"] == "Add") {
+                    include '././db-component/matkul-add.php';
+                    echo "<br> Add to database";
+                    // TODO: database action untuk add
+                } else if ($_POST["ClassModal_ActionType"] == "Update") {
+                    include '././db-component/matkul-update.php';
+                    echo "<br> Update to database";
+                    // TODO: database action untuk update
+                } else if ($_POST["ClassModal_ActionType"] == "Delete") {
+                    include '././db-component/matkul-delete.php';
+                    echo "<br> Delete to database";
+                    // TODO: database action untuk delete
+                }
             }
-
-
 
             include '././db-component/GetAllClass.php';
 
@@ -89,21 +110,20 @@ session_start();
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tbody>"
-              ;
+                <tbody>";
 
-                //belajar tentang foreach
-                foreach ($FetchedClassList as $key => $value) {
-                    $nomor = $key + 1;
+                foreach ($FetchedClassList as $primaryKey => $value) {
+                    $nomor = $primaryKey + 1;
+                    $matkulKode =$value["matkul_kode"];
                     echo "
             <tr>
                 <td>$nomor</td>
-                <td id='matkulNama_$key'>$value[matkul_nama]</td>
-                <td id='matkulkode_$key'>$value[matkul_kode]</td>
+                <td id='matkulNama_$primaryKey'>$value[matkul_nama]</td>
+                <td id='matkulkode_$primaryKey'>$value[matkul_kode]</td>
                 <td style='text-align:center;'>
                     <form method='POST'>
-                        <button name='deleteClass' value='$value[matkul_kode]' class='btn btn-danger'>Delete</button>
-                        <button onclick='fillupUpdateClassModal(&#39;$key&#39;);' class='btn btn-warning' data-toggle='modal' data-target='#update_class_modal' type='button'>
+                        <button type='button' onclick='initializeDeleteClassModal(&#39;$matkulKode&#39;);' class='btn btn-danger'>Delete</button>
+                        <button onclick='initializeUpdateClassModal(&#39;$primaryKey&#39;);' class='btn btn-warning' data-toggle='modal' data-target='#class_manage_modal' type='button'>
                             Update
                         </button>
                     </form>
@@ -111,18 +131,23 @@ session_start();
                 </td>
             </tr>";
                 } //end of foreach
-                echo "</table>";
+                echo "
+               
+            </table>
+      ";
             }
 
             ?>
 
+            <h1>Tambah Mata Kuliah</h1>
+            <button type="button" onclick="initializeAddClassModal();" class="btn waves-effect waves-light btn-success" data-toggle="modal" data-target="#class_manage_modal">Add</button>
+
 </body>
 
-<!-- Update Class Modal -->
-<div class="modal fade" id="update_class_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Class Modal -->
+<div class="modal fade" id="class_manage_modal" tabindex="-1" aria-labelledby="class_manage_modal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <input type="hidden" id="ClassModal_activeKey" value="0">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Ubah Detail Kelas</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -131,6 +156,10 @@ session_start();
             </div>
             <div class="modal-body">
                 <form method="POST" id='ClassModal_bodyForm'>
+
+                    <input type="text" class="form-control" id="ClassModal_ActionType" name="ClassModal_ActionType">
+                    <input type="text" class="form-control" id="ClassModal_PrimaryKey" name="ClassModal_PrimaryKey">
+
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Kode Kelas:</label>
                         <input type="text" class="form-control" id="ClassModal_Kode" name="ClassModal_Kode">
@@ -143,7 +172,7 @@ session_start();
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button onclick="submitUpdateClassForm();" type="button" class="btn btn-primary">
+                <button onclick="submitModal();" type="button" class="btn btn-primary">
                     Save changes
                 </button>
             </div>
@@ -156,48 +185,76 @@ session_start();
 
 </html>
 
-<style>
-    table,
-    th,
-    td {
-        border: 1px solid black;
-    }
-</style>
+
 
 <script>
-    function fillupUpdateClassModal(key) {
-
+    function initializeUpdateClassModal(primaryKey) {
         //get value from the table row based on selected Key
-        const namaKelas = document.getElementById("matkulNama_" + key).innerHTML;
-        const kodeKelas = document.getElementById("matkulkode_" + key).innerHTML;
+        const namaKelas = document.getElementById("matkulNama_" + primaryKey).innerHTML;
+        const kodeKelas = document.getElementById("matkulkode_" + primaryKey).innerHTML;
 
-        //set the input value in the modal
-        document.getElementById("ClassModal_activeKey").value = key;
+        // //set the input value in the modal
+        document.getElementById("ClassModal_ActionType").value = "Update";
+        document.getElementById("ClassModal_PrimaryKey").value = primaryKey;
         document.getElementById("ClassModal_Nama").value = namaKelas;
         document.getElementById("ClassModal_Kode").value = kodeKelas;
-
     }
 
-    function submitUpdateClassForm() {
+    function initializeAddClassModal(primaryKey) {
+        //set all the field to empty, because it is a frehs new modal
+        document.getElementById("ClassModal_ActionType").value = "Add";
+        document.getElementById("ClassModal_PrimaryKey").value = primaryKey;
+        document.getElementById("ClassModal_Nama").value = "";
+        document.getElementById("ClassModal_Kode").value = "";
+    }
 
-        const activeKey = document.getElementById("ClassModal_activeKey").value;
+    function initializeDeleteClassModal(matkulKode) {
+        document.getElementById("ClassModal_ActionType").value = "Delete";
+        document.getElementById("ClassModal_PrimaryKey").value = "";
+        document.getElementById("ClassModal_Nama").value = "";
+        document.getElementById("ClassModal_Kode").value = matkulKode;
+        // console.log(primaryKey);
+        submitModal()
+    }
 
-        // pakai innetHTML karena dia dialam table, didalam html tag
-        const oldNamaKelas = document.getElementById("matkulNama_" + activeKey).innerHTML;
-        const oldKodeKelas = document.getElementById("matkulkode_" + activeKey).innerHTML;
-
-        // pakai value karena dia dialam <input>, kita ambil <input> dari value itu
+    function submitModal() {
+        const modalType = document.getElementById("ClassModal_ActionType").value;
         const newNamaKelas = document.getElementById("ClassModal_Nama").value;
         const newKodeKelas = document.getElementById("ClassModal_Kode").value;
 
-        // console.log("old Kode kelas : " + oldKodeKelas);
-        // console.log("old Nama kelas : " + oldNamaKelas);
-        // console.log("new kode kelas : " + newKodeKelas);
-        // console.log("new nama kelas : " + newNamaKelas);
+        if (modalType == "Add") {
 
-        if (oldNamaKelas == newNamaKelas && oldKodeKelas == newKodeKelas) {
-            window.alert("nothing changed, nothing to submit, pakai izzi toast")
-        } else {
+            // pakai value karena dia dialam <input>, kita ambil <input> dari value itu
+            console.log("kode kelas baru: " + newKodeKelas);
+            console.log("nama kelas baru : " + newNamaKelas);
+
+            if (newNamaKelas == "" || newKodeKelas == "") {
+                window.alert("Fill up the field!")
+            } else {
+                document.getElementById("ClassModal_bodyForm").submit();
+            }
+
+        } else if (modalType == "Update") {
+
+            // dapatin primary key
+            const primaryKey = document.getElementById("ClassModal_PrimaryKey").value;
+
+            // // pakai innetHTML karena dia dialam table, didalam html tag, di select berdasarkan primary key
+            const oldNamaKelas = document.getElementById("matkulNama_" + primaryKey).innerHTML;
+            const oldKodeKelas = document.getElementById("matkulkode_" + primaryKey).innerHTML;
+
+            console.log("Kode kelas lama: " + oldKodeKelas);
+            console.log("Nama kelas lama: " + oldNamaKelas);
+            console.log("Kode kelas baru: " + newKodeKelas);
+            console.log("Nama kelas baru: " + newNamaKelas);
+
+            if (oldNamaKelas == newNamaKelas && oldKodeKelas == newKodeKelas || newNamaKelas == "" || newKodeKelas == "") {
+                window.alert("nothing changed, nothing to submit, pakai izzi toast")
+            } else {
+                document.getElementById("ClassModal_bodyForm").submit();
+            }
+
+        } else if (modalType == "Delete") {
             document.getElementById("ClassModal_bodyForm").submit();
         }
     }
@@ -214,3 +271,11 @@ include '././ui-component/dependenciesImport.php';
 ?>
 
 </html>
+
+<style>
+    table,
+    th,
+    td {
+        border: 1px solid black;
+    }
+</style>
