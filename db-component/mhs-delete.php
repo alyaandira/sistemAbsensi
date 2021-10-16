@@ -3,6 +3,9 @@ include "././db-component/config.php";
 $input_mahasiswa_nim = $_POST["MahasiswaModal_NIM"];
 $input_mahasiswa_nama = $_POST["MahasiswaModal_Nama"];
 $input_mahasiswa_pass = $_POST["MahasiswaModal_Password"];
+$input_mahasiswa_email = $_POST["MahasiswaModal_Email"];
+$input_mahasiswa_fakultas = $_POST["MahasiswaModal_Fakultas"];
+$input_mahasiswa_jurusan = $_POST["MahasiswaModal_Jurusan"];
 
 // Create connection
 $conn = new mysqli($hostname, $username, $password, $dbName);

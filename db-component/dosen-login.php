@@ -30,11 +30,19 @@ if ($result) {
     $dataRow = $result->fetch_row();
 
     // assign current user details to
-    $_SESSION["currentUsername"] = $dataRow[1];
     $_SESSION["currentNIP"] = $dataRow[0];
+    $_SESSION["currentUsername"] = $dataRow[1];
+    $_SESSION["currentPassword"] = $dataRow[2];
+    $_SESSION["currentEmail"] = $dataRow[3];
+    $_SESSION["currentFakultas"] = $dataRow[4];
+    $_SESSION["currentJurusan"] = $dataRow[5];
 
-    // var_dump($_SESSION["currentUsername"]);
-    // var_dump($_SESSION["currentNIP"]);
+    var_dump($_SESSION["currentNIP"]);
+    var_dump($_SESSION["currentUsername"]);
+    var_dump($_SESSION["currentPassword"]);
+    var_dump($_SESSION["currentEmail"]);
+    var_dump($_SESSION["currentFakultas"]);
+    var_dump($_SESSION["currentJurusan"]);
     // redirect to home page
     header("Location: beranda-dosen.php");
     // exit;

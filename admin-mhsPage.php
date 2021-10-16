@@ -57,17 +57,20 @@ session_start();
         <div class="page-wrapper">
             <!-- Bread crumb and right sidebar toggle -->
             <div> Halaman Admin </div>
-            <h1>Admin Panel</h1>
+            <h1>Mahasiswa Management</h1>
 
 
             <?php
             if (isset($_POST["MahasiswaModal_ActionType"])) {
 
-                var_dump($_POST["MahasiswaModal_ActionType"]);
-                var_dump($_POST["MahasiswaModal_PrimaryKey"]);
-                var_dump($_POST["MahasiswaModal_NIM"]);
-                var_dump($_POST["MahasiswaModal_Nama"]);
-                var_dump($_POST["MahasiswaModal_Password"]);
+                // var_dump($_POST["MahasiswaModal_ActionType"]);
+                // var_dump($_POST["MahasiswaModal_PrimaryKey"]);
+                // var_dump($_POST["MahasiswaModal_NIM"]);
+                // var_dump($_POST["MahasiswaModal_Nama"]);
+                // var_dump($_POST["MahasiswaModal_Password"]);
+                // var_dump($_POST["MahasiswaModal_Email"]);
+                // var_dump($_POST["MahasiswaModal_Fakultas"]);
+                // var_dump($_POST["MahasiswaModal_Jurusan"]);
 
                 if ($_POST["MahasiswaModal_ActionType"] == "Add") {
                     include '././db-component/mhs-add.php';
@@ -99,6 +102,9 @@ session_start();
                         <th>Name</th>
                         <th>NIM</th>
                         <th>Password</th>
+                        <th>Email</th>
+                        <th>Fakultas</th>
+                        <th>Jurusan</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -113,6 +119,9 @@ session_start();
                 <td id='mahasiswaNama_$primaryKey'>$value[mhs_nama]</td>
                 <td id='mahasiswaNIM_$primaryKey'>$value[mhs_nim]</td>
                 <td id='mahasiswaPass_$primaryKey'>$value[mhs_password]</td>
+                <td id='mahasiswaEmail_$primaryKey'>$value[mhs_email]</td>
+                <td id='mahasiswaFakultas_$primaryKey'>$value[mhs_fakultas]</td>
+                <td id='mahasiswaJurusan_$primaryKey'>$value[mhs_jurusan]</td>
                 <td style='text-align:center;'>
                     <form method='POST'>
                         <button type='button' onclick='initializeDeleteMahasiswaModal(&#39;$mahasiswaNIM&#39;);' class='btn btn-danger'>Delete</button>
@@ -162,6 +171,18 @@ session_start();
                         <label for="message-text" class="col-form-label">Password Mahasiswa:</label>
                         <input type="password" class="form-control" id="MahasiswaModal_Password" name="MahasiswaModal_Password">
                     </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Email Mahasiswa:</label>
+                        <input type="text" class="form-control" id="MahasiswaModal_Email" name="MahasiswaModal_Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Fakultas:</label>
+                        <input type="text" class="form-control" id="MahasiswaModal_Fakultas" name="MahasiswaModal_Fakultas">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Jurusan:</label>
+                        <input type="text" class="form-control" id="MahasiswaModal_Jurusan" name="MahasiswaModal_Jurusan">
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -186,12 +207,18 @@ session_start();
         const namaMahasiswa = document.getElementById("mahasiswaNama_" + primaryKey).innerHTML;
         const NIMmahasiswa = document.getElementById("mahasiswaNIM_" + primaryKey).innerHTML;
         const passMahasiswa = document.getElementById("mahasiswaPass_" + primaryKey).innerHTML;
+        const emailMahasiswa = document.getElementById("mahasiswaEmail_" + primaryKey).innerHTML;
+        const fakultasMahasiswa = document.getElementById("mahasiswaFakultas_" + primaryKey).innerHTML;
+        const jurusanMahasiswa = document.getElementById("mahasiswaJurusan_" + primaryKey).innerHTML;
 
         document.getElementById("MahasiswaModal_ActionType").value = "Update";
         document.getElementById("MahasiswaModal_PrimaryKey").value = primaryKey;
         document.getElementById("MahasiswaModal_Nama").value = namaMahasiswa;
         document.getElementById("MahasiswaModal_NIM").value = NIMmahasiswa;
         document.getElementById("MahasiswaModal_Password").value = passMahasiswa;
+        document.getElementById("MahasiswaModal_Email").value = emailMahasiswa;
+        document.getElementById("MahasiswaModal_Fakultas").value = fakultasMahasiswa;
+        document.getElementById("MahasiswaModal_Jurusan").value = jurusanMahasiswa;
     }
 
     function initializeAddMahasiswaModal(primaryKey) {
@@ -200,6 +227,9 @@ session_start();
         document.getElementById("MahasiswaModal_Nama").value = "";
         document.getElementById("MahasiswaModal_NIM").value = "";
         document.getElementById("MahasiswaModal_Password").value = "";
+        document.getElementById("MahasiswaModal_Email").value = "";
+        document.getElementById("MahasiswaModal_Fakultas").value = "";
+        document.getElementById("MahasiswaModal_Jurusan").value = "";
 
     }
 
@@ -209,15 +239,21 @@ session_start();
         document.getElementById("MahasiswaModal_Nama").value = "";
         document.getElementById("MahasiswaModal_NIM").value = mahasiswaNIM;
         document.getElementById("MahasiswaModal_Password").value = "";
+        document.getElementById("MahasiswaModal_Email").value = "";
+        document.getElementById("MahasiswaModal_Fakultas").value = "";
+        document.getElementById("MahasiswaModal_Jurusan").value = "";
         // console.log(primaryKey);
         submitModal()
     }
 
     function submitModal() {
         const modalType = document.getElementById("MahasiswaModal_ActionType").value;
-        const newNamaMahasiswa= document.getElementById("MahasiswaModal_Nama").value;
-        const newNIMmahasiswa= document.getElementById("MahasiswaModal_NIM").value;
+        const newNamaMahasiswa = document.getElementById("MahasiswaModal_Nama").value;
+        const newNIMmahasiswa = document.getElementById("MahasiswaModal_NIM").value;
         const newpassMahasiswa = document.getElementById("MahasiswaModal_Password").value;
+        const newemailMahasiswa = document.getElementById("MahasiswaModal_Email").value;
+        const newfakultasMahasiswa = document.getElementById("MahasiswaModal_Fakultas").value;
+        const newjurusanMahasiswa = document.getElementById("MahasiswaModal_Jurusan").value;
 
         if (modalType == "Add") {
 
@@ -226,7 +262,7 @@ session_start();
             console.log("nama mahasiswa baru : " + newNamaMahasiswa);
             console.log("password mahasiswa baru : " + newpassMahasiswa);
 
-            if (newNamaMahasiswa == "" || newNIMmahasiswa == "" || newpassMahasiswa == "") {
+            if (newNamaMahasiswa == "" || newNIMmahasiswa == "" || newpassMahasiswa == "" || newemailMahasiswa == "" || newfakultasMahasiswa == "" || newjurusanMahasiswa == "") {
                 window.alert("Fill up the field!")
             } else {
                 document.getElementById("MhsModal_bodyForm").submit();
@@ -238,18 +274,22 @@ session_start();
             const primaryKey = document.getElementById("MahasiswaModal_PrimaryKey").value;
 
             // // pakai innetHTML karena dia dialam table, didalam html tag, di select berdasarkan primary key
-            const oldNamaMahasiswa= document.getElementById("mahasiswaNama_" + primaryKey).innerHTML;
+            const oldNamaMahasiswa = document.getElementById("mahasiswaNama_" + primaryKey).innerHTML;
             const oldNIMmahasiswa = document.getElementById("mahasiswaNIM_" + primaryKey).innerHTML;
-            const oldpassMahsiswa= document.getElementById("mahasiswaPass_" + primaryKey).innerHTML;
+            const oldpassMahasiswa = document.getElementById("mahasiswaPass_" + primaryKey).innerHTML;
+            const oldemailMahasiswa = document.getElementById("mahasiswaEmail_" + primaryKey).innerHTML;
+            const oldfakultasMahasiswa = document.getElementById("mahasiswaFakultas_" + primaryKey).innerHTML;
+            const oldjurusanMahasiswa = document.getElementById("mahasiswaJurusan_" + primaryKey).innerHTML;
 
             console.log("NIP dosen lama : " + oldNIMmahasiswa);
             console.log("Nama dosen lama : " + oldNamaMahasiswa);
-            console.log("Pass dosen lama : " + oldpassMahsiswa);
+            console.log("Pass dosen lama : " + oldpassMahasiswa);
             console.log("NIP dosen baru : " + newNIMmahasiswa);
             console.log("Nama dosen baru : " + newNamaMahasiswa);
             console.log("Pass dosen baru : " + newpassMahasiswa);
 
-            if (oldNamaMahasiswa == newNamaMahasiswa && oldNIMmahasiswa == newNIMmahasiswa && oldpassMahsiswa == newpassMahasiswa || newNamaMahasiswa == "" || newNIMmahasiswa == "" || newpassMahasiswa == "") {
+            if (oldNamaMahasiswa == newNamaMahasiswa && oldNIMmahasiswa == newNIMmahasiswa && oldpassMahasiswa == newpassMahasiswa && oldemailMahasiswa == newemailMahasiswa && oldfakultasMahasiswa == newfakultasMahasiswa && oldjurusanMahasiswa == newjurusanMahasiswa ||
+                newNamaMahasiswa == "" || newNIMmahasiswa == "" || newpassMahasiswa == "" || newemailMahasiswa == "" || newfakultasMahasiswa == "" || newjurusanMahasiswa == "") {
                 window.alert("nothing changed, nothing to submit, pakai izzi toast")
             } else {
                 document.getElementById("MhsModal_bodyForm").submit();
@@ -270,3 +310,11 @@ session_start();
 <?php
 include '././ui-component/dependenciesImport.php';
 ?>
+
+<style>
+    table,
+    th,
+    td {
+        border: 1px solid black;
+    }
+</style>

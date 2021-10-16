@@ -75,10 +75,10 @@ session_start();
             // add class
             if (isset($_POST["ClassModal_ActionType"])) {
 
-                var_dump($_POST["ClassModal_ActionType"]);
-                var_dump($_POST["ClassModal_PrimaryKey"]);
-                var_dump($_POST["ClassModal_Kode"]);
-                var_dump($_POST["ClassModal_Nama"]);
+                // var_dump($_POST["ClassModal_ActionType"]);
+                // var_dump($_POST["ClassModal_PrimaryKey"]);
+                // var_dump($_POST["ClassModal_Kode"]);
+                // var_dump($_POST["ClassModal_Nama"]);
 
                 if ($_POST["ClassModal_ActionType"] == "Add") {
                     include '././db-component/matkul-add.php';

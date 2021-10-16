@@ -3,6 +3,9 @@ include "././db-component/config.php";
 $input_dosen_nip = $_POST["DosenModal_NIP"];
 $input_dosen_nama = $_POST["DosenModal_Nama"];
 $input_dosen_pass = $_POST["DosenModal_Password"];
+$input_dosen_email = $_POST["DosenModal_Email"];
+$input_dosen_fakultas = $_POST["DosenModal_Fakultas"];
+$input_dosen_jurusan = $_POST["DosenModal_Jurusan"];
 
 // Create connection
 $conn = new mysqli($hostname, $username, $password, $dbName);

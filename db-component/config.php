@@ -31,6 +31,9 @@ $dosen_table = "dosen";
 $dosen_nip = "dosen_nip";
 $dosen_nama = "dosen_nama";
 $dosen_password = "dosen_password";
+$dosen_email= "dosen_email";
+$dosen_fakultas = "dosen_fakultas";
+$dosen_jurusan = "dosen_jurusan";
 
 
 // Tabel Mhs
@@ -38,6 +41,9 @@ $mhs_table = "mahasiswa";
 $mhs_nim = "mhs_nim";
 $mhs_nama = "mhs_nama";
 $mhs_password = "mhs_password";
+$mhs_email= "mhs_email";
+$mhs_fakultas = "mhs_fakultas";
+$mhs_jurusan = "mhs_jurusan";
 
 
 // Tabel Matkul

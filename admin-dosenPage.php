@@ -63,11 +63,14 @@ session_start();
             <?php
             if (isset($_POST["DosenModal_ActionType"])) {
 
-                var_dump($_POST["DosenModal_ActionType"]);
-                var_dump($_POST["DosenModal_PrimaryKey"]);
-                var_dump($_POST["DosenModal_NIP"]);
-                var_dump($_POST["DosenModal_Nama"]);
-                var_dump($_POST["DosenModal_Password"]);
+                // var_dump($_POST["DosenModal_ActionType"]);
+                // var_dump($_POST["DosenModal_PrimaryKey"]);
+                // var_dump($_POST["DosenModal_NIP"]);
+                // var_dump($_POST["DosenModal_Nama"]);
+                // var_dump($_POST["DosenModal_Password"]);
+                // var_dump($_POST["DosenModal_Email"]);
+                // var_dump($_POST["DosenModal_Fakultas"]);
+                // var_dump($_POST["DosenModal_Jurusan"]);
 
                 if ($_POST["DosenModal_ActionType"] == "Add") {
                     include '././db-component/dosen-add.php';
@@ -99,6 +102,9 @@ session_start();
                         <th>Nama</th>
                         <th>NIP</th>
                         <th>Password</th>
+                        <th>Email</th>
+                        <th>Fakultas</th>
+                        <th>Jurusan</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -113,6 +119,9 @@ session_start();
                 <td id='dosenNama_$primaryKey'>$value[dosen_nama]</td>
                 <td id='dosenNIP_$primaryKey'>$value[dosen_nip]</td>
                 <td id='dosenPass_$primaryKey'>$value[dosen_password]</td>
+                <td id='dosenEmail_$primaryKey'>$value[dosen_email]</td>
+                <td id='dosenFakultas_$primaryKey'>$value[dosen_fakultas]</td>
+                <td id='dosenJurusan_$primaryKey'>$value[dosen_jurusan]</td>
                 <td style='text-align:center;'>
                     <form method='POST'>
                         <button type='button' onclick='initializeDeleteDosenModal(&#39;$dosenNIP&#39;);' class='btn btn-danger'>Delete</button>
@@ -162,6 +171,18 @@ session_start();
                         <label for="message-text" class="col-form-label">Password Dosen:</label>
                         <input type="password" class="form-control" id="DosenModal_Password" name="DosenModal_Password">
                     </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Email Dosen:</label>
+                        <input type="text" class="form-control" id="DosenModal_Email" name="DosenModal_Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Fakultas:</label>
+                        <input type="text" class="form-control" id="DosenModal_Fakultas" name="DosenModal_Fakultas">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Jurusan:</label>
+                        <input type="text" class="form-control" id="DosenModal_Jurusan" name="DosenModal_Jurusan">
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -182,42 +203,57 @@ session_start();
 
 
 <script>
-    function initializeUpdateDosenModal(primaryKey) {
+    function initializeUpdateDosenModal(primaryKey) { 
         const namaDosen = document.getElementById("dosenNama_" + primaryKey).innerHTML;
         const NIPdosen = document.getElementById("dosenNIP_" + primaryKey).innerHTML;
         const passDosen = document.getElementById("dosenPass_" + primaryKey).innerHTML;
+        const emailDosen = document.getElementById("dosenEmail_" + primaryKey).innerHTML;
+        const fakultasDosen = document.getElementById("dosenFakultas_" + primaryKey).innerHTML;
+        const jurusanDosen = document.getElementById("dosenJurusan_" + primaryKey).innerHTML;
 
         document.getElementById("DosenModal_ActionType").value = "Update";
         document.getElementById("DosenModal_PrimaryKey").value = primaryKey;
         document.getElementById("DosenModal_Nama").value = namaDosen;
         document.getElementById("DosenModal_NIP").value = NIPdosen;
         document.getElementById("DosenModal_Password").value = passDosen;
+        document.getElementById("DosenModal_Email").value = emailDosen;
+        document.getElementById("DosenModal_Fakultas").value = fakultasDosen;
+        document.getElementById("DosenModal_Jurusan").value = jurusanDosen;
     }
-    
+
     function initializeAddDosenModal(primaryKey) {
         document.getElementById("DosenModal_ActionType").value = "Add";
         document.getElementById("DosenModal_PrimaryKey").value = primaryKey;
         document.getElementById("DosenModal_Nama").value = "";
         document.getElementById("DosenModal_NIP").value = "";
         document.getElementById("DosenModal_Password").value = "";
+        document.getElementById("DosenModal_Email").value = "";
+        document.getElementById("DosenModal_Fakultas").value = "";
+        document.getElementById("DosenModal_Jurusan").value = "";
 
     }
 
-    function initializeDeleteDosenModal (dosenNIP){
+    function initializeDeleteDosenModal(dosenNIP) {
         document.getElementById("DosenModal_ActionType").value = "Delete";
         document.getElementById("DosenModal_PrimaryKey").value = "";
         document.getElementById("DosenModal_Nama").value = "";
         document.getElementById("DosenModal_NIP").value = dosenNIP;
         document.getElementById("DosenModal_Password").value = "";
+        document.getElementById("DosenModal_Email").value = "";
+        document.getElementById("DosenModal_Fakultas").value = "";
+        document.getElementById("DosenModal_Jurusan").value = "";
         // console.log(primaryKey);
         submitModal()
     }
-    
+
     function submitModal() {
         const modalType = document.getElementById("DosenModal_ActionType").value;
         const newNamaDosen = document.getElementById("DosenModal_Nama").value;
         const newNIPdosen = document.getElementById("DosenModal_NIP").value;
         const newpassDosen = document.getElementById("DosenModal_Password").value;
+        const newemailDosen = document.getElementById("DosenModal_Email").value;
+        const newfakultasDosen = document.getElementById("DosenModal_Fakultas").value;
+        const newjurusanDosen = document.getElementById("DosenModal_Jurusan").value;
 
         if (modalType == "Add") {
 
@@ -225,8 +261,11 @@ session_start();
             console.log("NIP dosen baru : " + newNIPdosen);
             console.log("nama dosen baru : " + newNamaDosen);
             console.log("password dosen baru : " + newpassDosen);
+            console.log("email dosen baru : " + newemailDosen);
+            console.log("fakultas dosen baru : " + newfakultasDosen);
+            console.log("jurusan dosen baru : " + newjurusanDosen);
 
-            if (newNamaDosen == "" || newNIPdosen == "" || newpassDosen == "") {
+            if (newNamaDosen == "" || newNIPdosen == "" || newpassDosen == "" || newemailDosen == "" || newfakultasDosen == "" || newjurusanDosen == "") {
                 window.alert("Fill up the field!")
             } else {
                 document.getElementById("DosenModal_bodyForm").submit();
@@ -241,15 +280,25 @@ session_start();
             const oldNamaDosen = document.getElementById("dosenNama_" + primaryKey).innerHTML;
             const oldNIPdosen = document.getElementById("dosenNIP_" + primaryKey).innerHTML;
             const oldpassDosen = document.getElementById("dosenPass_" + primaryKey).innerHTML;
+            const oldemailDosen = document.getElementById("dosenEmail_" + primaryKey).innerHTML;
+            const oldfakultasDosen = document.getElementById("dosenFakultas_" + primaryKey).innerHTML;
+            const oldjurusanDosen = document.getElementById("dosenJurusan_" + primaryKey).innerHTML;
 
             console.log("NIP dosen lama : " + oldNIPdosen);
             console.log("Nama dosen lama : " + oldNamaDosen);
             console.log("Pass dosen lama : " + oldpassDosen);
+            console.log("Email dosen lama : " + oldemailDosen);
+            console.log("Fakultas dosen lama : " + oldfakultasDosen);
+            console.log("Jurusan dosen lama : " + oldjurusanDosen);
             console.log("NIP dosen baru : " + newNIPdosen);
             console.log("Nama dosen baru : " + newNamaDosen);
             console.log("Pass dosen baru : " + newpassDosen);
+            console.log("Email dosen baru : " + newemailDosen);
+            console.log("Fakultas dosen baru : " + newfakultasDosen);
+            console.log("Jurusan dosen baru : " + newjurusanDosen);
 
-            if (oldNamaDosen == newNamaDosen && oldNIPdosen == newNIPdosen && oldpassDosen == newpassDosen || newNamaDosen == "" || newNIPdosen == "" || newpassDosen == "") {
+            if (oldNamaDosen == newNamaDosen && oldNIPdosen == newNIPdosen && oldpassDosen == newpassDosen && oldemailDosen == newemailDosen && oldfakultasDosen == newfakultasDosen && oldjurusanDosen == newjurusanDosen ||
+                newNamaDosen == "" || newNIPdosen == "" || newpassDosen == "" || newemailDosen == "" || newfakultasDosen == "" || newjurusanDosen == "") {
                 window.alert("nothing changed, nothing to submit, pakai izzi toast")
             } else {
                 document.getElementById("DosenModal_bodyForm").submit();
