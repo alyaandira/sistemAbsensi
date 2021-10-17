@@ -17,7 +17,7 @@ if ($conn->connect_error) {
 // $SQL_query = "INSERT INTO `mata_kuliah`(`matkul_kode`, `matkul_nama`) VALUES ('ILK345','rendangkurus')";
 $SQL_query = "UPDATE `$pertemuan_table` SET `$pert_kode`='$input_pertemuan_kode',`$matkul_kode`='$input_class_kode',`$kelas_id`='$input_class_id',
 `$dosen_nip`='$input_dosen_nip',`$waktuMulai`='$input_class_waktumulai',`$waktuAkhir`='$input_class_waktuakhir',`$batasWaktu`='$input_class_bataswaktu' 
-WHERE `$matkul_kode`= '$input_class_kode'";
+WHERE `$pert_kode`= '$input_pertemuan_kode'";
 
 $result = mysqli_query($conn, $SQL_query);
 
@@ -27,7 +27,7 @@ if ($result) {
     "<script>
       iziToast.success({
           title: 'Success',
-          message: 'Berhasil ditambahkan',
+          message: 'Berhasil diupdate',
       });
   </script>";
 } else {

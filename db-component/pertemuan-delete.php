@@ -15,7 +15,7 @@ if ($conn->connect_error) {
 }
 
 // $SQL_query = "INSERT INTO `mata_kuliah`(`matkul_kode`, `matkul_nama`) VALUES ('ILK345','rendangkurus')";
-$SQL_query = "DELETE FROM `$pertemuan_table` WHERE `$matkul_kode`= '$input_class_kode'";
+$SQL_query = "DELETE FROM `$pertemuan_table` WHERE `$pert_kode`= '$input_pertemuan_kode'";
 
 $result = mysqli_query($conn, $SQL_query);
 

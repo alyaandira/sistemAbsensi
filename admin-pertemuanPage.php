@@ -44,6 +44,13 @@ session_start();
             <div class="lds-pos"></div>
         </div>
     </div>
+
+    <!-- floating action button -->
+    <div class="adminActions" id="adminButton">
+        <input type="checkbox" name="adminToggle" class="adminToggle" />
+        <a class="adminButton" href="#!">+</a>
+    </div>
+
     <!-- Main wrapper - style you can find in pages.scss -->
     <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
 
@@ -71,16 +78,10 @@ session_start();
 
                 if ($_POST["PertemuanModal_ActionType"] == "Add") {
                     include '././db-component/pertemuan-add.php';
-                    echo "<br> Add to database";
-                    // TODO: database action untuk add
                 } else if ($_POST["PertemuanModal_ActionType"] == "Update") {
                     include '././db-component/pertemuan-update.php';
-                    echo "<br> Update to database";
-                    // TODO: database action untuk update
                 } else if ($_POST["PertemuanModal_ActionType"] == "Delete") {
                     include '././db-component/pertemuan-delete.php';
-                    echo "<br> Delete to database";
-                    // TODO: database action untuk delete
                 }
             }
 
@@ -110,7 +111,7 @@ session_start();
 
                 foreach ($FetchedPertemuanList as $primaryKey => $value) {
                     $nomor = $primaryKey + 1;
-                    $pertemuanKode =$value["pert_kode"];
+                    $pertemuanKode = $value["pert_kode"];
                     echo "
             <tr>
                 <td>$nomor</td>
@@ -187,15 +188,13 @@ session_start();
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">Batas Waktu:</label>
-                        <input type="time" class="form-control" id="PertemuanModal_LimitTime" name="PertemuanModal_LimitTime">
+                        <input class="form-control" id="PertemuanModal_LimitTime" name="PertemuanModal_LimitTime">
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button onclick="submitModal();" type="button" class="btn btn-primary">
-                    Save changes
-                </button>
+                <button onclick="submitModal();" type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
@@ -209,8 +208,13 @@ session_start();
 
 
 <script>
+
+    document.getElementById("adminButton").addEventListener("click", initializeAddPertemuanModal);
+
     function initializeUpdatePertemuanModal(primaryKey) {
+
         //get value from the table row based on selected Key
+        // mengambil data dari table berdasarkan primary Key yang kita pegang
         const kodePertemuan = document.getElementById("pertkode_" + primaryKey).innerHTML;
         const kodeKelas = document.getElementById("matkulkode_" + primaryKey).innerHTML;
         const IDKelas = document.getElementById("kelasID_" + primaryKey).innerHTML;
@@ -219,22 +223,28 @@ session_start();
         const waktuAkhirPertemuan = document.getElementById("waktuAkhir_" + primaryKey).innerHTML;
         const batasWaktuPertemuan = document.getElementById("batasWaktu_" + primaryKey).innerHTML;
 
+        // get timezone offset
+        var tzoffset = (new Date()).getTimezoneOffset() * 60000;
+
         // //set the input value in the modal
+        // memasukkan data kedalam modal
         document.getElementById("PertemuanModal_ActionType").value = "Update";
         document.getElementById("PertemuanModal_PrimaryKey").value = primaryKey;
         document.getElementById("PertemuanModal_Kode").value = kodePertemuan;
         document.getElementById("ClassModal_Kode").value = kodeKelas;
         document.getElementById("ClassModal_ID").value = IDKelas;
         document.getElementById("DosenModal_NIP").value = NIPdosen;
-        document.getElementById("PertemuanModal_StartTime").value = waktuMulaiPertemuan;
-        document.getElementById("PertemuanModal_EndTime").value = waktuAkhirPertemuan;
+        document.getElementById("PertemuanModal_StartTime").value = new Date(new Date(waktuMulaiPertemuan) - tzoffset).toISOString().slice(0, 16);
+        document.getElementById("PertemuanModal_EndTime").value = new Date(new Date(waktuAkhirPertemuan) - tzoffset).toISOString().slice(0, 16);
         document.getElementById("PertemuanModal_LimitTime").value = batasWaktuPertemuan;
     }
 
-    function initializeAddPertemuanModal(primaryKey) {
+    function initializeAddPertemuanModal() {
+
+        $('#pertemuan_manage_modal').modal('toggle')
         //set all the field to empty, because it is a frehs new modal
         document.getElementById("PertemuanModal_ActionType").value = "Add";
-        document.getElementById("PertemuanModal_PrimaryKey").value = primaryKey;
+        document.getElementById("PertemuanModal_PrimaryKey").value = "";
         document.getElementById("PertemuanModal_Kode").value = "";
         document.getElementById("ClassModal_Kode").value = "";
         document.getElementById("ClassModal_ID").value = "";
@@ -247,8 +257,8 @@ session_start();
     function initializeDeletePertemuanModal(pertemuanKode) {
         document.getElementById("PertemuanModal_ActionType").value = "Delete";
         document.getElementById("PertemuanModal_PrimaryKey").value = "";
-        document.getElementById("PertemuanModal_Kode").value = "";
-        document.getElementById("ClassModal_Kode").value = pertemuanKode;
+        document.getElementById("PertemuanModal_Kode").value = pertemuanKode;
+        document.getElementById("ClassModal_Kode").value = "";
         document.getElementById("ClassModal_ID").value = "";
         document.getElementById("DosenModal_NIP").value = "";
         document.getElementById("PertemuanModal_StartTime").value = "";
@@ -270,10 +280,6 @@ session_start();
 
         if (modalType == "Add") {
 
-            // pakai value karena dia dialam <input>, kita ambil <input> dari value itu
-            // console.log("kode kelas baru: " + newKodeKelas);
-            // console.log("nama kelas baru : " + newNamaKelas);
-
             if (newKodePertemuan == "" || newKodeKelas == "" || newIDKelas == "" || newNIPdosen == "" || newWaktuMulai == "" || newWaktuAkhir == "" || newBatasWaktu == "") {
                 window.alert("Fill up the field!")
             } else {
@@ -294,13 +300,8 @@ session_start();
             const oldWaktuAkhir = document.getElementById("waktuAkhir_" + primaryKey).innerHTML;
             const oldBatasWaktu = document.getElementById("batasWaktu_" + primaryKey).innerHTML;
 
-            // console.log("Kode kelas lama: " + oldKodeKelas);
-            // console.log("Nama kelas lama: " + oldNamaKelas);
-            // console.log("Kode kelas baru: " + newKodeKelas);
-            // console.log("Nama kelas baru: " + newNamaKelas);
-
-            if (oldKodePertemuan == newKodePertemuan && oldKodeKelas == newKodeKelas && oldIDKelas == newIDKelas && oldNIPdosen == newNIPdosen && oldWaktuMulai == newWaktuMulai && oldWaktuAkhir == newWaktuAkhir && oldBatasWaktu == newBatasWaktu
-            || newKodePertemuan == "" || newKodeKelas == "" || newIDKelas == "" || newNIPdosen == "" || newWaktuMulai == "" || newWaktuAkhir == "" || newBatasWaktu == "") {
+            if (oldKodePertemuan == newKodePertemuan && oldKodeKelas == newKodeKelas && oldIDKelas == newIDKelas && oldNIPdosen == newNIPdosen && oldWaktuMulai == newWaktuMulai && oldWaktuAkhir == newWaktuAkhir && oldBatasWaktu == newBatasWaktu ||
+                newKodePertemuan == "" || newKodeKelas == "" || newIDKelas == "" || newNIPdosen == "" || newWaktuMulai == "" || newWaktuAkhir == "" || newBatasWaktu == "") {
                 window.alert("nothing changed, nothing to submit, pakai izzi toast")
             } else {
                 document.getElementById("PertemuanModal_bodyForm").submit();
@@ -329,5 +330,59 @@ include '././ui-component/dependenciesImport.php';
     th,
     td {
         border: 1px solid black;
+    }
+</style>
+<style>
+    body {
+        background-color: #f5f5f5;
+    }
+
+    .adminActions {
+        position: fixed;
+        bottom: 45px;
+        right: 55px;
+        z-index: 10;
+    }
+
+    .adminButton {
+        background-color: rgba(67, 83, 143);
+        border-radius: 50%;
+        display: block;
+        color: #fff;
+        text-align: center;
+        position: relative;
+        text-decoration: none;
+        padding: 25px 30px;
+    }
+
+    .adminButton i {
+        font-size: 22px;
+    }
+
+    .adminToggle {
+        -webkit-appearance: none;
+        position: absolute;
+        border-radius: 50%;
+        top: 0;
+        left: 0;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        z-index: 2;
+        transition: box-shadow 0.2s ease-in-out;
+        box-shadow: 0 3px 5px 1px rgba(51, 51, 51, 0.3);
+    }
+
+    .adminToggle:hover {
+        box-shadow: 0 3px 6px 2px rgba(51, 51, 51, 0.3);
+    }
+
+    .adminToggle:checked~.adminButtons a {
+        opacity: 1;
+        visibility: visible;
     }
 </style>

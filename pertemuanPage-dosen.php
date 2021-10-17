@@ -71,16 +71,10 @@ session_start();
 
                 if ($_POST["PertemuanModal_ActionType"] == "Add") {
                     include '././db-component/pertemuan-add.php';
-                    echo "<br> Add to database";
-                    // TODO: database action untuk add
                 } else if ($_POST["PertemuanModal_ActionType"] == "Update") {
                     include '././db-component/pertemuan-update.php';
-                    echo "<br> Update to database";
-                    // TODO: database action untuk update
                 } else if ($_POST["PertemuanModal_ActionType"] == "Delete") {
                     include '././db-component/pertemuan-delete.php';
-                    echo "<br> Delete to database";
-                    // TODO: database action untuk delete
                 }
             }
 
@@ -110,7 +104,7 @@ session_start();
 
                 foreach ($FetchedPertemuanList as $primaryKey => $value) {
                     $nomor = $primaryKey + 1;
-                    $pertemuanKode =$value["pert_kode"];
+                    $pertemuanKode = $value["pert_kode"];
                     echo "
             <tr>
                 <td>$nomor</td>
@@ -187,15 +181,13 @@ session_start();
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">Batas Waktu:</label>
-                        <input type="time" class="form-control" id="PertemuanModal_LimitTime" name="PertemuanModal_LimitTime">
+                        <input class="form-control" id="PertemuanModal_LimitTime" name="PertemuanModal_LimitTime">
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button onclick="submitModal();" type="button" class="btn btn-primary">
-                    Save changes
-                </button>
+                <button onclick="submitModal();" type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
@@ -210,7 +202,9 @@ session_start();
 
 <script>
     function initializeUpdatePertemuanModal(primaryKey) {
+
         //get value from the table row based on selected Key
+        // mengambil data dari table berdasarkan primary Key yang kita pegang
         const kodePertemuan = document.getElementById("pertkode_" + primaryKey).innerHTML;
         const kodeKelas = document.getElementById("matkulkode_" + primaryKey).innerHTML;
         const IDKelas = document.getElementById("kelasID_" + primaryKey).innerHTML;
@@ -219,22 +213,26 @@ session_start();
         const waktuAkhirPertemuan = document.getElementById("waktuAkhir_" + primaryKey).innerHTML;
         const batasWaktuPertemuan = document.getElementById("batasWaktu_" + primaryKey).innerHTML;
 
+        // get timezone offset
+        var tzoffset = (new Date()).getTimezoneOffset() * 60000;
+
         // //set the input value in the modal
+        // memasukkan data kedalam modal
         document.getElementById("PertemuanModal_ActionType").value = "Update";
         document.getElementById("PertemuanModal_PrimaryKey").value = primaryKey;
         document.getElementById("PertemuanModal_Kode").value = kodePertemuan;
         document.getElementById("ClassModal_Kode").value = kodeKelas;
         document.getElementById("ClassModal_ID").value = IDKelas;
         document.getElementById("DosenModal_NIP").value = NIPdosen;
-        document.getElementById("PertemuanModal_StartTime").value = waktuMulaiPertemuan;
-        document.getElementById("PertemuanModal_EndTime").value = waktuAkhirPertemuan;
+        document.getElementById("PertemuanModal_StartTime").value = new Date(new Date(waktuMulaiPertemuan) - tzoffset).toISOString().slice(0, 16);
+        document.getElementById("PertemuanModal_EndTime").value = new Date(new Date(waktuAkhirPertemuan) - tzoffset).toISOString().slice(0, 16);
         document.getElementById("PertemuanModal_LimitTime").value = batasWaktuPertemuan;
     }
 
-    function initializeAddPertemuanModal(primaryKey) {
+    function initializeAddPertemuanModal() {
         //set all the field to empty, because it is a frehs new modal
         document.getElementById("PertemuanModal_ActionType").value = "Add";
-        document.getElementById("PertemuanModal_PrimaryKey").value = primaryKey;
+        document.getElementById("PertemuanModal_PrimaryKey").value = "";
         document.getElementById("PertemuanModal_Kode").value = "";
         document.getElementById("ClassModal_Kode").value = "";
         document.getElementById("ClassModal_ID").value = "";
@@ -247,8 +245,8 @@ session_start();
     function initializeDeletePertemuanModal(pertemuanKode) {
         document.getElementById("PertemuanModal_ActionType").value = "Delete";
         document.getElementById("PertemuanModal_PrimaryKey").value = "";
-        document.getElementById("PertemuanModal_Kode").value = "";
-        document.getElementById("ClassModal_Kode").value = pertemuanKode;
+        document.getElementById("PertemuanModal_Kode").value = pertemuanKode;
+        document.getElementById("ClassModal_Kode").value = "";
         document.getElementById("ClassModal_ID").value = "";
         document.getElementById("DosenModal_NIP").value = "";
         document.getElementById("PertemuanModal_StartTime").value = "";
@@ -270,10 +268,6 @@ session_start();
 
         if (modalType == "Add") {
 
-            // pakai value karena dia dialam <input>, kita ambil <input> dari value itu
-            // console.log("kode kelas baru: " + newKodeKelas);
-            // console.log("nama kelas baru : " + newNamaKelas);
-
             if (newKodePertemuan == "" || newKodeKelas == "" || newIDKelas == "" || newNIPdosen == "" || newWaktuMulai == "" || newWaktuAkhir == "" || newBatasWaktu == "") {
                 window.alert("Fill up the field!")
             } else {
@@ -294,13 +288,8 @@ session_start();
             const oldWaktuAkhir = document.getElementById("waktuAkhir_" + primaryKey).innerHTML;
             const oldBatasWaktu = document.getElementById("batasWaktu_" + primaryKey).innerHTML;
 
-            // console.log("Kode kelas lama: " + oldKodeKelas);
-            // console.log("Nama kelas lama: " + oldNamaKelas);
-            // console.log("Kode kelas baru: " + newKodeKelas);
-            // console.log("Nama kelas baru: " + newNamaKelas);
-
-            if (oldKodePertemuan == newKodePertemuan && oldKodeKelas == newKodeKelas && oldIDKelas == newIDKelas && oldNIPdosen == newNIPdosen && oldWaktuMulai == newWaktuMulai && oldWaktuAkhir == newWaktuAkhir && oldBatasWaktu == newBatasWaktu
-            || newKodePertemuan == "" || newKodeKelas == "" || newIDKelas == "" || newNIPdosen == "" || newWaktuMulai == "" || newWaktuAkhir == "" || newBatasWaktu == "") {
+            if (oldKodePertemuan == newKodePertemuan && oldKodeKelas == newKodeKelas && oldIDKelas == newIDKelas && oldNIPdosen == newNIPdosen && oldWaktuMulai == newWaktuMulai && oldWaktuAkhir == newWaktuAkhir && oldBatasWaktu == newBatasWaktu ||
+                newKodePertemuan == "" || newKodeKelas == "" || newIDKelas == "" || newNIPdosen == "" || newWaktuMulai == "" || newWaktuAkhir == "" || newBatasWaktu == "") {
                 window.alert("nothing changed, nothing to submit, pakai izzi toast")
             } else {
                 document.getElementById("PertemuanModal_bodyForm").submit();
