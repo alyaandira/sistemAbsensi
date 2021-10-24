@@ -13,7 +13,7 @@ session_start();
     <meta name="author" content="Alya Andira Lubis">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon.png">
-    <title>Sistem Absensi - Beranda Admin</title>
+    <title>Sistem Absensi - Dosen</title>
     <!-- Custom CSS -->
     <link href="./assets/extra-libs/c3/c3.min.css" rel="stylesheet">
     <link href="./assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
@@ -45,6 +45,12 @@ session_start();
         </div>
     </div>
 
+    <!-- floating action button -->
+    <div class="adminActions" id="adminButton">
+        <input type="checkbox" name="adminToggle" class="adminToggle" />
+        <a class="adminButton" href="#!">+</a>
+    </div>
+
     <!-- Main wrapper - style you can find in pages.scss -->
     <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
 
@@ -56,7 +62,7 @@ session_start();
         <!-- Page wrapper  -->
         <div class="page-wrapper">
             <!-- Bread crumb and right sidebar toggle -->
-            <div> Halaman Admin </div>
+            <!-- <div> Halaman Admin </div> -->
             <h1>Dosen Management</h1>
 
 
@@ -138,8 +144,8 @@ session_start();
             ?>
 
             <br>
-            <h1>Tambah Dosen</h1>
-            <button type="button" onclick="initializeAddDosenModal();" class="btn waves-effect waves-light btn-success" data-toggle="modal" data-target="#dosen_manage_modal">Add</button>
+            <!-- <h1>Tambah Dosen</h1>
+            <button type="button" onclick="initializeAddDosenModal();" class="btn waves-effect waves-light btn-success" data-toggle="modal" data-target="#dosen_manage_modal">Add</button> -->
 
 </body>
 
@@ -169,7 +175,7 @@ session_start();
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">Password Dosen:</label>
-                        <input type="password" class="form-control" id="DosenModal_Password" name="DosenModal_Password">
+                        <input type="text" class="form-control" id="DosenModal_Password" name="DosenModal_Password">
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">Email Dosen:</label>
@@ -203,7 +209,9 @@ session_start();
 
 
 <script>
-    function initializeUpdateDosenModal(primaryKey) { 
+    document.getElementById("adminButton").addEventListener("click", initializeAddDosenModal);
+
+    function initializeUpdateDosenModal(primaryKey) {
         const namaDosen = document.getElementById("dosenNama_" + primaryKey).innerHTML;
         const NIPdosen = document.getElementById("dosenNIP_" + primaryKey).innerHTML;
         const passDosen = document.getElementById("dosenPass_" + primaryKey).innerHTML;
@@ -221,9 +229,11 @@ session_start();
         document.getElementById("DosenModal_Jurusan").value = jurusanDosen;
     }
 
-    function initializeAddDosenModal(primaryKey) {
+    function initializeAddDosenModal() {
+        $('#dosen_manage_modal').modal('toggle')
+
         document.getElementById("DosenModal_ActionType").value = "Add";
-        document.getElementById("DosenModal_PrimaryKey").value = primaryKey;
+        document.getElementById("DosenModal_PrimaryKey").value = "";
         document.getElementById("DosenModal_Nama").value = "";
         document.getElementById("DosenModal_NIP").value = "";
         document.getElementById("DosenModal_Password").value = "";
@@ -327,5 +337,60 @@ include '././ui-component/dependenciesImport.php';
     th,
     td {
         border: 1px solid black;
+    }
+</style>
+
+<style>
+    body {
+        background-color: #f5f5f5;
+    }
+
+    .adminActions {
+        position: fixed;
+        bottom: 45px;
+        right: 55px;
+        z-index: 10;
+    }
+
+    .adminButton {
+        background-color: rgba(67, 83, 143);
+        border-radius: 50%;
+        display: block;
+        color: #fff;
+        text-align: center;
+        position: relative;
+        text-decoration: none;
+        padding: 25px 30px;
+    }
+
+    .adminButton i {
+        font-size: 22px;
+    }
+
+    .adminToggle {
+        -webkit-appearance: none;
+        position: absolute;
+        border-radius: 50%;
+        top: 0;
+        left: 0;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        z-index: 2;
+        transition: box-shadow 0.2s ease-in-out;
+        box-shadow: 0 3px 5px 1px rgba(51, 51, 51, 0.3);
+    }
+
+    .adminToggle:hover {
+        box-shadow: 0 3px 6px 2px rgba(51, 51, 51, 0.3);
+    }
+
+    .adminToggle:checked~.adminButtons a {
+        opacity: 1;
+        visibility: visible;
     }
 </style>

@@ -13,7 +13,7 @@ session_start();
     <meta name="author" content="Alya Andira Lubis">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon.png">
-    <title>Sistem Absensi - Beranda Admin</title>
+    <title>Sistem Absensi - Daftar Pertemuan</title>
     <!-- Custom CSS -->
     <link href="./assets/extra-libs/c3/c3.min.css" rel="stylesheet">
     <link href="./assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
@@ -44,6 +44,13 @@ session_start();
             <div class="lds-pos"></div>
         </div>
     </div>
+
+    <!-- floating action button -->
+    <div class="adminActions" id="adminButton">
+        <input type="checkbox" name="adminToggle" class="adminToggle" />
+        <a class="adminButton" href="#!">+</a>
+    </div>
+
     <!-- Main wrapper - style you can find in pages.scss -->
     <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
 
@@ -55,7 +62,7 @@ session_start();
         <!-- Page wrapper  -->
         <div class="page-wrapper">
             <!-- Bread crumb and right sidebar toggle -->
-            <div> Halaman Dosen </div>
+            <!-- <div> Halaman Dosen </div> -->
             <h1>Meeting Management</h1>
 
 
@@ -134,8 +141,8 @@ session_start();
 
             ?>
 
-            <h1>Tambah Mata Kuliah</h1>
-            <button type="button" onclick="initializeAddPertemuanModal();" class="btn waves-effect waves-light btn-success" data-toggle="modal" data-target="#pertemuan_manage_modal">Add</button>
+            <!-- <h1>Tambah Mata Kuliah</h1>
+            <button type="button" onclick="initializeAddPertemuanModal();" class="btn waves-effect waves-light btn-success" data-toggle="modal" data-target="#pertemuan_manage_modal">Add</button> -->
 
 </body>
 
@@ -201,6 +208,8 @@ session_start();
 
 
 <script>
+    document.getElementById("adminButton").addEventListener("click", initializeAddPertemuanModal);
+
     function initializeUpdatePertemuanModal(primaryKey) {
 
         //get value from the table row based on selected Key
@@ -230,6 +239,8 @@ session_start();
     }
 
     function initializeAddPertemuanModal() {
+        $('#pertemuan_manage_modal').modal('toggle')
+
         //set all the field to empty, because it is a frehs new modal
         document.getElementById("PertemuanModal_ActionType").value = "Add";
         document.getElementById("PertemuanModal_PrimaryKey").value = "";
@@ -318,5 +329,59 @@ include '././ui-component/dependenciesImport.php';
     th,
     td {
         border: 1px solid black;
+    }
+</style>
+<style>
+    body {
+        background-color: #f5f5f5;
+    }
+
+    .adminActions {
+        position: fixed;
+        bottom: 45px;
+        right: 55px;
+        z-index: 10;
+    }
+
+    .adminButton {
+        background-color: rgba(67, 83, 143);
+        border-radius: 50%;
+        display: block;
+        color: #fff;
+        text-align: center;
+        position: relative;
+        text-decoration: none;
+        padding: 25px 30px;
+    }
+
+    .adminButton i {
+        font-size: 22px;
+    }
+
+    .adminToggle {
+        -webkit-appearance: none;
+        position: absolute;
+        border-radius: 50%;
+        top: 0;
+        left: 0;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        z-index: 2;
+        transition: box-shadow 0.2s ease-in-out;
+        box-shadow: 0 3px 5px 1px rgba(51, 51, 51, 0.3);
+    }
+
+    .adminToggle:hover {
+        box-shadow: 0 3px 6px 2px rgba(51, 51, 51, 0.3);
+    }
+
+    .adminToggle:checked~.adminButtons a {
+        opacity: 1;
+        visibility: visible;
     }
 </style>

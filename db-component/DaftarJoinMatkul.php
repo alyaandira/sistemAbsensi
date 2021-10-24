@@ -7,15 +7,13 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-$NIP = $_SESSION["currentNIP"];
-
 // $SQL_query = "SELECT * FROM $mengajar_table WHERE ".
-$SQL_query = "SELECT mata_kuliah.matkul_nama, mata_kuliah.matkul_kode, `dosen_nip` FROM mengajar ". 
-"LEFT JOIN mata_kuliah ". 
-"ON mengajar.matkul_kode = mata_kuliah.matkul_kode ". 
-"HAVING `dosen_nip` = '$NIP' ";
+$SQL_query = "SELECT mata_kuliah.matkul_kode, mata_kuliah.matkul_nama FROM daftar". 
+"INNER JOIN mata_kuliah ". 
+"ON daftar.matkul_kode = mata_kuliah.matkul_kode ";
 
-// "$dosen_nip = '$NIP'";
+// SELECT mata_kuliah.matkul_kode, mata_kuliah.matkul_nama FROM `daftar` INNER JOIN mata_kuliah ON daftar.matkul_kode=mata_kuliah.matkul_kode
+
 $result = mysqli_query($conn, $SQL_query);
 
 if ($result) {
@@ -37,3 +35,4 @@ if ($result) {
         });
     </script>";
 }
+?>

@@ -13,7 +13,7 @@ session_start();
     <meta name="author" content="Alya Andira Lubis">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon.png">
-    <title>Sistem Absensi - Beranda Admin</title>
+    <title>Sistem Absensi - Pertemuan</title>
     <!-- Custom CSS -->
     <link href="./assets/extra-libs/c3/c3.min.css" rel="stylesheet">
     <link href="./assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
@@ -62,7 +62,7 @@ session_start();
         <!-- Page wrapper  -->
         <div class="page-wrapper">
             <!-- Bread crumb and right sidebar toggle -->
-            <div> Halaman Admin </div>
+            <!-- <div> Halaman Admin </div> -->
             <h1>Meeting Management</h1>
 
 
@@ -141,8 +141,8 @@ session_start();
 
             ?>
 
-            <h1>Tambah Mata Kuliah</h1>
-            <button type="button" onclick="initializeAddPertemuanModal();" class="btn waves-effect waves-light btn-success" data-toggle="modal" data-target="#pertemuan_manage_modal">Add</button>
+            <!-- <h1>Tambah Mata Kuliah</h1>
+            <button type="button" onclick="initializeAddPertemuanModal();" class="btn waves-effect waves-light btn-success" data-toggle="modal" data-target="#pertemuan_manage_modal">Add</button> -->
 
 </body>
 
@@ -172,7 +172,14 @@ session_start();
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">ID Kelas:</label>
-                        <input type="text" class="form-control" id="ClassModal_ID" name="ClassModal_ID">
+                        <!-- <input type="text" class="form-control" id="ClassModal_ID" name="ClassModal_ID"> -->
+                        <select class="form-control" id="ClassModal_ID" name="ClassModal_ID">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">NIP Dosen:</label>
@@ -208,7 +215,6 @@ session_start();
 
 
 <script>
-
     document.getElementById("adminButton").addEventListener("click", initializeAddPertemuanModal);
 
     function initializeUpdatePertemuanModal(primaryKey) {
@@ -332,6 +338,7 @@ include '././ui-component/dependenciesImport.php';
         border: 1px solid black;
     }
 </style>
+
 <style>
     body {
         background-color: #f5f5f5;

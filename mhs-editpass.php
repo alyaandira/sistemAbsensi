@@ -13,7 +13,7 @@ session_start();
     <meta name="author" content="Alya Andira Lubis">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon.png">
-    <title>Sistem Absensi - Beranda Admin</title>
+    <title>Sistem Absensi - Ubah Kata Sandi</title>
     <!-- Custom CSS -->
     <link href="./assets/extra-libs/c3/c3.min.css" rel="stylesheet">
     <link href="./assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
@@ -63,29 +63,37 @@ session_start();
 
         <!-- Page wrapper  -->
         <div class="page-wrapper">
-            <h1>Ubah Profil</h1>
+            <h1>Ubah Kata Sandi</h1>
             <br>
 
             <form method="POST">
                 <input type="hidden" name="mahasiswa_changePassword_NIM" value="<?php echo $_SESSION["currentNIP"]; ?>" />
 
                 <div class="form-group">
-                    <label for="message-text"><i class="col-form-label">Password Lama</i></label>
+                <h4>Sandi saat ini</h2>
+
+                    <label for="message-text"><i class="col-form-label"></i></label>
                     <input type="password" name="mahasiswa_changePassword_oldPassword" id="mahasiswa_changePassword_oldPassword" placeholder="" />
                 </div>
 
                 <div class="form-group">
-                    <label for="message-text"><i class="col-form-label">Password Baru</i></label>
+                <h4>Kata sandi baru</h2>
+
+                    <label for="message-text"><i class="col-form-label"></i></label>
                     <input type="password" name="mahasiswa_changePassword_newPassword" id="mahasiswa_changePassword_newPassword" placeholder="" />
                 </div>
 
                 <div class="form-group">
-                    <label for="message-text"><i class="col-form-label">Konfirmasi Password Baru</i></label>
+                <h4>Ulangi kata sandi baru</h2>
+
+                    <label for="message-text"><i class="col-form-label"></i></label>
                     <input type="password" name="mahasiswa_changePassword_newPasswordConfirm" id="mahasiswa_changePassword_newPasswordConfirm" placeholder="" />
                 </div>
 
                 <br>
-                <button type="submit" class="btn btn-primary">Change Password</button>
+                <!-- <button type="submit" class="btn btn-primary">Change Password</button> -->
+                <button type="button" class="btn waves-effect waves-light btn-rounded btn-light">Batal</button>
+                <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success">Ubah kata sandi</button>
             </form>
             <!-- <button type="button" class="btn btn-success btn-rounded"><i class="fas fa-check"></i> Atur Password Baru</button> -->
         </div>

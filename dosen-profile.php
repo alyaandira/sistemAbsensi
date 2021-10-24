@@ -13,7 +13,7 @@ session_start();
     <meta name="author" content="Alya Andira Lubis">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon.png">
-    <title>Sistem Absensi - Beranda Admin</title>
+    <title>Sistem Absensi - Profil</title>
     <!-- Custom CSS -->
     <link href="./assets/extra-libs/c3/c3.min.css" rel="stylesheet">
     <link href="./assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">

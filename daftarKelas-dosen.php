@@ -18,7 +18,7 @@ if (!isset($_SESSION["currentNIP"])) {
         <meta name="author" content="Alya Andira Lubis">
         <!-- Favicon icon -->
         <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon.png">
-        <title>Sistem Absensi - Beranda</title>
+        <title>Sistem Absensi - Daftar Kelas</title>
         <!-- Custom CSS -->
         <link href="./assets/extra-libs/c3/c3.min.css" rel="stylesheet">
         <link href="./assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
@@ -57,11 +57,11 @@ if (!isset($_SESSION["currentNIP"])) {
                 <div class="page-breadcrumb">
                     <div class="row">
                         <div class="col-7 align-self-center">
-                            <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">Good Morning!</h3>
+                            <!-- <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">Good Morning!</h3> -->
                             <div class="d-flex align-items-center">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb m-0 p-0">
-                                        <li class="breadcrumb-item"><a href="index.html">Dashboard</a>
+                                        <!-- <li class="breadcrumb-item"><a href="index.html">Dashboard</a> -->
                                         </li>
                                     </ol>
                                 </nav>
@@ -77,7 +77,7 @@ if (!isset($_SESSION["currentNIP"])) {
                     <?php
                     include './db-component/GetMatkulByMengajar.php';
 
-                    // var_dump($matkulList);
+                    var_dump($matkulList);
                     ?>
                     <table class="table table-sm">
                         <thead>
@@ -89,11 +89,8 @@ if (!isset($_SESSION["currentNIP"])) {
                         </thead>
                         <tbody>
                             <?php
-                            //  <a target="" href="http://www.natures-health-foods.com/images/Sushi-RollSalmonAvacado.jpg" class="image_card">
-                            //  <img src="images/bluemarble.jpg"></a>
                             foreach ($matkulList as $class) {
                                 $matkulKode = $class[$matkul_kode];
-                                // $IDmengajar = $class[$mengajar_id];
                                 $matkulNama = $class[$matkul_nama];
                                 echo "
                             <tr>

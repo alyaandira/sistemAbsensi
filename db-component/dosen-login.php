@@ -44,7 +44,7 @@ if ($result) {
     var_dump($_SESSION["currentFakultas"]);
     var_dump($_SESSION["currentJurusan"]);
     // redirect to home page
-    header("Location: beranda-dosen.php");
+    header("Location: daftarKelas-dosen.php");
     // exit;
   } else {
     echo
