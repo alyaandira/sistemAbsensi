@@ -86,6 +86,18 @@ session_start();
             }
 
             include '././db-component/GetAllPertemuan.php';
+            include '././db-component/GetAllClass.php';
+            include '././db-component/GetClassByPertemuan.php';
+            // var_dump($kelasTerdaftarList);
+            // var_dump($AllClassList);
+            // echo "<br";
+            // echo "<br";
+
+            // $selectedNIP = $_POST["selectedDosenNIP"];
+
+            if (isset($_POST["ClassModal_ID"])) {
+                var_dump($_POST["ClassModal_ID"]);
+            }
 
             if (empty($FetchedPertemuanList)) {
                 echo "<p>No class has been registered</p>";
@@ -141,8 +153,18 @@ session_start();
 
             ?>
 
-            <!-- <h1>Tambah Mata Kuliah</h1>
-            <button type="button" onclick="initializeAddPertemuanModal();" class="btn waves-effect waves-light btn-success" data-toggle="modal" data-target="#pertemuan_manage_modal">Add</button> -->
+            <?php
+
+            for ($i = 0; $i < count($AllClassList); $i++) {
+                for ($j = 0; $j < count($kelasTerdaftarList); $j++) {
+                    if ($AllClassList[$i]["kelas_id"] == $kelasTerdaftarList[$j]["kelas_id"]) {
+                        unset($AllClassList[$i]);
+                        break;
+                    } else {
+                    }
+                }
+            }
+            ?>
 
 </body>
 
@@ -159,6 +181,8 @@ session_start();
             <div class="modal-body">
                 <form method="POST" id='PertemuanModal_bodyForm'>
 
+                    <input type="hidden" class="form-control" value="<?php echo $selectedNIP ?>" name="selectedDosenNIP">
+
                     <input type="text" class="form-control" id="PertemuanModal_ActionType" name="PertemuanModal_ActionType">
                     <input type="text" class="form-control" id="PertemuanModal_PrimaryKey" name="PertemuanModal_PrimaryKey">
 
@@ -174,11 +198,15 @@ session_start();
                         <label for="message-text" class="col-form-label">ID Kelas:</label>
                         <!-- <input type="text" class="form-control" id="ClassModal_ID" name="ClassModal_ID"> -->
                         <select class="form-control" id="ClassModal_ID" name="ClassModal_ID">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                            <?php
+                            foreach ($AllClassList as $class) {
+                                $pertemuan_classID = $class["kelas_id"];
+                                $pertemuan_classNama = $class["kelas_nama"];
+                                $value_to_display = $pertemuan_classID . " - " . $pertemuan_classNama;
+
+                                echo '<option value="' . $pertemuan_classID . '">' . $value_to_display . '</option>';
+                            }
+                            ?>
                         </select>
                     </div>
                     <div class="form-group">

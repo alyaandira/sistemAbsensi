@@ -7,25 +7,16 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-
-// 
-// 
-$NIM = $_SESSION["currentNIP"];
-
-$SQL_query = "SELECT mata_kuliah.matkul_nama, mata_kuliah.matkul_kode, `mhs_nim` FROM daftar ".
-"LEFT JOIN mata_kuliah ".
-"ON daftar.matkul_kode = mata_kuliah.matkul_kode ".
-"HAVING `mhs_nim` = '$NIM'";
+$SQL_query = "SELECT * FROM `$matkul_table`";
 $result = mysqli_query($conn, $SQL_query);
 
 
 if ($result) {
   $row_count = $result->num_rows;
-  $RegisteredClassList = [];
+  $AllCourseList = [];
 
   if ($row_count > 0) {
-    $RegisteredClassList = $result -> fetch_all(MYSQLI_ASSOC);
-    // array_push($RegisteredClassList, $result -> fetch_all(MYSQLI_ASSOC));
+    $AllCourseList = $result -> fetch_all(MYSQLI_ASSOC);
   } 
 } else {
   $error_message = $conn->error;

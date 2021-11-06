@@ -7,16 +7,16 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-$SQL_query = "SELECT * FROM `$mhs_table`";
+$SQL_query = "SELECT * FROM `$absensi_table`";
 $result = mysqli_query($conn, $SQL_query);
 
 
 if ($result) {
   $row_count = $result->num_rows;
-  $FetchedMahasiswaList = [];
+  $AbsensiList = [];
 
   if ($row_count > 0) {
-    $FetchedMahasiswaList = $result -> fetch_all(MYSQLI_ASSOC);
+    $AbsensiList = $result -> fetch_all(MYSQLI_ASSOC);
   } 
 } else {
   $error_message = $conn->error;

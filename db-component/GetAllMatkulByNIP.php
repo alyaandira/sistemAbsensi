@@ -7,21 +7,24 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-// $SQL_query = "SELECT * FROM $mengajar_table WHERE ".
-$SQL_query = "SELECT mata_kuliah.matkul_kode, mata_kuliah.matkul_nama FROM daftar". 
-"INNER JOIN mata_kuliah ". 
-"ON daftar.matkul_kode = mata_kuliah.matkul_kode ";
 
-// SELECT mata_kuliah.matkul_kode, mata_kuliah.matkul_nama FROM `daftar` INNER JOIN mata_kuliah ON daftar.matkul_kode=mata_kuliah.matkul_kode
+// 
+// 
+$NIM = $_SESSION["currentNIP"];
 
+$SQL_query = "SELECT mata_kuliah.matkul_nama, mata_kuliah.matkul_kode, `$mhs_nim` FROM $daftar_table ".
+"LEFT JOIN $matkul_table ".
+"ON daftar.matkul_kode = mata_kuliah.matkul_kode ".
+"HAVING `$mhs_nim` = '$NIM'";
 $result = mysqli_query($conn, $SQL_query);
+
 
 if ($result) {
   $row_count = $result->num_rows;
-  $matkulList = [];
+  $RegisteredClassList = [];
 
   if ($row_count > 0) {
-    $matkulList = $result -> fetch_all(MYSQLI_ASSOC);
+    $RegisteredClassList = $result -> fetch_all(MYSQLI_ASSOC);
     // array_push($RegisteredClassList, $result -> fetch_all(MYSQLI_ASSOC));
   } 
 } else {
@@ -35,4 +38,3 @@ if ($result) {
         });
     </script>";
 }
-?>

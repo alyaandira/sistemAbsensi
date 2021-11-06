@@ -136,7 +136,7 @@ session_start();
                             Update
                         </button>
                     </form>
-                    <form method='POST' action='admin-mhsManageClass.php'>
+                    <form method='POST' action='admin-mhsManageMatkul.php'>
                         <input type='hidden' value='$mahasiswaNIM' name='selectedMahasiswaNIM'>
                         <input type='hidden' value='$mahasiswaNama' name='selectedMahasiswaName'>
                         <button type='submit' name='selectedNIM' class='btn waves-effect waves-light btn-dark' >Manage Class</button>

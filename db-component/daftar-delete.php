@@ -1,7 +1,7 @@
 <?php
 include "././db-component/config.php";
-$input_class_kode = $_POST["ClassModal_Kode"];
-$input_class_nama = $_POST["ClassModal_Nama"];
+$delete_daftar = $_POST["delete_daftar"];
+$input_nim_mhs = $_POST["selectedMahasiswaNIM"];
 
 // Create connection
 $conn = new mysqli($hostname, $username, $password, $dbName);
@@ -9,8 +9,10 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-$SQL_query = "DELETE FROM `$daftar_table` WHERE `$matkul_kode`= '$input_class_kode'";
+$SQL_query = "DELETE FROM `$daftar_table` WHERE `$daftar_id` = '$delete_daftar'";
 
+
+var_dump($SQL_query);
 $result = mysqli_query($conn, $SQL_query);
 
 

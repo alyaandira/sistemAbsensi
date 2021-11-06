@@ -74,4 +74,3 @@ $batasWaktu = "batasWaktu";
 $ruangkelas_table = "ruang_kelas";
 $kelas_id = "kelas_id";
 $kelas_nama = "kelas_nama";
-$dosen_nip = "dosen_nip";

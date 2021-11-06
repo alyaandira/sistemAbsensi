@@ -20,7 +20,7 @@ if (!isset($_SESSION["currentNIP"])) {
         <meta name="author" content="Alya Andira Lubis">
         <!-- Favicon icon -->
         <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon.png">
-        <title>Sistem Absensi - Daftar Kelas</title>
+        <title>Sistem Absensi - Ubah Pertemuan</title>
         <!-- Custom CSS -->
         <link href="./assets/extra-libs/c3/c3.min.css" rel="stylesheet">
         <link href="./assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
@@ -34,6 +34,8 @@ if (!isset($_SESSION["currentNIP"])) {
         <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="./css/beranda-adminstyle.css">
+        <script src="src\izitoast\dist\js\iziToast.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="src\izitoast\dist\css\iziToast.css">
 
     </head>
 
@@ -83,15 +85,22 @@ if (!isset($_SESSION["currentNIP"])) {
                 <!-- End Bread crumb and right sidebar toggle -->
 
                 <?php
-                if (isset($_POST["ClassModal_ActionType"])) {
 
-                    if ($_POST["ClassModal_ActionType"] == "Add") {
-                        include '././db-component/daftar-add.php';
-                    } else if ($_POST["ClassModal_ActionType"] == "Delete") {
-                        include '././db-component/daftar-delete.php';
-                    }
-
+                if (isset($_POST["matkulModal_daftar_matkulKode"])) {
+                    include '././db-component/daftar-add.php';
+                    $matkulModal_daftar_matkulKode = $_POST["matkulModal_daftar_matkulKode"];
+                    $input_nim_mhs = $_POST["selectedMahasiswaNIM"];
+                    var_dump($matkulModal_daftar_matkulKode);
+                    var_dump($input_nim_mhs);
                 }
+
+                if (isset($_POST["delete_daftar"])) {
+                    include '././db-component/daftar-delete.php';
+                    // $matkulModal_daftar_matkulKode = $_POST["matkulModal_daftar_matkulKode"];
+                    // var_dump($matkulModal_daftar_matkulKode);
+                    // var_dump($_POST["delete_daftar"]);
+                }
+
                 ?>
                 <!-- Container fluid  -->
                 <div class="container-fluid">
@@ -107,7 +116,11 @@ if (!isset($_SESSION["currentNIP"])) {
 
                     <?php
                     include './db-component/GetMatkulByDaftar.php';
-                    if (count($matkulList) == 0) {
+                    include './db-component/GetAllMatkul.php';
+                    // var_dump($AllCourseList);
+                    // var_dump($matkulTerdaftarList);
+
+                    if (count($matkulTerdaftarList) == 0) {
                         echo "<p>Saat ini tidak terdaftar di kelas manapun</p>";
                     } else {
                     ?>
@@ -121,26 +134,48 @@ if (!isset($_SESSION["currentNIP"])) {
                             </thead>
                             <tbody>
                                 <?php
-                                foreach ($matkulList as $class) {
-                                    $matkulKode = $class[$matkul_kode];
-                                    $matkulNama = $class[$matkul_nama];
+                                $selectedNIM = $_POST["selectedMahasiswaNIM"];
+                                $selectedName = $_POST["selectedMahasiswaName"];
+                                foreach ($matkulTerdaftarList as $matkul) {
+                                    $daftarID = $matkul[$daftar_id];
+                                    $matkulKode = $matkul[$matkul_kode];
+                                    $matkulNama = $matkul[$matkul_nama];
                                     echo "
-                            <tr>
-                                <td>$matkulKode</td>
-                                <td>$matkulNama</td>
-                                <td style='text-align:center;'>
-                                    <form method='POST'>
-                                        <button type='button' onclick='initializeDeleteClassModal(&#39;$matkulKode&#39;);' class='btn btn-danger'>Delete</button>
-                                    </form>
-                                </td>
-                            </tr>";
+                                <tr>
+                                    <td>$matkulKode</td>
+                                    <td>$matkulNama</td>
+                                    <td style='text-align:center;'>
+                                        <form method='POST'>
+                                            <input type='hidden' name='selectedMahasiswaName' value='$selectedName' />
+                                            <input type='hidden' name='selectedMahasiswaNIM' value='$selectedNIM' />
+                                            <button type='submit' value='$daftarID' name='delete_daftar' class='btn btn-danger'>Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>";
                                 }
                                 ?>
                             </tbody>
                         </table>
                     <?php } ?>
+
+                    <?php
+
+                    for ($i = 0; $i < count($AllCourseList); $i++) {
+                        for ($j = 0; $j < count($matkulTerdaftarList); $j++) {
+                            if ($AllCourseList[$i]["matkul_kode"] == $matkulTerdaftarList[$j]["matkul_kode"]) {
+                                unset($AllCourseList[$i]);
+                                break;
+                            } else {
+                            }
+                        }
+                    }
+
+                    // encode -> array or object into string
+                    // decode -> string into array or object
+                    // echo json_encode($AllCourseList);
+
+                    ?>
                 </div>
-                <!-- End Container fluid  -->
             </div>
             <!-- End Page wrapper  -->
         </div>
@@ -151,36 +186,47 @@ if (!isset($_SESSION["currentNIP"])) {
         ?>
     </body>
 
+
     <div class="modal fade" id="class_manage_modal" tabindex="-1" aria-labelledby="class_manage_modal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ubah Detail Kelas</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Daftar Mata Kuliah</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form method="POST" id='ClassModal_bodyForm'>
-
-                        <input type="text" class="form-control" id="ClassModal_ActionType" name="ClassModal_ActionType">
+                <form method="POST" id='ClassModal_bodyForm'>
+                    <div class="modal-body">
+                        <input type="hidden" class="form-control" value="<?php echo $selectedNIM ?>" name="selectedMahasiswaNIM">
+                        <input type="hidden" class="form-control" value="<?php echo $selectedName ?>" name="selectedMahasiswaName">
 
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Kode Kelas:</label>
-                            <input type="text" class="form-control" id="ClassModal_Kode" name="ClassModal_Kode">
+                            <select class="form-control form-control-lg" name="matkulModal_daftar_matkulKode">
+                                <?php
+                                foreach ($AllCourseList as $course) {
+                                    $course_matkulKode = $course["matkul_kode"];
+                                    $course_matkulNama = $course["matkul_nama"];
+                                    $value_to_display = $course_matkulKode . " - " . $course_matkulNama;
+
+                                    echo '<option value="' . $course_matkulKode . '">' . $value_to_display . '</option>';
+
+                                    // echo '<option value="'.$postResult["page_id"].'">'.$postResult["name"].'</option>';
+                                    // echo "<option>$value_to_display</option>";
+                                }
+                                ?>
+                            </select>
                         </div>
-                        <div class="form-group">
-                            <label for="message-text" class="col-form-label">Nama Kelas:</label>
-                            <input type="text" class="form-control" id="ClassModal_Nama" name="ClassModal_Nama">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button onclick="submitModal();" type="button" class="btn btn-primary">
-                        Save changes
-                    </button>
-                </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" value="load page" class="btn btn-primary">
+                            Save changes
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -198,34 +244,8 @@ if (!isset($_SESSION["currentNIP"])) {
     function initializeAddClassModal() {
 
         $('#class_manage_modal').modal('toggle')
-        document.getElementById("ClassModal_ActionType").value = "Add";
-        document.getElementById("ClassModal_Nama").value = "";
-        document.getElementById("ClassModal_Kode").value = "";
-    }
-
-    function initializeDeleteClassModal(matkulKode) {
-        document.getElementById("ClassModal_ActionType").value = "Delete";
-        document.getElementById("ClassModal_Nama").value = "";
-        document.getElementById("ClassModal_Kode").value = matkulKode;
-        submitModal()
-    }
-
-    function submitModal() {
-        const modalType = document.getElementById("ClassModal_ActionType").value;
-        const newNamaKelas = document.getElementById("ClassModal_Nama").value;
-        const newKodeKelas = document.getElementById("ClassModal_Kode").value;
-
-        if (modalType == "Add") {
-
-            if (newNamaKelas == "" || newKodeKelas == "") {
-                window.alert("Fill up the field!")
-            } else {
-                document.getElementById("ClassModal_bodyForm").submit();
-            }
-
-        } else if (modalType == "Delete") {
-            document.getElementById("ClassModal_bodyForm").submit();
-        }
+        // document.getElementById("ClassModal_Nama").value = "";
+        // document.getElementById("ClassModal_Kode").value = "";
     }
 </script>
 

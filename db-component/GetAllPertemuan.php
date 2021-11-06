@@ -7,7 +7,7 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-$SQL_query = "SELECT * FROM `pertemuan`";
+$SQL_query = "SELECT * FROM `$pertemuan_table`";
 $result = mysqli_query($conn, $SQL_query);
 
 

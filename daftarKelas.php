@@ -48,7 +48,7 @@ session_start();
 
         <?php
 
-        include '././db-component/GetAllClassByNIP.php';
+        include '././db-component/GetAllMatkulByNIP.php';
 
         if (count($RegisteredClassList) > 0) {
         ?>
@@ -64,7 +64,7 @@ session_start();
                     <li class='card'>
                         <h3 class='card-header'>$namaMatkul</h3>
                         <form method='POST' action='pindaiAbsensi.php'>
-                          <button type='submit' class='order-now' value='$kodeMatkul' name='btn-select-kelas'>Isi Absensi</button>
+                          <button type='submit' class='order-now' value='$kodeMatkul' name='selectedMataKuliah'>Isi Absensi</button>
                         </form>
                     </li>";
               }

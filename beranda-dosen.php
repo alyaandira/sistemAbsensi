@@ -73,9 +73,9 @@ session_start();
 
 
 
-            include '././db-component/GetAllClass.php';
+            include '././db-component/GetAllMatkul.php';
 
-            if (empty($FetchedClassList)) {
+            if (empty($AllCourseList)) {
                 echo "<p>No class has been registered</p>";
             } else {
 
@@ -93,7 +93,7 @@ session_start();
                         <tbody>";
 
                 //belajar tentang foreach
-                foreach ($FetchedClassList as $key => $value) {
+                foreach ($AllCourseList as $key => $value) {
                     $nomor = $key + 1;
                     echo "
                             <tr>

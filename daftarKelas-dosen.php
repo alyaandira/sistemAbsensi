@@ -77,7 +77,7 @@ if (!isset($_SESSION["currentNIP"])) {
                     <?php
                     include './db-component/GetMatkulByMengajar.php';
 
-                    var_dump($matkulList);
+                    var_dump($matkulTerdaftarList);
                     ?>
                     <table class="table table-sm">
                         <thead>
@@ -89,7 +89,7 @@ if (!isset($_SESSION["currentNIP"])) {
                         </thead>
                         <tbody>
                             <?php
-                            foreach ($matkulList as $class) {
+                            foreach ($matkulTerdaftarList as $class) {
                                 $matkulKode = $class[$matkul_kode];
                                 $matkulNama = $class[$matkul_nama];
                                 echo "

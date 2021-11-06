@@ -66,16 +66,18 @@ session_start();
             <!-- Container fluid  -->
             <div class="container-fluid">
                 <?php
-                $matkulKodePost = $_POST["btn-select-kelas"];
+                $matkulKodePost = $_POST["selectedMataKuliah"];
                 //buat data pos validation
                 var_dump($matkulKodePost);
                 include './db-component/mhs-GetPertemuanByAllMatkul.php';
-
-                var_dump($pertemuanList);
+                include './db-component/AbsensiJoinPertemuan.php';
+                
+                // var_dump($pertemuanList);
+                var_dump($absensiPertemuanList);
                 ?>
                 <table class="table table-sm">
                     <thead>
-                        <tr>    
+                        <tr>
                             <th scope="col">Kode Pertemuan</th>
                             <th scope="col">Kode Matkul</th>
                             <th scope="col">ID Kelas</th>
@@ -83,6 +85,7 @@ session_start();
                             <th scope="col">Waktu Mulai</th>
                             <th scope="col">Waktu Akhir</th>
                             <th scope="col">Batas Waktu</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -97,6 +100,8 @@ session_start();
                             $awalWaktu = $class[$waktuMulai];
                             $akhirWaktu = $class[$waktuAkhir];
                             $waktuBatas = $class[$batasWaktu];
+                            $mahasiswaNIM = $class[$mhs_nim];
+                            $mahasiswaNama = $class[$mhs_nama];
                             echo "
                             <tr>
                                 <td>$pertKode</td>
@@ -106,6 +111,13 @@ session_start();
                                 <td>$awalWaktu</td>
                                 <td>$akhirWaktu</td>
                                 <td>$waktuBatas</td>
+                                <td style='text-align:center;'>
+                                    <form method='POST' action='mhs-absensiPage.php'>
+                                        <input type='hidden' value='$mahasiswaNIM' name='selectedMahasiswaNIM'>
+                                        <input type='hidden' value='$mahasiswaNama' name='selectedMahasiswaName'>
+                                        <button type='submit' name='selectedNIM' class='btn waves-effect waves-light btn-dark' >Manage Class</button>
+                                    </form>
+                                </td>
                             </tr>";
                         }
                         ?>

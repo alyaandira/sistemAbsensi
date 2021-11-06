@@ -1,7 +1,7 @@
 <?php
 include "././db-component/config.php";
-$input_class_kode = $_POST["ClassModal_Kode"];
-$input_class_nama = $_POST["ClassModal_Nama"];
+$matkulModal_daftar_matkulKode = $_POST["matkulModal_daftar_matkulKode"];
+$input_nim_mhs = $_POST["selectedMahasiswaNIM"];
 
 // Create connection
 $conn = new mysqli($hostname, $username, $password, $dbName);
@@ -9,8 +9,9 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-$SQL_query = "INSERT INTO `$daftar_table`(`$matkul_kode`, `$matkul_nama`) VALUES ('$input_class_kode','$input_class_nama')";
+$SQL_query = "INSERT INTO `$daftar_table`(`$matkul_kode`,`$mhs_nim`) VALUES ('$matkulModal_daftar_matkulKode','$input_nim_mhs')";
 
+var_dump($SQL_query);
 $result = mysqli_query($conn, $SQL_query);
 
 
@@ -19,7 +20,7 @@ if ($result) {
     "<script>
     iziToast.success({
         title: 'Success',
-        message: 'Berhasil dihapus',
+        message: 'Berhasil ditambah',
         
     });
   </script>";

@@ -119,6 +119,7 @@ session_start();
                 foreach ($FetchedDosenList as $primaryKey => $value) {
                     $nomor = $primaryKey + 1;
                     $dosenNIP = $value["dosen_nip"];
+                    $dosenNama = $value["dosen_nama"];
                     echo "
             <tr>
                 <td>$nomor</td>
@@ -135,7 +136,11 @@ session_start();
                             Update
                         </button>
                     </form>
-                    
+                    <form method='POST' action='admin-ManageMengajar.php'>
+                        <input type='hidden' value='$dosenNIP' name='selectedDosenNIP'>
+                        <input type='hidden' value='$dosenNama' name='selectedDosenName'>
+                        <button type='submit' name='selectedNIP' class='btn waves-effect waves-light btn-dark' >Manage Mengajar</button>
+                    </form>
                 </td>
             </tr>";
                 } //end of foreach

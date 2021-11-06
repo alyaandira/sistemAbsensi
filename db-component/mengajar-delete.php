@@ -1,5 +1,8 @@
 <?php
 include "././db-component/config.php";
+$delete_mengajar = $_POST["delete_mengajar"];
+$input_dosen_nip = $_POST["selectedDosenNIP"];
+
 
 // Create connection
 $conn = new mysqli($hostname, $username, $password, $dbName);
@@ -7,22 +10,27 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-$SQL_query = "SELECT * FROM `$mhs_table`";
+$SQL_query = "DELETE FROM `$mengajar_table` WHERE `$mengajar_id` = '$delete_mengajar'";
+
+
 $result = mysqli_query($conn, $SQL_query);
 
 
 if ($result) {
-  $row_count = $result->num_rows;
-  $FetchedMahasiswaList = [];
+  echo
+    "<script>
+    iziToast.success({
+        title: 'Success',
+        message: 'Berhasil dihapus',
+        
+    });
+  </script>";
 
-  if ($row_count > 0) {
-    $FetchedMahasiswaList = $result -> fetch_all(MYSQLI_ASSOC);
-  } 
 } else {
   $error_message = $conn->error;
   echo ("Error is = " . $error_message);
   echo
-    "<script>
+  "<script>
         iziToast.error({
             title: 'Error',
             message: 'SQL error',
