@@ -2,8 +2,6 @@
 session_start();
 if (!isset($_SESSION["currentNIP"])) {
     header("location: login.php");
-} else if (!isset($_POST["selectedMahasiswaNIM"])) {
-    header("location: pindaiAbsensi.php");
 } else {
 
 ?>
@@ -37,8 +35,101 @@ if (!isset($_SESSION["currentNIP"])) {
         <link rel="stylesheet" href="src\izitoast\dist\css\iziToast.css">
 </head>
 <body>
-    
-</body>
+        <!-- Preloader - style you can find in spinners.css -->
+        <div class="preloader">
+            <div class="lds-ripple">
+                <div class="lds-pos"></div>
+                <div class="lds-pos"></div>
+            </div>
+        </div>
+
+        <!-- Main wrapper - style you can find in pages.scss -->
+        <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
+
+            <?php
+            include '././ui-component/topbar.php';
+            include '././ui-component/sidebar.php';
+            ?>
+
+
+            <!-- Page wrapper  -->
+            <div class="page-wrapper">
+                <!-- Bread crumb and right sidebar toggle -->
+                <div class="page-breadcrumb">
+                    <div class="row">
+                        <div class="col-7 align-self-center">
+                            <!-- <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">Good Morning!</h3> -->
+                            <div class="d-flex align-items-center">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb m-0 p-0">
+                                        <!-- <li class="breadcrumb-item"><a href="index.html">Dashboard</a> -->
+                                        </li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- End Bread crumb and right sidebar toggle -->
+
+                <!-- Container fluid  -->
+                <div class="container-fluid">
+
+                    <?php
+                    include './db-component/GetAllAbsensi.php';
+                    include './db-component/AbsensiJoinPertemuan.php';
+                    // var_dump($AbsensiList);
+                    var_dump($absensiPertemuanList);
+
+                    if (count($absensiPertemuanList) == 0) {
+                        echo "<p>Saat ini tidak terdaftar di kelas manapun</p>";
+                    } else {
+                    ?>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID Absensi</th>
+                                    <th scope="col">Status Absensi</th>
+                                    <th scope="col">Kode Pertemuan</th>
+                                    <th scope="col">NIM Mahasiswa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $selectedKode = $_POST["selectedMatkulKode"];
+                                foreach ($absensiPertemuanList as $absensi) {
+                                    $absensiID = $absensi[$absensi_id];
+                                    $absensiStatus = $absensi[$absensi_status];
+                                    $pertKode = $absensi[$pert_kode];
+                                    $mahasiswaNIM = $absensi[$mhs_nim];
+                                    echo "
+                                <tr>
+                                    <td>$absensiID</td>
+                                    <td>$absensiStatus</td>
+                                    <td>$pertKode</td>
+                                    <td>$mahasiswaNIM</td>
+                                    <td style='text-align:center;'>
+                                        <form method='POST'>
+                                            <input type='hidden' name='selectedMatkulKode' value='$selectedKode' />
+                                        </form>
+                                    </td>
+                                </tr>";
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    <?php } ?>
+                </div>
+            </div>
+            <!-- End Page wrapper  -->
+        </div>
+        <!-- End Wrapper -->
+
+        <?php
+        include '././ui-component/dependenciesImport.php';
+        ?>
+    </body>
 </html>
 
 

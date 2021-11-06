@@ -1,25 +1,25 @@
-{
-  "0": { "matkul_kode": "111", "matkul_nama": "aaaalia" },
-  "1": { "matkul_kode": "1113", "matkul_nama": "aalula" },
-  "2": { "matkul_kode": "12222", "matkul_nama": "aaaalyaandira" },
-  "3": { "matkul_kode": "123", "matkul_nama": "pascal" },
-  "4": { "matkul_kode": "456", "matkul_nama": "gi hun" },
-  "5": { "matkul_kode": "ILK2212", "matkul_nama": "Sistem Manajemen Database" },
-  "7": {
-    "matkul_kode": "ILK3224",
-    "matkul_nama": "Mikroprosessor dan Assembly(MA)"
-  },
-  "8": {
-    "matkul_kode": "ILK3229",
-    "matkul_nama": "Natural Language Processing"
-  },
-  "9": { "matkul_kode": "ILK3230", "matkul_nama": "Pemodelan Geometris 3D" },
-  "11": { "matkul_kode": "ILK345", "matkul_nama": "rendangkurus" },
-  "13": { "matkul_kode": "ILK4254", "matkul_nama": "Digital Forensik" },
-  "14": {
-    "matkul_kode": "ILK4255",
-    "matkul_nama": "Sistem Informasi Geografis"
-  }
-}
+// {
+//   "0": { "matkul_kode": "111", "matkul_nama": "aaaalia" },
+//   "1": { "matkul_kode": "1113", "matkul_nama": "aalula" },
+//   "2": { "matkul_kode": "12222", "matkul_nama": "aaaalyaandira" },
+//   "3": { "matkul_kode": "123", "matkul_nama": "pascal" },
+//   "4": { "matkul_kode": "456", "matkul_nama": "gi hun" },
+//   "5": { "matkul_kode": "ILK2212", "matkul_nama": "Sistem Manajemen Database" },
+//   "7": {
+//     "matkul_kode": "ILK3224",
+//     "matkul_nama": "Mikroprosessor dan Assembly(MA)"
+//   },
+//   "8": {
+//     "matkul_kode": "ILK3229",
+//     "matkul_nama": "Natural Language Processing"
+//   },
+//   "9": { "matkul_kode": "ILK3230", "matkul_nama": "Pemodelan Geometris 3D" },
+//   "11": { "matkul_kode": "ILK345", "matkul_nama": "rendangkurus" },
+//   "13": { "matkul_kode": "ILK4254", "matkul_nama": "Digital Forensik" },
+//   "14": {
+//     "matkul_kode": "ILK4255",
+//     "matkul_nama": "Sistem Informasi Geografis"
+//   }
+// }
 
-{"matkul_kode":"111","matkul_nama":"aaaalia"},{"matkul_kode":"1113","matkul_nama":"aalula"},{"matkul_kode":"12222","matkul_nama":"aaaalyaandira"},{"matkul_kode":"123","matkul_nama":"pascal"},{"matkul_kode":"456","matkul_nama":"gi hun"},{"matkul_kode":"ILK2212","matkul_nama":"Sistem Manajemen Database"},{"matkul_kode":"ILK3224","matkul_nama":"Mikroprosessor dan Assembly(MA)"},{"matkul_kode":"ILK3229","matkul_nama":"Natural Language Processing"},{"matkul_kode":"ILK3230","matkul_nama":"Pemodelan Geometris 3D"},{"matkul_kode":"ILK345","matkul_nama":"rendangkurus"},{"matkul_kode":"ILK4254","matkul_nama":"Digital Forensik"},{"matkul_kode":"ILK4255","matkul_nama":"Sistem Informasi Geografis"}
+{"absensi_id":"1","absensi_status":"0","mhs_nim":"171401121","pert_kode":"1","matkul_kode":"ILK4250","kelas_id":"101","dosen_nip":"121127801","waktuMulai":"2021-08-19 08:00:00","waktuAkhir":"2021-08-19 09:40:00","batasWaktu":"15"},{"absensi_id":null,"absensi_status":null,"mhs_nim":null,"pert_kode":"11","matkul_kode":"ILK4250","kelas_id":"101","dosen_nip":"4097901","waktuMulai":"2021-11-07 20:00:00","waktuAkhir":"2021-11-07 21:00:00","batasWaktu":"15"}

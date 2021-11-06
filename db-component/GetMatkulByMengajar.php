@@ -7,13 +7,14 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-$selectedDosenNIP = $_POST["selectedDosenNIP"];
+// $selectedDosenNIP = $_POST["selectedDosenNIP"];
+$NIP = $_SESSION["currentNIP"];
 
 // $SQL_query = "SELECT * FROM $mengajar_table WHERE ".
 $SQL_query = "SELECT mata_kuliah.matkul_nama, mata_kuliah.matkul_kode, `$dosen_nip`, `$mengajar_id` FROM $mengajar_table " .
   "LEFT JOIN $matkul_table " .
   "ON mengajar.matkul_kode = mata_kuliah.matkul_kode " .
-  "HAVING `$dosen_nip` = '$selectedDosenNIP' ";
+  "HAVING `$dosen_nip` = '$NIP' ";
 
 // "$dosen_nip = '$NIP'";
 $result = mysqli_query($conn, $SQL_query);

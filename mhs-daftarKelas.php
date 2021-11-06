@@ -44,7 +44,7 @@ session_start();
     <div class="page-wrapper">
       <!-- Container fluid  -->
       <div class="container-fluid">
-        <h1>Content for scan attendance goes here</h1>
+        <h1>----- Title ----- </h1>
 
         <?php
 
@@ -63,7 +63,7 @@ session_start();
                 echo "
                     <li class='card'>
                         <h3 class='card-header'>$namaMatkul</h3>
-                        <form method='POST' action='pindaiAbsensi.php'>
+                        <form method='POST' action='mhs-absensi.php'>
                           <button type='submit' class='order-now' value='$kodeMatkul' name='selectedMataKuliah'>Isi Absensi</button>
                         </form>
                     </li>";

@@ -7,13 +7,24 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-$SQL_query = "SELECT * FROM $absensi_table " .
+$selectedMataKuliah = $_POST["selectedMataKuliah"];
+
+$SQL_query = 
+"SELECT * FROM $absensi_table " .
   "LEFT JOIN $pertemuan_table " .
   "ON absensi.pert_kode = pertemuan.pert_kode " .
-  "UNION " . 
-  "SELECT * FROM $absensi_table " . 
+  "HAVING `$matkul_kode` = '$selectedMataKuliah' " .
+  "UNION " .
+  "SELECT * FROM $absensi_table " .
   "RIGHT JOIN $pertemuan_table " .
-  "ON absensi.pert_kode = pertemuan.pert_kode ";
+  "ON absensi.pert_kode = pertemuan.pert_kode " .
+  "HAVING `$matkul_kode` = '$selectedMataKuliah' ";
+
+  // $SQL_query = 
+  // "SELECT * FROM $absensi_table " .
+  // "RIGHT JOIN $pertemuan_table " .
+  // "ON absensi.pert_kode = pertemuan.pert_kode " .
+  // "HAVING `$matkul_kode` = '$selectedMataKuliah'";
 
 // SELECT * FROM `absensi` LEFT JOIN `pertemuan` ON absensi.pert_kode = pertemuan.pert_kode 
 // UNION

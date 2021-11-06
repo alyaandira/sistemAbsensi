@@ -66,19 +66,22 @@ session_start();
             <!-- Container fluid  -->
             <div class="container-fluid">
                 <?php
-                $matkulKodePost = $_POST["selectedMataKuliah"];
-                //buat data pos validation
-                var_dump($matkulKodePost);
-                include './db-component/mhs-GetPertemuanByAllMatkul.php';
-                include './db-component/AbsensiJoinPertemuan.php';
-                
+
+                $selectedMataKuliah = $_POST["selectedMataKuliah"];
+
+                // TODO: buat data pos validation
+                var_dump($selectedMataKuliah);
+                // include './db-component/mhs-GetPertemuanByAllMatkul.php';
+                include './db-component/mhs-GetAvailablePertemuanBasedOnMatkul.php';
+
                 // var_dump($pertemuanList);
-                var_dump($absensiPertemuanList);
+                // var_dump($absensiPertemuanList);
+                echo json_encode($absensiPertemuanList);
+
                 ?>
                 <table class="table table-sm">
                     <thead>
                         <tr>
-                            <th scope="col">Kode Pertemuan</th>
                             <th scope="col">Kode Matkul</th>
                             <th scope="col">ID Kelas</th>
                             <th scope="col">NIP Dosen</th>
@@ -93,18 +96,14 @@ session_start();
                         //  <a target="" href="http://www.natures-health-foods.com/images/Sushi-RollSalmonAvacado.jpg" class="image_card">
                         //  <img src="images/bluemarble.jpg"></a>
                         foreach ($pertemuanList as $class) {
-                            $pertKode = $class[$pert_kode];
                             $matkulKode = $class[$matkul_kode];
                             $kelasID = $class[$kelas_id];
                             $dosenNIP = $class[$dosen_nip];
                             $awalWaktu = $class[$waktuMulai];
                             $akhirWaktu = $class[$waktuAkhir];
                             $waktuBatas = $class[$batasWaktu];
-                            $mahasiswaNIM = $class[$mhs_nim];
-                            $mahasiswaNama = $class[$mhs_nama];
                             echo "
                             <tr>
-                                <td>$pertKode</td>
                                 <td>$matkulKode</td>
                                 <td>$kelasID</td>
                                 <td>$dosenNIP</td>
@@ -113,9 +112,8 @@ session_start();
                                 <td>$waktuBatas</td>
                                 <td style='text-align:center;'>
                                     <form method='POST' action='mhs-absensiPage.php'>
-                                        <input type='hidden' value='$mahasiswaNIM' name='selectedMahasiswaNIM'>
-                                        <input type='hidden' value='$mahasiswaNama' name='selectedMahasiswaName'>
-                                        <button type='submit' name='selectedNIM' class='btn waves-effect waves-light btn-dark' >Manage Class</button>
+                                    <input type='hidden' value='$matkulKode' name='selectedMatkulKode'>
+                                    <button type='submit' name='selectedKode' class='btn waves-effect waves-light btn-dark'>Isi Absensi</button>
                                     </form>
                                 </td>
                             </tr>";

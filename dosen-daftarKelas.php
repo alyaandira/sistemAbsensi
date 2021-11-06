@@ -76,8 +76,7 @@ if (!isset($_SESSION["currentNIP"])) {
                 <div class="container-fluid">
                     <?php
                     include './db-component/GetMatkulByMengajar.php';
-
-                    var_dump($matkulTerdaftarList);
+                    // var_dump($matkulTerdaftarList);
                     ?>
                     <table class="table table-sm">
                         <thead>

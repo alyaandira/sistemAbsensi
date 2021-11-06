@@ -15,8 +15,8 @@ if ($conn->connect_error) {
 }
 
 // $SQL_query = "INSERT INTO `mata_kuliah`(`matkul_kode`, `matkul_nama`) VALUES ('ILK345','rendangkurus')";
-$SQL_query = "INSERT INTO `$pertemuan_table`(`$pert_kode`, `$matkul_kode`, `$kelas_id`, `$dosen_nip`, `$waktuMulai`, `$waktuAkhir`, `$batasWaktu`) 
-VALUES ('$input_pertemuan_kode','$input_class_kode','$input_class_id','$input_dosen_nip','$input_class_waktumulai','$input_class_waktuakhir','$input_class_bataswaktu')";
+$SQL_query = "INSERT INTO `$pertemuan_table`(`$matkul_kode`, `$kelas_id`, `$dosen_nip`, `$waktuMulai`, `$waktuAkhir`, `$batasWaktu`) 
+VALUES ('$input_class_kode','$input_class_id','$input_dosen_nip','$input_class_waktumulai','$input_class_waktuakhir','$input_class_bataswaktu')";
 
 $result = mysqli_query($conn, $SQL_query);
 

@@ -95,9 +95,9 @@ session_start();
 
             // $selectedNIP = $_POST["selectedDosenNIP"];
 
-            if (isset($_POST["ClassModal_ID"])) {
-                var_dump($_POST["ClassModal_ID"]);
-            }
+            // if (isset($_POST["ClassModal_ID"])) {
+            //     var_dump($_POST["ClassModal_ID"]);
+            // }
 
             if (empty($FetchedPertemuanList)) {
                 echo "<p>No class has been registered</p>";
@@ -196,7 +196,6 @@ session_start();
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">ID Kelas:</label>
-                        <!-- <input type="text" class="form-control" id="ClassModal_ID" name="ClassModal_ID"> -->
                         <select class="form-control" id="ClassModal_ID" name="ClassModal_ID">
                             <?php
                             foreach ($AllClassList as $class) {
