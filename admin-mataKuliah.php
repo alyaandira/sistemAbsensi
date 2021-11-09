@@ -77,16 +77,10 @@ session_start();
 
                 if ($_POST["ClassModal_ActionType"] == "Add") {
                     include '././db-component/matkul-add.php';
-                    echo "<br> Add to database";
-                    // TODO: database action untuk add
                 } else if ($_POST["ClassModal_ActionType"] == "Update") {
                     include '././db-component/matkul-update.php';
-                    echo "<br> Update to database";
-                    // TODO: database action untuk update
                 } else if ($_POST["ClassModal_ActionType"] == "Delete") {
                     include '././db-component/matkul-delete.php';
-                    echo "<br> Delete to database";
-                    // TODO: database action untuk delete
                 }
             }
 

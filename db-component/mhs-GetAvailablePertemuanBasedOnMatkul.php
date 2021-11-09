@@ -7,29 +7,21 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-$selectedMataKuliah = $_POST["selectedMataKuliah"];
+// $selectedMataKuliah = $_POST["selectedMataKuliah"];
+$currentNIP = $_SESSION["currentNIP"];
 
-$SQL_query = 
-"SELECT * FROM $absensi_table " .
-  "LEFT JOIN $pertemuan_table " .
-  "ON absensi.pert_kode = pertemuan.pert_kode " .
-  "HAVING `$matkul_kode` = '$selectedMataKuliah' " .
+$SQL_query =
+  "SELECT * FROM $absensi_table " .
+  "LEFT JOIN $pert_table " .
+  "ON " . $absensi_table . "." . $pert_kode . " = " . "$pert_table" . "." . $pert_kode . " " .
+  "HAVING `$matkul_kode` = '$selectedMataKuliahKode' " .
   "UNION " .
   "SELECT * FROM $absensi_table " .
-  "RIGHT JOIN $pertemuan_table " .
-  "ON absensi.pert_kode = pertemuan.pert_kode " .
-  "HAVING `$matkul_kode` = '$selectedMataKuliah' ";
+  "RIGHT JOIN $pert_table " .
+  "ON " . $absensi_table . "." . $pert_kode . " = " . "$pert_table" . "." . $pert_kode . " " .
+  "HAVING `$matkul_kode` = '$selectedMataKuliahKode' ";
 
-  // $SQL_query = 
-  // "SELECT * FROM $absensi_table " .
-  // "RIGHT JOIN $pertemuan_table " .
-  // "ON absensi.pert_kode = pertemuan.pert_kode " .
-  // "HAVING `$matkul_kode` = '$selectedMataKuliah'";
-
-// SELECT * FROM `absensi` LEFT JOIN `pertemuan` ON absensi.pert_kode = pertemuan.pert_kode 
-// UNION
-// SELECT * FROM `absensi` RIGHT JOIN `pertemuan` ON absensi.pert_kode = pertemuan.pert_kode
-var_dump($SQL_query);
+// var_dump($SQL_query);
 $result = mysqli_query($conn, $SQL_query);
 
 if ($result) {

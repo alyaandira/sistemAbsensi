@@ -75,13 +75,13 @@ if (!isset($_SESSION["currentNIP"])) {
                 <!-- Container fluid  -->
                 <div class="container-fluid">
                     <?php
-                    include './db-component/GetMatkulByMengajar.php';
+                    include './db-component/dosen-GetMatkulByMengajar.php';
                     // var_dump($matkulTerdaftarList);
                     ?>
+                    <h1> DAFTAR MATA KULIAH </h1>
                     <table class="table table-sm">
                         <thead>
                             <tr>
-                                <h1> DAFTAR MATA KULIAH </h1>
                                 <th scope="col">Kode Mata Kuliah</th>
                                 <th scope="col">Nama Mata Kuliah</th>
                             </tr>

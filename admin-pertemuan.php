@@ -29,11 +29,6 @@ session_start();
     <link rel="stylesheet" type="text/css" href="./css/beranda-adminstyle.css">
     <script src="src\izitoast\dist\js\iziToast.js" type="text/javascript"></script>
     <link rel="stylesheet" href="src\izitoast\dist\css\iziToast.css">
-    <!-- <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
-	<link rel="stylesheet" type="text/css" href="css/util.css">
-	<link rel="stylesheet" type="text/css" href="./css/table-style.css"> -->
 </head>
 
 <body>
@@ -71,33 +66,21 @@ session_start();
             // add class
             if (isset($_POST["PertemuanModal_ActionType"])) {
 
-                // var_dump($_POST["PertemuanModal_ActionType"]);
-                // var_dump($_POST["PertemuanModal_PrimaryKey"]);
-                // var_dump($_POST["ClassModal_Kode"]);
-                // var_dump($_POST["ClassModal_Nama"]);
-
                 if ($_POST["PertemuanModal_ActionType"] == "Add") {
                     include '././db-component/pertemuan-add.php';
                 } else if ($_POST["PertemuanModal_ActionType"] == "Update") {
                     include '././db-component/pertemuan-update.php';
-                } else if ($_POST["PertemuanModal_ActionType"] == "Delete") {
-                    include '././db-component/pertemuan-delete.php';
                 }
             }
 
+            if (isset($_POST["delete_pertemuan_action"])) {
+                include '././db-component/pertemuan-delete.php';
+            } 
+
             include '././db-component/GetAllPertemuan.php';
             include '././db-component/GetAllClass.php';
-            include '././db-component/GetClassByPertemuan.php';
-            // var_dump($kelasTerdaftarList);
-            // var_dump($AllClassList);
-            // echo "<br";
-            // echo "<br";
-
-            // $selectedNIP = $_POST["selectedDosenNIP"];
-
-            // if (isset($_POST["ClassModal_ID"])) {
-            //     var_dump($_POST["ClassModal_ID"]);
-            // }
+            include '././db-component/GetAllDosen.php';
+            // include '././db-component/admin-GetClassByPertemuan.php';
 
             if (empty($FetchedPertemuanList)) {
                 echo "<p>No class has been registered</p>";
@@ -121,51 +104,37 @@ session_start();
                 </thead>
                 <tbody>";
 
+
                 foreach ($FetchedPertemuanList as $primaryKey => $value) {
                     $nomor = $primaryKey + 1;
                     $pertemuanKode = $value["pert_kode"];
+                    // $selectedNIP = $value["dosen_nip"];
+                    // var_dump ($selectedNIP);
                     echo "
-            <tr>
-                <td>$nomor</td>
-                <td id='pertkode_$primaryKey'>$value[pert_kode]</td>
-                <td id='matkulkode_$primaryKey'>$value[matkul_kode]</td>
-                <td id='kelasID_$primaryKey'>$value[kelas_id]</td>
-                <td id='dosenNIP_$primaryKey'>$value[dosen_nip]</td>
-                <td id='waktuMulai_$primaryKey'>$value[waktuMulai]</td>
-                <td id='waktuAkhir_$primaryKey'>$value[waktuAkhir]</td>
-                <td id='batasWaktu_$primaryKey'>$value[batasWaktu]</td>
-                <td style='text-align:center;'>
-                    <form method='POST'>
-                        <button type='button' onclick='initializeDeletePertemuanModal(&#39;$pertemuanKode&#39;);' class='btn btn-danger'>Delete</button>
-                        <button onclick='initializeUpdatePertemuanModal(&#39;$primaryKey&#39;);' class='btn btn-warning' data-toggle='modal' data-target='#pertemuan_manage_modal' type='button'>
-                            Update
-                        </button>
-                    </form>
-                    
-                </td>
-            </tr>";
+                    <tr>
+                        <td>$nomor</td>
+                        <td id='pertkode_$primaryKey'>$value[pert_kode]</td>
+                        <td id='matkulkode_$primaryKey'>$value[matkul_kode]</td>
+                        <td id='kelasID_$primaryKey'>$value[kelas_id]</td>
+                        <td id='dosenNIP_$primaryKey'>$value[dosen_nip]</td>
+                        <td id='waktuMulai_$primaryKey'>$value[waktuMulai]</td>
+                        <td id='waktuAkhir_$primaryKey'>$value[waktuAkhir]</td>
+                        <td id='batasWaktu_$primaryKey'>$value[batasWaktu]</td>
+                        <td style='text-align:center;'>
+                            <form method='POST'>
+                                <button type='submit' value='$pertemuanKode' name='delete_pertemuan_action' class='btn btn-danger'>Delete</button>
+                                <button onclick='initializeUpdatePertemuanModal(&#39;$primaryKey&#39;);' class='btn btn-warning' data-toggle='modal' data-target='#pertemuan_manage_modal' type='button'>
+                                    Update
+                                </button>
+                            </form>
+                            
+                        </td>
+                    </tr>";
                 } //end of foreach
                 echo "
-               
-            </table>
-      ";
-            }
-
-            ?>
-
-            <?php
-
-            for ($i = 0; $i < count($AllClassList); $i++) {
-                for ($j = 0; $j < count($kelasTerdaftarList); $j++) {
-                    if ($AllClassList[$i]["kelas_id"] == $kelasTerdaftarList[$j]["kelas_id"]) {
-                        unset($AllClassList[$i]);
-                        break;
-                    } else {
-                    }
-                }
+            </table>";
             }
             ?>
-
 </body>
 
 <!-- Class Modal -->
@@ -181,22 +150,35 @@ session_start();
             <div class="modal-body">
                 <form method="POST" id='PertemuanModal_bodyForm'>
 
-                    <input type="hidden" class="form-control" value="<?php echo $selectedNIP ?>" name="selectedDosenNIP">
-
-                    <input type="text" class="form-control" id="PertemuanModal_ActionType" name="PertemuanModal_ActionType">
-                    <input type="text" class="form-control" id="PertemuanModal_PrimaryKey" name="PertemuanModal_PrimaryKey">
+                    <input type="hidden" class="form-control" id="PertemuanModal_ActionType" name="PertemuanModal_ActionType">
+                    <input type="hidden" class="form-control" id="PertemuanModal_PrimaryKey" name="PertemuanModal_PrimaryKey">
+                    <input type="hidden" class="form-control" id="PertemuanModal_Kode" name="PertemuanModal_Kode">
 
                     <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Kode Pertemuan:</label>
-                        <input type="text" class="form-control" id="PertemuanModal_Kode" name="PertemuanModal_Kode">
+                        <label for="message-text" class="col-form-label">NIP Dosen:</label>
+                        <!-- <input type="text" class="form-control" id="DosenModal_NIP" name="DosenModal_NIP"> -->
+                        <select class="form-control" name="DosenModal_NIP" id="DosenModal_NIP">
+                            <?php
+                            foreach ($FetchedDosenList as $dosen) {
+                                $pertemuan_dosenNIP = $dosen["dosen_nip"];
+                                $pertemuan_dosenNama = $dosen["dosen_nama"];
+                                $displayDosen = $pertemuan_dosenNIP . " - " . $pertemuan_dosenNama;
+
+                                echo '<option value="' . $pertemuan_dosenNIP . '">' . $displayDosen . '</option>';
+                            }
+                            ?>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">Kode Mata Kuliah:</label>
-                        <input type="text" class="form-control" id="ClassModal_Kode" name="ClassModal_Kode">
+                        <select class="form-control" id="MatkulModal_Kode" name="MatkulModal_Kode" disabled>
+
+                        </select>
+
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">ID Kelas:</label>
-                        <select class="form-control" id="ClassModal_ID" name="ClassModal_ID">
+                        <select class="form-control" id="ClassModal_ID" name="ClassModal_ID" disabled>
                             <?php
                             foreach ($AllClassList as $class) {
                                 $pertemuan_classID = $class["kelas_id"];
@@ -208,27 +190,24 @@ session_start();
                             ?>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="message-text" class="col-form-label">NIP Dosen:</label>
-                        <input type="text" class="form-control" id="DosenModal_NIP" name="DosenModal_NIP">
-                    </div>
+
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">Waktu Mulai:</label>
-                        <input type="datetime-local" class="form-control" id="PertemuanModal_StartTime" name="PertemuanModal_StartTime">
+                        <input disabled type="datetime-local" class="form-control" id="PertemuanModal_StartTime" name="PertemuanModal_StartTime">
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">Waktu Akhir:</label>
-                        <input type="datetime-local" class="form-control" id="PertemuanModal_EndTime" name="PertemuanModal_EndTime">
+                        <input disabled type="datetime-local" class="form-control" id="PertemuanModal_EndTime" name="PertemuanModal_EndTime">
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">Batas Waktu:</label>
-                        <input class="form-control" id="PertemuanModal_LimitTime" name="PertemuanModal_LimitTime">
+                        <input disabled class="form-control" id="PertemuanModal_LimitTime" name="PertemuanModal_LimitTime">
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button onclick="submitModal();" type="button" class="btn btn-primary">Save changes</button>
+                <button disabled onclick="submitModal();" id="PertemuanModal_submitButton" type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
@@ -240,6 +219,19 @@ session_start();
 </html>
 
 
+
+
+</div>
+<!-- End Container fluid  -->
+</div>
+<!-- End Page wrapper  -->
+</div>
+<!-- End Wrapper -->
+<?php
+include '././ui-component/dependenciesImport.php';
+?>
+
+</html>
 
 <script>
     document.getElementById("adminButton").addEventListener("click", initializeAddPertemuanModal);
@@ -256,6 +248,15 @@ session_start();
         const waktuAkhirPertemuan = document.getElementById("waktuAkhir_" + primaryKey).innerHTML;
         const batasWaktuPertemuan = document.getElementById("batasWaktu_" + primaryKey).innerHTML;
 
+        getUpdatedMatkulListByMengajar(NIPdosen)
+        
+        $("#MatkulModal_Kode").prop('disabled', false);
+        $("#ClassModal_ID").prop('disabled', false);
+        $("#PertemuanModal_StartTime").prop('disabled', false);
+        $("#PertemuanModal_EndTime").prop('disabled', false);
+        $("#PertemuanModal_LimitTime").prop('disabled', false);
+        $("#PertemuanModal_submitButton").prop('disabled', false);
+
         // get timezone offset
         var tzoffset = (new Date()).getTimezoneOffset() * 60000;
 
@@ -264,7 +265,7 @@ session_start();
         document.getElementById("PertemuanModal_ActionType").value = "Update";
         document.getElementById("PertemuanModal_PrimaryKey").value = primaryKey;
         document.getElementById("PertemuanModal_Kode").value = kodePertemuan;
-        document.getElementById("ClassModal_Kode").value = kodeKelas;
+        document.getElementById("MatkulModal_Kode").value = kodeKelas;
         document.getElementById("ClassModal_ID").value = IDKelas;
         document.getElementById("DosenModal_NIP").value = NIPdosen;
         document.getElementById("PertemuanModal_StartTime").value = new Date(new Date(waktuMulaiPertemuan) - tzoffset).toISOString().slice(0, 16);
@@ -274,12 +275,128 @@ session_start();
 
     function initializeAddPertemuanModal() {
 
-        $('#pertemuan_manage_modal').modal('toggle')
-        //set all the field to empty, because it is a frehs new modal
+        // to disable all input when open the modal
+        $("#MatkulModal_Kode").prop('disabled', true);
+        $("#ClassModal_ID").prop('disabled', true);
+        $("#PertemuanModal_StartTime").prop('disabled', true);
+        $("#PertemuanModal_EndTime").prop('disabled', true);
+        $("#PertemuanModal_LimitTime").prop('disabled', true);
+        $("#PertemuanModal_submitButton").prop('disabled', true);
+        cleanModalInput()
         document.getElementById("PertemuanModal_ActionType").value = "Add";
+
+        $('#pertemuan_manage_modal').modal('toggle')
+        // //set all the field to empty, because it is a frehs new modal
+    }
+
+    function getMatkulListByMengajar(NIPDosen) {
+
+        //HTTP Request to API
+        $.ajax({
+            contentType: 'application/json',
+            data: JSON.stringify({
+                "selectedDosenNIP": NIPDosen
+            }),
+            dataType: 'json',
+            success: function(data) {
+                console.log("device control succeeded");
+                // console.log(data);
+
+                var select = document.getElementById('MatkulModal_Kode');
+                select.innerHTML = '';
+
+                for (var i = 0; i < data.length; i++) {
+                    var opt = document.createElement('option');
+                    opt.value = data[i].matkul_kode;
+                    opt.innerHTML = data[i].matkul_kode;
+                    select.appendChild(opt);
+                }
+
+                $("#MatkulModal_Kode").prop('disabled', false);
+                $("#ClassModal_ID").prop('disabled', false);
+                $("#PertemuanModal_StartTime").prop('disabled', false);
+                $("#PertemuanModal_EndTime").prop('disabled', false);
+                $("#PertemuanModal_LimitTime").prop('disabled', false);
+                $("#PertemuanModal_submitButton").prop('disabled', false);
+                document.getElementById("MatkulModal_Kode").value = "";
+                document.getElementById("ClassModal_ID").value = "";
+                document.getElementById("PertemuanModal_StartTime").value = "";
+                document.getElementById("PertemuanModal_EndTime").value = "";
+                document.getElementById("PertemuanModal_LimitTime").value = "";
+            },
+            error: function(data) {
+                console.log("Device control failed");
+                console.log(data);
+
+                $("#MatkulModal_Kode").prop('disabled', true);
+                $("#ClassModal_ID").prop('disabled', true);
+                $("#PertemuanModal_StartTime").prop('disabled', true);
+                $("#PertemuanModal_EndTime").prop('disabled', true);
+                $("#PertemuanModal_LimitTime").prop('disabled', true);
+                $("#PertemuanModal_submitButton").prop('disabled', true);
+                cleanModalInput()
+                // TODO: add izitoast or whatever to tell the user something wrong 
+                // might be data empty or connection error or API URL error 
+                // (change from local server to live server or to ngrok tunneling)
+            },
+            processData: false,
+            type: 'POST',
+            //TODO: tukar URL kalau tukar HTTP (ngrok or anything that could lead to change of the base URL)
+            url: 'http://localhost/GitHub/sistemAbsensi/db-component/admin-GetMatkulByMengajarAPI.php'
+        });
+
+    }
+
+    function getUpdatedMatkulListByMengajar(NIPDosen) {
+
+        //HTTP Request to API
+        $.ajax({
+            contentType: 'application/json',
+            data: JSON.stringify({
+                "selectedDosenNIP": NIPDosen
+            }),
+            dataType: 'json',
+            success: function(data) {
+                console.log("device control succeeded");
+                // console.log(data);
+
+                var select = document.getElementById('MatkulModal_Kode');
+                select.innerHTML = '';
+
+                for (var i = 0; i < data.length; i++) {
+                    var opt = document.createElement('option');
+                    opt.value = data[i].matkul_kode;
+                    opt.innerHTML = data[i].matkul_kode;
+                    select.appendChild(opt);
+                }
+            },
+            error: function(data) {
+                console.log("Device control failed");
+                console.log(data);
+
+                $("#MatkulModal_Kode").prop('disabled', true);
+                $("#ClassModal_ID").prop('disabled', true);
+                $("#PertemuanModal_StartTime").prop('disabled', true);
+                $("#PertemuanModal_EndTime").prop('disabled', true);
+                $("#PertemuanModal_LimitTime").prop('disabled', true);
+                $("#PertemuanModal_submitButton").prop('disabled', true);
+                cleanModalInput()
+                // TODO: add izitoast or whatever to tell the user something wrong 
+                // might be data empty or connection error or API URL error 
+                // (change from local server to live server or to ngrok tunneling)
+            },
+            processData: false,
+            type: 'POST',
+            //TODO: tukar URL kalau tukar HTTP (ngrok or anything that could lead to change of the base URL)
+            url: 'http://localhost/GitHub/sistemAbsensi/db-component/admin-GetMatkulByMengajarAPI.php'
+        });
+
+    }
+
+    function cleanModalInput() {
         document.getElementById("PertemuanModal_PrimaryKey").value = "";
         document.getElementById("PertemuanModal_Kode").value = "";
-        document.getElementById("ClassModal_Kode").value = "";
+        document.getElementById("MatkulModal_Kode").value = "";
         document.getElementById("ClassModal_ID").value = "";
         document.getElementById("DosenModal_NIP").value = "";
         document.getElementById("PertemuanModal_StartTime").value = "";
@@ -287,33 +404,32 @@ session_start();
         document.getElementById("PertemuanModal_LimitTime").value = "";
     }
 
-    function initializeDeletePertemuanModal(pertemuanKode) {
-        document.getElementById("PertemuanModal_ActionType").value = "Delete";
-        document.getElementById("PertemuanModal_PrimaryKey").value = "";
-        document.getElementById("PertemuanModal_Kode").value = pertemuanKode;
-        document.getElementById("ClassModal_Kode").value = "";
-        document.getElementById("ClassModal_ID").value = "";
-        document.getElementById("DosenModal_NIP").value = "";
-        document.getElementById("PertemuanModal_StartTime").value = "";
-        document.getElementById("PertemuanModal_EndTime").value = "";
-        document.getElementById("PertemuanModal_LimitTime").value = "";
-        // console.log(primaryKey);
-        submitModal()
-    }
+    $(document).ready(function() {
+        $('#DosenModal_NIP').on('change', function() {
+            getMatkulListByMengajar(this.value)
+        });
+    });
 
     function submitModal() {
         const modalType = document.getElementById("PertemuanModal_ActionType").value;
         const newKodePertemuan = document.getElementById("PertemuanModal_Kode").value;
-        const newKodeKelas = document.getElementById("ClassModal_Kode").value;
+        const newKodeKelas = document.getElementById("MatkulModal_Kode").value;
         const newIDKelas = document.getElementById("ClassModal_ID").value;
         const newNIPdosen = document.getElementById("DosenModal_NIP").value;
         const newWaktuMulai = document.getElementById("PertemuanModal_StartTime").value;
         const newWaktuAkhir = document.getElementById("PertemuanModal_EndTime").value;
         const newBatasWaktu = document.getElementById("PertemuanModal_LimitTime").value;
+        console.log(modalType)
+        console.log(newKodeKelas)
+        console.log(newIDKelas)
+        console.log(newNIPdosen)
+        console.log(newWaktuMulai)
+        console.log(newWaktuAkhir)
+        console.log(newBatasWaktu)
 
         if (modalType == "Add") {
 
-            if (newKodePertemuan == "" || newKodeKelas == "" || newIDKelas == "" || newNIPdosen == "" || newWaktuMulai == "" || newWaktuAkhir == "" || newBatasWaktu == "") {
+            if (newKodeKelas == "" || newIDKelas == "" || newNIPdosen == "" || newWaktuMulai == "" || newWaktuAkhir == "" || newBatasWaktu == "") {
                 window.alert("Fill up the field!")
             } else {
                 document.getElementById("PertemuanModal_bodyForm").submit();
@@ -340,24 +456,12 @@ session_start();
                 document.getElementById("PertemuanModal_bodyForm").submit();
             }
 
-        } else if (modalType == "Delete") {
-            document.getElementById("PertemuanModal_bodyForm").submit();
         }
     }
 </script>
+<script>
 
-</div>
-<!-- End Container fluid  -->
-</div>
-<!-- End Page wrapper  -->
-</div>
-<!-- End Wrapper -->
-<?php
-include '././ui-component/dependenciesImport.php';
-?>
-
-</html>
-
+</script>
 <style>
     table,
     th,

@@ -6,10 +6,11 @@ if (!isset($_SESSION["currentNIP"])) {
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,8 +34,9 @@ if (!isset($_SESSION["currentNIP"])) {
         <link rel="stylesheet" type="text/css" href="./css/beranda-adminstyle.css">
         <script src="src\izitoast\dist\js\iziToast.js" type="text/javascript"></script>
         <link rel="stylesheet" href="src\izitoast\dist\css\iziToast.css">
-</head>
-<body>
+    </head>
+
+    <body>
         <!-- Preloader - style you can find in spinners.css -->
         <div class="preloader">
             <div class="lds-ripple">
@@ -77,15 +79,14 @@ if (!isset($_SESSION["currentNIP"])) {
                 <div class="container-fluid">
 
                     <?php
-                    include './db-component/GetAllAbsensi.php';
-                    include './db-component/AbsensiJoinPertemuan.php';
-                    // var_dump($AbsensiList);
-                    var_dump($absensiPertemuanList);
+                    include './db-component/mhs-GetAllAbsensi.php';
+                    var_dump($AbsensiList);
 
                     if (count($absensiPertemuanList) == 0) {
                         echo "<p>Saat ini tidak terdaftar di kelas manapun</p>";
                     } else {
                     ?>
+                        <h1><?php echo $_POST["selectedMatkulKode"] . " " . $_POST["selectedMatkulNama"] ?></h1>
                         <table class="table table-sm">
                             <thead>
                                 <tr>
@@ -130,7 +131,8 @@ if (!isset($_SESSION["currentNIP"])) {
         include '././ui-component/dependenciesImport.php';
         ?>
     </body>
-</html>
+
+    </html>
 
 
 

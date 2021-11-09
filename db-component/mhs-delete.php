@@ -21,6 +21,7 @@ $result = mysqli_query($conn, $SQL_query);
 if ($result) {
   echo
   "<script>
+  window.history.replaceState( null, null, window.location.href );
   iziToast.success({
       title: 'Success',
       message: 'Berhasil dihapus',
@@ -31,6 +32,7 @@ if ($result) {
   echo ("Error is = " . $error_message);
   echo
   "<script>
+  window.history.replaceState( null, null, window.location.href );
         iziToast.error({
             title: 'Error',
             message: 'SQL error',

@@ -115,10 +115,10 @@ if (!isset($_SESSION["currentNIP"])) {
                             ?> </h1>
 
                     <?php
-                    include './db-component/GetMatkulByMengajar.php';
+                    include './db-component/admin-GetMatkulByMengajar.php';
                     include './db-component/GetAllMatkul.php';
                     // var_dump($AllCourseList);
-                    var_dump($matkulTerdaftarList);
+                    // var_dump($matkulTerdaftarList);
 
                     if (count($matkulTerdaftarList) == 0) {
                         echo "<p>Saat ini tidak terdaftar di kelas manapun</p>";

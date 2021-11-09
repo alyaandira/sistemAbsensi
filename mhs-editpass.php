@@ -68,24 +68,20 @@ session_start();
 
             <form method="POST">
                 <input type="hidden" name="mahasiswa_changePassword_NIM" value="<?php echo $_SESSION["currentNIP"]; ?>" />
+                <input type="hidden" name="mahasiswa_changePassword_newPassword" id="mahasiswa_changePassword_newPassword"/>
 
                 <div class="form-group">
                 <h4>Sandi saat ini</h2>
-
                     <label for="message-text"><i class="col-form-label"></i></label>
                     <input type="password" name="mahasiswa_changePassword_oldPassword" id="mahasiswa_changePassword_oldPassword" placeholder="" />
                 </div>
-
-                <div class="form-group">
+                <!-- <div class="form-group">
                 <h4>Kata sandi baru</h2>
-
                     <label for="message-text"><i class="col-form-label"></i></label>
                     <input type="password" name="mahasiswa_changePassword_newPassword" id="mahasiswa_changePassword_newPassword" placeholder="" />
-                </div>
-
+                </div> -->
                 <div class="form-group">
-                <h4>Ulangi kata sandi baru</h2>
-
+                <h4>ata sandi baru</h2>
                     <label for="message-text"><i class="col-form-label"></i></label>
                     <input type="password" name="mahasiswa_changePassword_newPasswordConfirm" id="mahasiswa_changePassword_newPasswordConfirm" placeholder="" />
                 </div>

@@ -36,7 +36,7 @@ if ($result) {
     // var_dump($_SESSION["currentUsername"]);
     // var_dump($_SESSION["currentNIP"]);
     // redirect to home page
-    header("Location: admin-beranda.php");
+    header("Location: admin-mataKuliah.php");
     exit;
   } else {
     echo

@@ -48,11 +48,11 @@ session_start();
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">Good Morning!</h3>
+                        <!-- <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">Good Morning!</h3> -->
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
-                                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a>
+                                    <!-- <li class="breadcrumb-item"><a href="index.html">Dashboard</a> -->
                                     </li>
                                 </ol>
                             </nav>
@@ -65,7 +65,7 @@ session_start();
 
             <!-- Container fluid  -->
             <div class="container-fluid">
-                <h1>Content for Beranda goes here</h1>
+                <!-- <h1>Content for Beranda goes here</h1> -->
                 <!-- <input id="pac-input" class="controls" type="text" placeholder="Enter a location" /> -->
                 <div id="map"></div>
             </div>
@@ -90,12 +90,12 @@ session_start();
   var bounds;
 
   function initMap() {
-    var center = new google.maps.LatLng(3.5250312, 98.6646724);
+    var center = new google.maps.LatLng(3.5250514, 98.6646126);
     var area = [
-    { lat: 3.529934, lng: 98.663746 },
-      { lat: 3.5304629, lng: 98.6712846 },
-      { lat: 3.5250587, lng: 98.670648 },
-      { lat: 3.5244463, lng: 98.6629224 },
+      { lat: 3.525087, lng: 98.664528 },
+      { lat: 3.525078, lng: 98.664677 },
+      { lat: 3.525004, lng: 98.664673 },
+      { lat: 3.525008, lng: 98.664524 },
     ];
 
     // initiliaze google map and store it to variable map

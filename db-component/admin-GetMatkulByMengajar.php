@@ -7,16 +7,13 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-// $selectedDosenNIP = $_POST["selectedDosenNIP"];
-$NIP = $_SESSION["currentNIP"];
+$selectedDosenNIP = $_POST["selectedDosenNIP"];
 
-// $SQL_query = "SELECT * FROM $mengajar_table WHERE ".
 $SQL_query = "SELECT mata_kuliah.matkul_nama, mata_kuliah.matkul_kode, `$dosen_nip`, `$mengajar_id` FROM $mengajar_table " .
   "LEFT JOIN $matkul_table " .
   "ON mengajar.matkul_kode = mata_kuliah.matkul_kode " .
-  "HAVING `$dosen_nip` = '$NIP' ";
+  "HAVING `$dosen_nip` = '$selectedDosenNIP' ";
 
-// "$dosen_nip = '$NIP'";
 $result = mysqli_query($conn, $SQL_query);
 
 if ($result) {
@@ -25,7 +22,6 @@ if ($result) {
 
   if ($row_count > 0) {
     $matkulTerdaftarList = $result->fetch_all(MYSQLI_ASSOC);
-    // array_push($RegisteredClassList, $result -> fetch_all(MYSQLI_ASSOC));
   }
 } else {
   $error_message = $conn->error;

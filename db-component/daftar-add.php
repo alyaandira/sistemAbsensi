@@ -9,7 +9,7 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-$SQL_query = "INSERT INTO `$daftar_table`(`$matkul_kode`,`$mhs_nim`) VALUES ('$matkulModal_daftar_matkulKode','$input_nim_mhs')";
+$SQL_query = "INSERT INTO `$daftar_table`(`$daftar_matkul_kode`,`$daftar_mhs_nim`) VALUES ('$matkulModal_daftar_matkulKode','$input_nim_mhs')";
 
 var_dump($SQL_query);
 $result = mysqli_query($conn, $SQL_query);
@@ -18,18 +18,19 @@ $result = mysqli_query($conn, $SQL_query);
 if ($result) {
   echo
     "<script>
-    iziToast.success({
-        title: 'Success',
-        message: 'Berhasil ditambah',
-        
-    });
+      window.history.replaceState( null, null, window.location.href );
+      iziToast.success({
+          title: 'Success',
+          message: 'Berhasil ditambah',
+      });
   </script>";
 
 } else {
   $error_message = $conn->error;
   echo ("Error is = " . $error_message);
   echo
-  "<script>
+   "<script>
+        window.history.replaceState( null, null, window.location.href );
         iziToast.error({
             title: 'Error',
             message: 'SQL error',

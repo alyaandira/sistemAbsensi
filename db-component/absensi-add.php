@@ -1,7 +1,9 @@
 <?php
 include "././db-component/config.php";
-$input_class_kode = $_POST["ClassModal_Kode"];
-$input_class_nama = $_POST["ClassModal_Nama"];
+$selectedPertKode = $_POST["selectedPertKode"];
+$tableMhsNim = $_POST["selectedMahasiswaNIM"];
+$tableAbsenID = $_POST["selectedAbsenID"];
+$tableAbsenStatus = $_POST["selectedAbsenStatus"];
 
 // Create connection
 $conn = new mysqli($hostname, $username, $password, $dbName);
@@ -9,8 +11,7 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-// $SQL_query = "INSERT INTO `mata_kuliah`(`matkul_kode`, `matkul_nama`) VALUES ('ILK345','rendangkurus')";
-$SQL_query = "INSERT INTO `$matkul_table`(`$matkul_kode`, `$matkul_nama`) VALUES ('$input_class_kode','$input_class_nama')";
+$SQL_query = "INSERT INTO `$absensi_table`(`$absensi_id`,`$absensi_status`,`$absensi_mhs_nim`,`$absensi_pert_kode`) VALUES ('$tableAbsenID','$tableAbsenStatus','$tableMhsNim','$selectedPertKode')";
 
 $result = mysqli_query($conn, $SQL_query);
 
@@ -18,7 +19,7 @@ $result = mysqli_query($conn, $SQL_query);
 if ($result) {
   echo
   "<script>
-  window.history.replaceState( null, null, window.location.href );
+      window.history.replaceState( null, null, window.location.href );
       iziToast.success({
           title: 'Success',
           message: 'Berhasil ditambahkan',
@@ -29,7 +30,7 @@ if ($result) {
   echo ("Error is = " . $error_message);
   echo
   "<script>
-  window.history.replaceState( null, null, window.location.href );
+        window.history.replaceState( null, null, window.location.href );
         iziToast.error({
             title: 'Error',
             message: 'SQL error',

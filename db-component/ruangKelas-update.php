@@ -9,7 +9,7 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-$SQL_query = "UPDATE `$ruangkelas_table` SET `$kelas_id`='$input_class_id',`$kelas_nama`='$input_class_nama' WHERE `$kelas_id`= '$input_class_id'";
+$SQL_query = "UPDATE `$ruangkelas_table` SET `$ruangkelas_id`='$input_class_id',`$ruangkelas_nama`='$input_class_nama' WHERE `$ruangkelas_id`= '$input_class_id'";
 
 $result = mysqli_query($conn, $SQL_query);
 
@@ -17,6 +17,7 @@ $result = mysqli_query($conn, $SQL_query);
 if ($result) {
   echo
   "<script>
+  window.history.replaceState( null, null, window.location.href );
       iziToast.success({
           title: 'Success',
           message: 'Berhasil dirubah',
@@ -27,6 +28,7 @@ if ($result) {
   echo ("Error is = " . $error_message);
   echo
   "<script>
+  window.history.replaceState( null, null, window.location.href );
         iziToast.error({
             title: 'Error',
             message: 'SQL error',

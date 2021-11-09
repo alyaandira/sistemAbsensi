@@ -17,9 +17,6 @@ if ($result) {
 
   if ($row_count > 0) {
     $FetchedDosenList = $result->fetch_all(MYSQLI_ASSOC);
-    // $_SESSION["currentUsername"];
-    // $_SESSION["currentNIP"];
-    // $_SESSION["currentPassword"];
   }
 } else {
   $error_message = $conn->error;

@@ -48,9 +48,25 @@ if ($result) {
                 </script>";
             }
         } else {
-            var_dump("old password does not match");
+            $error_message = $conn->error;
+                echo ("Error is = " . $error_message);
+                echo
+                "<script>
+                    iziToast.error({
+                        title: 'Error',
+                        message: 'old pass doesnt match',
+                    });
+                </script>";
         }
     } else {
-        var_dump("no record found");
+        $error_message = $conn->error;
+                echo ("Error is = " . $error_message);
+                echo
+                "<script>
+                    iziToast.error({
+                        title: 'Error',
+                        message: 'no record found',
+                    });
+                </script>";
     }
 }

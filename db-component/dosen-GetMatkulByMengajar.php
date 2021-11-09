@@ -7,23 +7,21 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-// $selectedDosenNIP = $_POST["selectedDosenNIP"];
+$currentNIP = $_SESSION["currentNIP"];
 
-$SQL_query = "SELECT ruang_kelas.kelas_id, ruang_kelas.kelas_nama, `$dosen_nip` FROM $pertemuan_table " .
-  "LEFT JOIN $ruangkelas_table " .
-  "ON pertemuan.kelas_id = ruang_kelas.kelas_id " .
-  "HAVING `$dosen_nip` = '222' ";
+$SQL_query = "SELECT mata_kuliah.matkul_nama, mata_kuliah.matkul_kode, `$mengajar_dosen_nip`, `$mengajar_id` FROM $mengajar_table " .
+  "LEFT JOIN $matkul_table " .
+  "ON mengajar.matkul_kode = mata_kuliah.matkul_kode " .
+  "HAVING `$mengajar_dosen_nip` = '$currentNIP' ";
 
-  // SELECT * FROM `pertemuan` LEFT JOIN mata_kuliah ON pertemuan.matkul_kode = mata_kuliah.matkul_kode HAVING `dosen_nip` = '2021383902'
-// var_dump($SQL_query);
 $result = mysqli_query($conn, $SQL_query);
 
 if ($result) {
   $row_count = $result->num_rows;
-  $kelasTerdaftarList = [];
+  $matkulTerdaftarList = [];
 
   if ($row_count > 0) {
-    $kelasTerdaftarList = $result->fetch_all(MYSQLI_ASSOC);
+    $matkulTerdaftarList = $result->fetch_all(MYSQLI_ASSOC);
   }
 } else {
   $error_message = $conn->error;

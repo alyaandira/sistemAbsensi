@@ -10,8 +10,8 @@ $dbName = "sistem_absensi";
 $absensi_table = "absensi";
 $absensi_id = "absensi_id";
 $absensi_status = "absensi_status";
-$mhs_nim = "mhs_nim";
-$pert_kode = "pert_kode";
+$absensi_mhs_nim = "mhs_nim";
+$absensi_pert_kode = "pert_kode";
 
 // Tabel Admin
 $admin_table = "admin";
@@ -22,8 +22,8 @@ $admin_pass = "admin_pass";
 // Tabel Daftar
 $daftar_table = "daftar";
 $daftar_id = "daftar_id";
-$matkul_kode = "matkul_kode";
-$mhs_nim = "mhs_nim";
+$daftar_matkul_kode = "matkul_kode";
+$daftar_mhs_nim = "mhs_nim";
 
 
 // Tabel Dosen
@@ -55,22 +55,22 @@ $matkul_nama = "matkul_nama";
 // Tabel Mengajar
 $mengajar_table = "mengajar";
 $mengajar_id = "mengajar_id";
-$matkul_kode = "matkul_kode";
-$dosen_nip = "dosen_nip";
+$mengajar_matkul_kode = "matkul_kode";
+$mengajar_dosen_nip = "dosen_nip";
 
 
 // Tabel Pertemuan
-$pertemuan_table = "pertemuan";
+$pert_table = "pertemuan";
 $pert_kode = "pert_kode";
-$matkul_kode = "matkul_kode";
-$kelas_id = "kelas_id";
-$dosen_nip = "dosen_nip";
-$waktuMulai = "waktuMulai";
-$waktuAkhir = "waktuAkhir";
-$batasWaktu = "batasWaktu";
+$pert_matkul_kode = "matkul_kode";
+$pert_kelas_id = "kelas_id";
+$pert_dosen_nip = "dosen_nip";
+$pert_waktu_mulai = "waktuMulai";
+$pert_waktu_akhir = "waktuAkhir";
+$pert_batas_waktu = "batasWaktu";
 
 
 // Tabel RKelas
 $ruangkelas_table = "ruang_kelas";
-$kelas_id = "kelas_id";
-$kelas_nama = "kelas_nama";
+$ruangkelas_id = "kelas_id";
+$ruangkelas_nama = "kelas_nama";

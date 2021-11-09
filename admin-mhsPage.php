@@ -80,16 +80,10 @@ session_start();
 
                 if ($_POST["MahasiswaModal_ActionType"] == "Add") {
                     include '././db-component/mhs-add.php';
-                    echo "<br> Add to database";
-                    // TODO: database action untuk add
                 } else if ($_POST["MahasiswaModal_ActionType"] == "Update") {
                     include '././db-component/mhs-update.php';
-                    echo "<br> Update to database";
-                    // TODO: database action untuk update
                 } else if ($_POST["MahasiswaModal_ActionType"] == "Delete") {
                     include '././db-component/mhs-delete.php';
-                    echo "<br> Delete to database";
-                    // TODO: database action untuk delete
                 }
             }
 
@@ -147,11 +141,6 @@ session_start();
                 echo "</table>";
             }
             ?>
-
-            <br>
-            <!-- <h1>Tambah Mahasiswa</h1>
-            <button type="button" onclick="initializeAddMahasiswaModal();" class="btn waves-effect waves-light btn-success" data-toggle="modal" data-target="#mahasiswa_manage_modal">Add</button> -->
-
 </body>
 
 <!-- Mahasiswa Modal -->

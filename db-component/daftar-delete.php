@@ -19,18 +19,20 @@ $result = mysqli_query($conn, $SQL_query);
 if ($result) {
   echo
     "<script>
+    window.history.replaceState( null, null, window.location.href );
     iziToast.success({
         title: 'Success',
         message: 'Berhasil dihapus',
         
     });
-  </script>";
+   </script>";
 
 } else {
   $error_message = $conn->error;
   echo ("Error is = " . $error_message);
   echo
-  "<script>
+   "<script>
+       window.history.replaceState( null, null, window.location.href );
         iziToast.error({
             title: 'Error',
             message: 'SQL error',

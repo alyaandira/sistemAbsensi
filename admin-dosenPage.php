@@ -69,6 +69,7 @@ session_start();
             <?php
             if (isset($_POST["DosenModal_ActionType"])) {
 
+                // TODO: Remove this. used for debugging purposes
                 // var_dump($_POST["DosenModal_ActionType"]);
                 // var_dump($_POST["DosenModal_PrimaryKey"]);
                 // var_dump($_POST["DosenModal_NIP"]);
@@ -80,16 +81,10 @@ session_start();
 
                 if ($_POST["DosenModal_ActionType"] == "Add") {
                     include '././db-component/dosen-add.php';
-                    echo "<br> Add to database";
-                    // TODO: database action untuk add
                 } else if ($_POST["DosenModal_ActionType"] == "Update") {
                     include '././db-component/dosen-update.php';
-                    echo "<br> Update to database";
-                    // TODO: database action untuk update
                 } else if ($_POST["DosenModal_ActionType"] == "Delete") {
                     include '././db-component/dosen-delete.php';
-                    echo "<br> Delete to database";
-                    // TODO: database action untuk delete
                 }
             }
 

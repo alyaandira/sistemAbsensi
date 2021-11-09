@@ -44,19 +44,17 @@ session_start();
     <div class="page-wrapper">
       <!-- Container fluid  -->
       <div class="container-fluid">
-        <h1>----- Title ----- </h1>
+        <h1>Daftar Kelas</h1>
 
         <?php
 
-        include '././db-component/GetAllMatkulByNIP.php';
+        include '././db-component/mhs-GetAllMatkulByNIP.php';
 
         if (count($RegisteredClassList) > 0) {
         ?>
           <section id="sushi-menu">
             <ul id="gallery">
               <?php
-              //  <a target="" href="http://www.natures-health-foods.com/images/Sushi-RollSalmonAvacado.jpg" class="image_card">
-              //  <img src="images/bluemarble.jpg"></a>
               foreach ($RegisteredClassList as $class) {
                 $namaMatkul = $class[$matkul_nama];
                 $kodeMatkul = $class[$matkul_kode];
@@ -64,7 +62,8 @@ session_start();
                     <li class='card'>
                         <h3 class='card-header'>$namaMatkul</h3>
                         <form method='POST' action='mhs-absensi.php'>
-                          <button type='submit' class='order-now' value='$kodeMatkul' name='selectedMataKuliah'>Isi Absensi</button>
+                          <input type='hidden' class='order-now' value='$namaMatkul' name='selectedMataKuliahNama'></button>
+                          <button type='submit' class='order-now' value='$kodeMatkul' name='selectedMataKuliahKode'>Isi Absensi</button>
                         </form>
                     </li>";
               }
