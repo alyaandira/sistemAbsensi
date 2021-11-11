@@ -16,7 +16,7 @@ $SQL_query = "SELECT ruang_kelas.kelas_id, ruang_kelas.kelas_nama, `$pert_dosen_
   "HAVING `$pert_dosen_nip` = '$selectedNIP' ";
 
   // SELECT * FROM `pertemuan` LEFT JOIN mata_kuliah ON pertemuan.matkul_kode = mata_kuliah.matkul_kode HAVING `dosen_nip` = '2021383902'
-var_dump($SQL_query);
+// var_dump($SQL_query);
 $result = mysqli_query($conn, $SQL_query);
 
 if ($result) {

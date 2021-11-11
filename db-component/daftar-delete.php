@@ -12,7 +12,7 @@ if ($conn->connect_error) {
 $SQL_query = "DELETE FROM `$daftar_table` WHERE `$daftar_id` = '$delete_daftar'";
 
 
-var_dump($SQL_query);
+// var_dump($SQL_query);
 $result = mysqli_query($conn, $SQL_query);
 
 

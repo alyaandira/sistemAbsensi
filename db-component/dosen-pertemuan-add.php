@@ -14,10 +14,10 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-// $SQL_query = "INSERT INTO `mata_kuliah`(`matkul_kode`, `matkul_nama`) VALUES ('ILK345','rendangkurus')";
 $SQL_query = "INSERT INTO `$pert_table`(`$pert_matkul_kode`, `$pert_kelas_id`, `$pert_dosen_nip`, `$pert_waktu_mulai`, `$pert_waktu_akhir`, `$pert_batas_waktu`) 
 VALUES ('$input_class_kode','$input_class_id','$input_dosen_nip','$input_class_waktumulai','$input_class_waktuakhir','$input_class_bataswaktu')";
 
+// var_dump($SQL_query);
 $result = mysqli_query($conn, $SQL_query);
 
 if ($result) {

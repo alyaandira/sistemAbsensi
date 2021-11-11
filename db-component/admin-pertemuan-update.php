@@ -1,9 +1,9 @@
 <?php
 include "././db-component/config.php";
 $input_pertemuan_kode = $_POST["PertemuanModal_Kode"];
-$input_class_kode = $_POST["ClassModal_Kode"];
+$input_class_kode = $_POST["MatkulModal_Kode"];
 $input_class_id = $_POST["ClassModal_ID"];
-$input_dosen_nip = $_SESSION["currentNIP"];
+$input_dosen_nip = $_POST["DosenModal_NIP"];
 $input_class_waktumulai = $_POST["PertemuanModal_StartTime"];
 $input_class_waktuakhir = $_POST["PertemuanModal_EndTime"];
 $input_class_bataswaktu = $_POST["PertemuanModal_LimitTime"];
@@ -14,7 +14,6 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// $SQL_query = "INSERT INTO `mata_kuliah`(`matkul_kode`, `matkul_nama`) VALUES ('ILK345','rendangkurus')";
 $SQL_query = "UPDATE `$pert_table` SET `$pert_kode`='$input_pertemuan_kode',`$pert_matkul_kode`='$input_class_kode',`$pert_kelas_id`='$input_class_id',
 `$pert_dosen_nip`='$input_dosen_nip',`$pert_waktu_mulai`='$input_class_waktumulai',`$pert_waktu_akhir`='$input_class_waktuakhir',`$pert_batas_waktu`='$input_class_bataswaktu' 
 WHERE `$pert_kode`= '$input_pertemuan_kode'";

@@ -49,8 +49,8 @@ if (!isset($_SESSION["currentNIP"])) {
         <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
 
             <?php
-            include '././ui-component/topbar.php';
-            include '././ui-component/sidebar.php';
+            include '././ui-component/topbar-mhs.php';
+            include '././ui-component/sidebar-mhs.php';
             ?>
 
 

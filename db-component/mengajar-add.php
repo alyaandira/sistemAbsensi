@@ -11,7 +11,7 @@ if ($conn->connect_error) {
 
 $SQL_query = "INSERT INTO `$mengajar_table`(`$mengajar_matkul_kode`,`$mengajar_dosen_nip) VALUES ('$matkulModal_mengajar_matkulKode','$input_dosen_nip')";
 
-var_dump($SQL_query);
+// var_dump($SQL_query);
 $result = mysqli_query($conn, $SQL_query);
 
 

@@ -1,85 +1,45 @@
-<?php
-session_start();
-?>
-
-<!DOCTYPE html>
-<html dir="ltr" lang="en">
-
-<head>
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Alya Andira Lubis">
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon.png">
-    <title>Sistem Absensi - Beranda</title>
-    <!-- Custom CSS -->
-    <link href="./assets/extra-libs/c3/c3.min.css" rel="stylesheet">
-    <link href="./assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
-    <link href="./assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
-    <!-- Custom CSS -->
-    <link href="./dist/css/style.min.css" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbe362NY_1XeP_q80kejQ3891jNhitXtc&callback=initMap&libraries=&v=weekly" defer></script>
-</head>
 
-<body>
-    <!-- Preloader - style you can find in spinners.css -->
-    <div class="preloader">
-        <div class="lds-ripple">
-            <div class="lds-pos"></div>
-            <div class="lds-pos"></div>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+      Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Check your location pls:)</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div id="map"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
         </div>
+      </div>
     </div>
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
 
-        <?php
-        include '././ui-component/topbar-mhs.php';
-        include '././ui-component/sidebar-mhs.php';
-        ?>
-
-        <!-- Page wrapper  -->
-        <div class="page-wrapper">
-            <!-- Bread crumb and right sidebar toggle -->
-            <div class="page-breadcrumb">
-                <div class="row">
-                    <div class="col-7 align-self-center">
-                        <!-- <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">Good Morning!</h3> -->
-                        <div class="d-flex align-items-center">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb m-0 p-0">
-                                    <!-- <li class="breadcrumb-item"><a href="index.html">Dashboard</a> -->
-                                    </li>
-                                </ol>
-                            </nav>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <!-- End Bread crumb and right sidebar toggle -->
-
-            <!-- Container fluid  -->
-            <div class="container-fluid">
-                <!-- <h1>Content for Beranda goes here</h1> -->
-                <!-- <input id="pac-input" class="controls" type="text" placeholder="Enter a location" /> -->
-                <div id="map"></div>
-            </div>
-            <!-- End Container fluid  -->
-        </div>
-        <!-- End Page wrapper  -->
-    </div>
-    <!-- End Wrapper -->
-
-    <?php
-    include '././ui-component/dependenciesImport.php';
-    ?>
-</body>
-
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
 </html>
 
 <script>

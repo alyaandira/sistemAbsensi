@@ -20,7 +20,7 @@ if (!isset($_SESSION["currentNIP"])) {
         <meta name="author" content="Alya Andira Lubis">
         <!-- Favicon icon -->
         <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon.png">
-        <title>Sistem Absensi - Ubah Pertemuan</title>
+        <title>Sistem Absensi - Mahasiswa - Daftar</title>
         <!-- Custom CSS -->
         <link href="./assets/extra-libs/c3/c3.min.css" rel="stylesheet">
         <link href="./assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
@@ -90,8 +90,8 @@ if (!isset($_SESSION["currentNIP"])) {
                     include '././db-component/daftar-add.php';
                     $matkulModal_daftar_matkulKode = $_POST["matkulModal_daftar_matkulKode"];
                     $input_nim_mhs = $_POST["selectedMahasiswaNIM"];
-                    var_dump($matkulModal_daftar_matkulKode);
-                    var_dump($input_nim_mhs);
+                    // var_dump($matkulModal_daftar_matkulKode);
+                    // var_dump($input_nim_mhs);
                 }
 
                 if (isset($_POST["delete_daftar"])) {

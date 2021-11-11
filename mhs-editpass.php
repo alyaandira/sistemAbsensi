@@ -57,8 +57,8 @@ session_start();
     <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
 
         <?php
-        include '././ui-component/topbar.php';
-        include '././ui-component/sidebar.php';
+        include '././ui-component/topbar-mhs.php';
+        include '././ui-component/sidebar-mhs.php';
         ?>
 
         <!-- Page wrapper  -->
@@ -81,7 +81,7 @@ session_start();
                     <input type="password" name="mahasiswa_changePassword_newPassword" id="mahasiswa_changePassword_newPassword" placeholder="" />
                 </div> -->
                 <div class="form-group">
-                <h4>ata sandi baru</h2>
+                <h4>Kata sandi baru</h2>
                     <label for="message-text"><i class="col-form-label"></i></label>
                     <input type="password" name="mahasiswa_changePassword_newPasswordConfirm" id="mahasiswa_changePassword_newPasswordConfirm" placeholder="" />
                 </div>

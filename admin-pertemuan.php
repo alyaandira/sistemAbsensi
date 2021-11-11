@@ -67,9 +67,21 @@ session_start();
             if (isset($_POST["PertemuanModal_ActionType"])) {
 
                 if ($_POST["PertemuanModal_ActionType"] == "Add") {
-                    include '././db-component/pertemuan-add.php';
+                    include '././db-component/admin-pertemuan-add.php';
+                    var_dump($_POST["DosenModal_NIP"]);
+                    var_dump($_POST["MatkulModal_Kode"]);
+                    var_dump($_POST["ClassModal_ID"]);
+                    var_dump($_POST["PertemuanModal_StartTime"]);
+                    var_dump($_POST["PertemuanModal_EndTime"]);
+                    var_dump($_POST["PertemuanModal_LimitTime"]);
                 } else if ($_POST["PertemuanModal_ActionType"] == "Update") {
-                    include '././db-component/pertemuan-update.php';
+                    include '././db-component/admin-pertemuan-update.php';
+                    var_dump($_POST["DosenModal_NIP"]);
+                    var_dump($_POST["MatkulModal_Kode"]);
+                    var_dump($_POST["ClassModal_ID"]);
+                    var_dump($_POST["PertemuanModal_StartTime"]);
+                    var_dump($_POST["PertemuanModal_EndTime"]);
+                    var_dump($_POST["PertemuanModal_LimitTime"]);
                 }
             }
 
@@ -300,7 +312,7 @@ include '././ui-component/dependenciesImport.php';
             dataType: 'json',
             success: function(data) {
                 console.log("device control succeeded");
-                // console.log(data);
+                // console.log(data);   
 
                 var select = document.getElementById('MatkulModal_Kode');
                 select.innerHTML = '';

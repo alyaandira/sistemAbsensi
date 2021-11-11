@@ -69,16 +69,6 @@ session_start();
             <?php
             if (isset($_POST["DosenModal_ActionType"])) {
 
-                // TODO: Remove this. used for debugging purposes
-                // var_dump($_POST["DosenModal_ActionType"]);
-                // var_dump($_POST["DosenModal_PrimaryKey"]);
-                // var_dump($_POST["DosenModal_NIP"]);
-                // var_dump($_POST["DosenModal_Nama"]);
-                // var_dump($_POST["DosenModal_Password"]);
-                // var_dump($_POST["DosenModal_Email"]);
-                // var_dump($_POST["DosenModal_Fakultas"]);
-                // var_dump($_POST["DosenModal_Jurusan"]);
-
                 if ($_POST["DosenModal_ActionType"] == "Add") {
                     include '././db-component/dosen-add.php';
                 } else if ($_POST["DosenModal_ActionType"] == "Update") {
@@ -131,7 +121,7 @@ session_start();
                             Update
                         </button>
                     </form>
-                    <form method='POST' action='admin-ManageMengajar.php'>
+                    <form method='POST' action='admin-manageMengajar.php'>
                         <input type='hidden' value='$dosenNIP' name='selectedDosenNIP'>
                         <input type='hidden' value='$dosenNama' name='selectedDosenName'>
                         <button type='submit' name='selectedNIP' class='btn waves-effect waves-light btn-dark' >Manage Mengajar</button>
@@ -162,8 +152,8 @@ session_start();
             <div class="modal-body">
                 <form method="POST" id='DosenModal_bodyForm'>
 
-                    <input type="text" class="form-control" id="DosenModal_ActionType" name="DosenModal_ActionType">
-                    <input type="text" class="form-control" id="DosenModal_PrimaryKey" name="DosenModal_PrimaryKey">
+                    <input type="hidden" class="form-control" id="DosenModal_ActionType" name="DosenModal_ActionType">
+                    <input type="hidden" class="form-control" id="DosenModal_PrimaryKey" name="DosenModal_PrimaryKey">
 
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">NIP Dosen:</label>
@@ -267,14 +257,6 @@ session_start();
 
         if (modalType == "Add") {
 
-            // pakai value karena dia dialam <input>, kita ambil <input> dari value itu
-            console.log("NIP dosen baru : " + newNIPdosen);
-            console.log("nama dosen baru : " + newNamaDosen);
-            console.log("password dosen baru : " + newpassDosen);
-            console.log("email dosen baru : " + newemailDosen);
-            console.log("fakultas dosen baru : " + newfakultasDosen);
-            console.log("jurusan dosen baru : " + newjurusanDosen);
-
             if (newNamaDosen == "" || newNIPdosen == "" || newpassDosen == "" || newemailDosen == "" || newfakultasDosen == "" || newjurusanDosen == "") {
                 window.alert("Fill up the field!")
             } else {
@@ -286,7 +268,7 @@ session_start();
             // dapatin primary key
             const primaryKey = document.getElementById("DosenModal_PrimaryKey").value;
 
-            // // pakai innetHTML karena dia dialam table, didalam html tag, di select berdasarkan primary key
+            // pakai innetHTML karena dia dialam table, didalam html tag, di select berdasarkan primary key
             const oldNamaDosen = document.getElementById("dosenNama_" + primaryKey).innerHTML;
             const oldNIPdosen = document.getElementById("dosenNIP_" + primaryKey).innerHTML;
             const oldpassDosen = document.getElementById("dosenPass_" + primaryKey).innerHTML;

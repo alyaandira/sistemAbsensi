@@ -69,15 +69,6 @@ session_start();
             <?php
             if (isset($_POST["MahasiswaModal_ActionType"])) {
 
-                // var_dump($_POST["MahasiswaModal_ActionType"]);
-                // var_dump($_POST["MahasiswaModal_PrimaryKey"]);
-                // var_dump($_POST["MahasiswaModal_NIM"]);
-                // var_dump($_POST["MahasiswaModal_Nama"]);
-                // var_dump($_POST["MahasiswaModal_Password"]);
-                // var_dump($_POST["MahasiswaModal_Email"]);
-                // var_dump($_POST["MahasiswaModal_Fakultas"]);
-                // var_dump($_POST["MahasiswaModal_Jurusan"]);
-
                 if ($_POST["MahasiswaModal_ActionType"] == "Add") {
                     include '././db-component/mhs-add.php';
                 } else if ($_POST["MahasiswaModal_ActionType"] == "Update") {
@@ -130,7 +121,7 @@ session_start();
                             Update
                         </button>
                     </form>
-                    <form method='POST' action='admin-mhsManageMatkul.php'>
+                    <form method='POST' action='admin-manageDaftar.php'>
                         <input type='hidden' value='$mahasiswaNIM' name='selectedMahasiswaNIM'>
                         <input type='hidden' value='$mahasiswaNama' name='selectedMahasiswaName'>
                         <button type='submit' name='selectedNIM' class='btn waves-effect waves-light btn-dark' >Manage Class</button>
@@ -156,8 +147,8 @@ session_start();
             <div class="modal-body">
                 <form method="POST" id='MhsModal_bodyForm'>
 
-                    <input type="text" class="form-control" id="MahasiswaModal_ActionType" name="MahasiswaModal_ActionType">
-                    <input type="text" class="form-control" id="MahasiswaModal_PrimaryKey" name="MahasiswaModal_PrimaryKey">
+                    <input type="hidden" class="form-control" id="MahasiswaModal_ActionType" name="MahasiswaModal_ActionType">
+                    <input type="hidden" class="form-control" id="MahasiswaModal_PrimaryKey" name="MahasiswaModal_PrimaryKey">
 
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">NIM Mahasiswa:</label>
@@ -260,11 +251,6 @@ session_start();
         const newjurusanMahasiswa = document.getElementById("MahasiswaModal_Jurusan").value;
 
         if (modalType == "Add") {
-
-            // pakai value karena dia dialam <input>, kita ambil <input> dari value itu
-            console.log("NIM mahasiswa baru : " + newNIMmahasiswa);
-            console.log("nama mahasiswa baru : " + newNamaMahasiswa);
-            console.log("password mahasiswa baru : " + newpassMahasiswa);
 
             if (newNamaMahasiswa == "" || newNIMmahasiswa == "" || newpassMahasiswa == "" || newemailMahasiswa == "" || newfakultasMahasiswa == "" || newjurusanMahasiswa == "") {
                 window.alert("Fill up the field!")

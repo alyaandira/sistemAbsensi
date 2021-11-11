@@ -67,9 +67,9 @@ session_start();
             if (isset($_POST["PertemuanModal_ActionType"])) {
 
                 if ($_POST["PertemuanModal_ActionType"] == "Add") {
-                    include '././db-component/pertemuan-add.php';
+                    include '././db-component/dosen-pertemuan-add.php';
                 } else if ($_POST["PertemuanModal_ActionType"] == "Update") {
-                    include '././db-component/pertemuan-update.php';
+                    include '././db-component/dosen-pertemuan-update.php';
                 }
             }
 
@@ -164,7 +164,7 @@ session_start();
 
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">Mata Kuliah:</label>
-                        <select class="form-control" name="ClassModal_Kode" id="ClassModal_Kode">
+                        <select class="form-control" name="MatkulModal_Kode" id="MatkulModal_Kode">
                             <?php
                             foreach ($matkulTerdaftarList as $matkul) {
                                 $matkulKode = $matkul["matkul_kode"];
@@ -237,7 +237,7 @@ session_start();
         document.getElementById("PertemuanModal_ActionType").value = "Update";
         document.getElementById("PertemuanModal_PrimaryKey").value = $.trim(primaryKey);
         document.getElementById("PertemuanModal_Kode").value = $.trim(kodePertemuan);
-        document.getElementById("ClassModal_Kode").value = $.trim(kodeKelas);
+        document.getElementById("MatkulModal_Kode").value = $.trim(kodeKelas);
         document.getElementById("ClassModal_ID").value = $.trim(IDKelas);
         document.getElementById("PertemuanModal_StartTime").value = new Date(new Date(waktuMulaiPertemuan) - tzoffset).toISOString().slice(0, 16);
         document.getElementById("PertemuanModal_EndTime").value = new Date(new Date(waktuAkhirPertemuan) - tzoffset).toISOString().slice(0, 16);
@@ -251,7 +251,7 @@ session_start();
         document.getElementById("PertemuanModal_ActionType").value = "Add";
         document.getElementById("PertemuanModal_PrimaryKey").value = "";
         document.getElementById("PertemuanModal_Kode").value = "";
-        document.getElementById("ClassModal_Kode").value = "";
+        document.getElementById("MatkulModal_Kode").value = "";
         document.getElementById("ClassModal_ID").value = "";
         document.getElementById("PertemuanModal_StartTime").value = "";
         document.getElementById("PertemuanModal_EndTime").value = "";
@@ -261,7 +261,7 @@ session_start();
     function submitModal() {
         const modalType = document.getElementById("PertemuanModal_ActionType").value;
         const newKodePertemuan = document.getElementById("PertemuanModal_Kode").value;
-        const newKodeKelas = document.getElementById("ClassModal_Kode").value;
+        const newKodeKelas = document.getElementById("MatkulModal_Kode").value;
         const newIDKelas = document.getElementById("ClassModal_ID").value;
         const newWaktuMulai = document.getElementById("PertemuanModal_StartTime").value;
         const newWaktuAkhir = document.getElementById("PertemuanModal_EndTime").value;

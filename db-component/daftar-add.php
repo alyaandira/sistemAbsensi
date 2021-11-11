@@ -11,7 +11,7 @@ if ($conn->connect_error) {
 
 $SQL_query = "INSERT INTO `$daftar_table`(`$daftar_matkul_kode`,`$daftar_mhs_nim`) VALUES ('$matkulModal_daftar_matkulKode','$input_nim_mhs')";
 
-var_dump($SQL_query);
+// var_dump($SQL_query);
 $result = mysqli_query($conn, $SQL_query);
 
 

@@ -14,7 +14,7 @@ session_start();
   <meta name="author" content="Alyen Andira">
   <!-- Favicon icon -->
   <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon.png">
-  <title>Sistem Absensi - Pindai Absensi</title>
+  <title>Sistem Absensi - Daftar Mata Kuliah</title>
   <!-- Custom CSS -->
   <link href="./assets/extra-libs/c3/c3.min.css" rel="stylesheet">
   <link href="./assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
@@ -36,15 +36,15 @@ session_start();
   <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
 
     <?php
-    include '././ui-component/topbar.php';
-    include '././ui-component/sidebar.php';
+    include '././ui-component/topbar-mhs.php';
+    include '././ui-component/sidebar-mhs.php';
     ?>
 
     <!-- Page wrapper  -->
     <div class="page-wrapper">
       <!-- Container fluid  -->
       <div class="container-fluid">
-        <h1>Daftar Kelas</h1>
+        <h1>Daftar Mata Kuliah</h1>
 
         <?php
 
@@ -77,6 +77,7 @@ session_start();
           echo "<h1>DAFTAR KELAS DLU BARU ABSEN !</h1>";
         }
         ?>
+        
         <div>Teachable Machine Image Model</div>
         <button type="button" onclick="init()">Start</button>
         <div id="webcam-container"></div>

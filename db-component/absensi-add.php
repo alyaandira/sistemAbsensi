@@ -1,9 +1,8 @@
 <?php
 include "././db-component/config.php";
 $selectedPertKode = $_POST["selectedPertKode"];
-$tableMhsNim = $_POST["selectedMahasiswaNIM"];
+$tableMhsNim = $_SESSION["currentNIP"];
 $tableAbsenID = $_POST["selectedAbsenID"];
-$tableAbsenStatus = $_POST["selectedAbsenStatus"];
 
 // Create connection
 $conn = new mysqli($hostname, $username, $password, $dbName);
