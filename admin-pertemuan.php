@@ -68,20 +68,8 @@ session_start();
 
                 if ($_POST["PertemuanModal_ActionType"] == "Add") {
                     include '././db-component/admin-pertemuan-add.php';
-                    var_dump($_POST["DosenModal_NIP"]);
-                    var_dump($_POST["MatkulModal_Kode"]);
-                    var_dump($_POST["ClassModal_ID"]);
-                    var_dump($_POST["PertemuanModal_StartTime"]);
-                    var_dump($_POST["PertemuanModal_EndTime"]);
-                    var_dump($_POST["PertemuanModal_LimitTime"]);
                 } else if ($_POST["PertemuanModal_ActionType"] == "Update") {
                     include '././db-component/admin-pertemuan-update.php';
-                    var_dump($_POST["DosenModal_NIP"]);
-                    var_dump($_POST["MatkulModal_Kode"]);
-                    var_dump($_POST["ClassModal_ID"]);
-                    var_dump($_POST["PertemuanModal_StartTime"]);
-                    var_dump($_POST["PertemuanModal_EndTime"]);
-                    var_dump($_POST["PertemuanModal_LimitTime"]);
                 }
             }
 
@@ -92,7 +80,6 @@ session_start();
             include '././db-component/GetAllPertemuan.php';
             include '././db-component/GetAllClass.php';
             include '././db-component/GetAllDosen.php';
-            // include '././db-component/admin-GetClassByPertemuan.php';
 
             if (empty($FetchedPertemuanList)) {
                 echo "<p>No class has been registered</p>";
@@ -463,7 +450,7 @@ include '././ui-component/dependenciesImport.php';
 
             if (oldKodePertemuan == newKodePertemuan && oldKodeKelas == newKodeKelas && oldIDKelas == newIDKelas && oldNIPdosen == newNIPdosen && oldWaktuMulai == newWaktuMulai && oldWaktuAkhir == newWaktuAkhir && oldBatasWaktu == newBatasWaktu ||
                 newKodePertemuan == "" || newKodeKelas == "" || newIDKelas == "" || newNIPdosen == "" || newWaktuMulai == "" || newWaktuAkhir == "" || newBatasWaktu == "") {
-                window.alert("nothing changed, nothing to submit, pakai izzi toast")
+                window.alert("nothing changed, nothing to submit")
             } else {
                 document.getElementById("PertemuanModal_bodyForm").submit();
             }

@@ -39,7 +39,6 @@ session_unset();
                 include '.\.\db-component\dosen-login.php';
             } elseif ($_POST["user_type"] == "Admin") {
                 include '.\.\db-component\admin-login.php';
-                var_dump("include alien");
             }
         } else {
             echo "select user type (ubah ini jadi izitoast)";

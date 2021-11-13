@@ -209,7 +209,10 @@ session_start();
             const oldNamaKelas = document.getElementById("kelasNama_" + primaryKey).innerHTML;
 
             if (oldIDKelas == newIDKelas && oldNamaKelas == newNamaKelas || newIDKelas == "" || newNamaKelas == "") {
-                window.alert("nothing changed, nothing to submit, pakai izzi toast")
+                iziToast.warning({
+                title: 'Caution',
+                message: 'Nothing changed!',
+                });
             } else {
                 document.getElementById("ClassModal_bodyForm").submit();
             }

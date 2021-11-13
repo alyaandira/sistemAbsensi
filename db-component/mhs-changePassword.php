@@ -35,7 +35,6 @@ if ($result) {
                         message: 'Berhasil diganti',
                     });
                 </script>";
-
             } else {
                 $error_message = $conn->error;
                 echo ("Error is = " . $error_message);
@@ -48,9 +47,23 @@ if ($result) {
                 </script>";
             }
         } else {
-            var_dump("old password does not match");
+            echo
+            "<script>
+            iziToast.warning({
+                title: 'Caution',
+                message: 'Old password doesnt match!',
+            });
+            </script>";
+            // var_dump("old password does not match");
         }
     } else {
-        var_dump("no record found");
+        echo
+            "<script>
+            iziToast.error({
+                title: 'Error',
+                message: 'No record found!',
+            });
+            </script>";
+        // var_dump("no record found");
     }
 }

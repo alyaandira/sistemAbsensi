@@ -28,11 +28,8 @@ session_start();
     <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="./css/beranda-adminstyle.css">
-    <!-- <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
-	<link rel="stylesheet" type="text/css" href="css/util.css">
-	<link rel="stylesheet" type="text/css" href="./css/table-style.css"> -->
+    <script src="src\izitoast\dist\js\iziToast.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="src\izitoast\dist\css\iziToast.css">
 
 </head>
 
@@ -61,14 +58,11 @@ session_start();
             <?php
 
             if (isset($_POST["ClassModal_Kode"])) {
-                var_dump($_POST["ClassModal_Kode"]);
-                var_dump($_POST["ClassModal_Nama"]);
+                // var_dump($_POST["ClassModal_Kode"]);
+                // var_dump($_POST["ClassModal_Nama"]);
 
-                //include db-component untuk update
-                //tengok SQL untuk update table
-                //pasangkan template dashboard ke beranda-admin.php
             } elseif (isset($_POST["deleteClass"])) {
-                var_dump($_POST["deleteClass"]);
+                // var_dump($_POST["deleteClass"]);
             }
 
 
@@ -201,7 +195,10 @@ session_start();
         // console.log("new nama kelas : " + newNamaKelas);
 
         if (oldNamaKelas == newNamaKelas && oldKodeKelas == newKodeKelas) {
-            window.alert("nothing changed, nothing to submit, pakai izzi toast")
+            iziToast.warning({
+                title: 'Caution',
+                message: 'Nothing changed!',
+                });
         } else {
             document.getElementById("ClassModal_bodyForm").submit();
         }

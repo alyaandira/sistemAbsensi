@@ -90,15 +90,10 @@ if (!isset($_SESSION["currentNIP"])) {
                     include '././db-component/daftar-add.php';
                     $matkulModal_daftar_matkulKode = $_POST["matkulModal_daftar_matkulKode"];
                     $input_nim_mhs = $_POST["selectedMahasiswaNIM"];
-                    // var_dump($matkulModal_daftar_matkulKode);
-                    // var_dump($input_nim_mhs);
                 }
 
                 if (isset($_POST["delete_daftar"])) {
                     include '././db-component/daftar-delete.php';
-                    // $matkulModal_daftar_matkulKode = $_POST["matkulModal_daftar_matkulKode"];
-                    // var_dump($matkulModal_daftar_matkulKode);
-                    // var_dump($_POST["delete_daftar"]);
                 }
 
                 ?>
@@ -117,8 +112,6 @@ if (!isset($_SESSION["currentNIP"])) {
                     <?php
                     include './db-component/admin-GetMatkulByDaftar.php';
                     include './db-component/GetAllMatkul.php';
-                    // var_dump($AllCourseList);
-                    // var_dump($matkulTerdaftarList);
 
                     if (count($matkulTerdaftarList) == 0) {
                         echo "<p>Saat ini tidak terdaftar di kelas manapun</p>";

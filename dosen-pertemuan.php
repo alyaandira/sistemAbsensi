@@ -11,22 +11,19 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="Alya Andira Lubis">
+
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon.png">
     <title>Sistem Absensi - Daftar Pertemuan</title>
-    <!-- Custom CSS -->
-    <link href="./assets/extra-libs/c3/c3.min.css" rel="stylesheet">
-    <link href="./assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
-    <link href="./assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
+   
     <!-- Custom CSS -->
     <link href="./dist/css/style.min.css" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <link rel="stylesheet" type="text/css" href="./css/beranda-adminstyle.css">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="./css/beranda-adminstyle.css">
+    
+    <!-- Izi Toast -->
     <script src="src\izitoast\dist\js\iziToast.js" type="text/javascript"></script>
     <link rel="stylesheet" href="src\izitoast\dist\css\iziToast.css">
 </head>
@@ -74,9 +71,7 @@ session_start();
             }
 
             if (isset($_POST["delete_pertemuan_action"])) {
-                // TODO: remove var dump
                 include '././db-component/pertemuan-delete.php';
-                var_dump($_POST["delete_pertemuan_action"]);
             }
 
             include '././db-component/GetAllClass.php';
@@ -88,20 +83,20 @@ session_start();
             } else {
 
                 echo "
-        <div class='container-table'>
-            <table class='table table-sm table-hover'>
-                <thead class='thead-dark'>
-                    <tr>
-                        <th>No</th>
-                        <th>Mata Kuliah</th>
-                        <th>Kelas</th>
-                        <th>Waktu Mulai</th>
-                        <th>Waktu Akhir</th>
-                        <th>Batas Waktu</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>";
+            <div class='container-table'>
+                <table class='table table-sm table-hover'>
+                    <thead class='thead-dark'>
+                        <tr>
+                            <th>No</th>
+                            <th>Mata Kuliah</th>
+                            <th>Kelas</th>
+                            <th>Waktu Mulai</th>
+                            <th>Waktu Akhir</th>
+                            <th>Batas Waktu</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>";
 
                 foreach ($pertemuanList as $primaryKey => $value) {
                     $nomor = $primaryKey + 1;
@@ -113,34 +108,36 @@ session_start();
                     $pertemuan_classNama = $value["kelas_nama"];
                     $value_to_display = $pertemuan_classID . " - " . $pertemuan_classNama;
                     echo "
-            <tr>
-                <td>$nomor</td>
-                <td> $DisplayMatkul </td>
-                <td> $value_to_display </td>
-                <td id='waktuMulai_$primaryKey'>$value[waktuMulai]</td>
-                <td id='waktuAkhir_$primaryKey'>$value[waktuAkhir]</td>
-                <td id='batasWaktu_$primaryKey'>$value[batasWaktu]</td>
-                <input type='hidden' id='pertKode_$primaryKey' value='$pertemuanKode' />
-                <input type='hidden' id='matkulKode_$primaryKey' value='$matkulKode' />
-                <input type='hidden' id='kelasID_$primaryKey' value='$pertemuan_classID' />
-                <td style='text-align:center;'>
-                    <form method='POST'>
-                        <button type='submit' value='$pertemuanKode' name='delete_pertemuan_action' class='btn btn-danger'>Delete</button>
-                        <button onclick='initializeUpdatePertemuanModal(&#39;$primaryKey&#39;);' class='btn btn-warning' data-toggle='modal' data-target='#pertemuan_manage_modal' type='button'>
-                            Update
-                        </button>
-                    </form>
-                    
-                </td>
-            </tr>";
+                        <tr>
+                            <td>$nomor</td>
+                            <td> $DisplayMatkul </td>
+                            <td> $value_to_display </td>
+                            <td id='waktuMulai_$primaryKey'>$value[waktuMulai]</td>
+                            <td id='waktuAkhir_$primaryKey'>$value[waktuAkhir]</td>
+                            <td id='batasWaktu_$primaryKey'>$value[batasWaktu]</td>
+                            <input type='hidden' id='pertKode_$primaryKey' value='$pertemuanKode' />
+                            <input type='hidden' id='matkulKode_$primaryKey' value='$matkulKode' />
+                            <input type='hidden' id='kelasID_$primaryKey' value='$pertemuan_classID' />
+                            <td style='text-align:center;'>
+                                <form method='POST'>
+                                    <button type='submit' value='$pertemuanKode' name='delete_pertemuan_action' class='btn btn-danger'>Delete</button>
+                                    <button onclick='initializeUpdatePertemuanModal(&#39;$primaryKey&#39;);' class='btn btn-warning' data-toggle='modal' data-target='#pertemuan_manage_modal' type='button'>
+                                        Update
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>";
                 } //end of foreach
                 echo "
-               
-            </table>
-      ";
+                    </tbody>
+                </table>
+            </div>";
             }
 
             ?>
+            <!-- End Wrapper -->
+        </div>
+    </div>
 </body>
 
 <!-- Class Modal -->
@@ -210,9 +207,11 @@ session_start();
     </div>
 </div>
 
-<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<?php
+include '././ui-component/dependenciesImport.php';
+?>
 
+</html>
 
 <script>
     document.getElementById("adminButton").addEventListener("click", initializeAddPertemuanModal);
@@ -296,25 +295,16 @@ session_start();
 
             if (oldKodePertemuan == newKodePertemuan && oldKodeKelas == newKodeKelas && oldIDKelas == newIDKelas && oldWaktuMulai == newWaktuMulai && oldWaktuAkhir == newWaktuAkhir && oldBatasWaktu == newBatasWaktu ||
                 newKodePertemuan == "" || newKodeKelas == "" || newIDKelas == "" || newWaktuMulai == "" || newWaktuAkhir == "" || newBatasWaktu == "") {
-                window.alert("nothing changed, nothing to submit, pakai izzi toast")
+                iziToast.warning({
+                    title: 'Caution',
+                    message: 'Nothing changed!',
+                });
             } else {
                 document.getElementById("PertemuanModal_bodyForm").submit();
             }
         }
     }
 </script>
-
-</div>
-<!-- End Container fluid  -->
-</div>
-<!-- End Page wrapper  -->
-</div>
-<!-- End Wrapper -->
-<?php
-include '././ui-component/dependenciesImport.php';
-?>
-
-</html>
 
 <style>
     table,

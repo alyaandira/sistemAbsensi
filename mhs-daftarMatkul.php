@@ -74,11 +74,11 @@ session_start();
 
         <?php
         } else {
-          echo "<h1>DAFTAR KELAS DLU BARU ABSEN !</h1>";
+          echo "<h1>DAFTAR KELAS TERLEBIH DAHULU</h1>";
         }
         ?>
         
-        <div>Teachable Machine Image Model</div>
+        <!-- <div>Teachable Machine Image Model</div>
         <button type="button" onclick="init()">Start</button>
         <div id="webcam-container"></div>
         <div id="label-container"></div>
@@ -134,7 +134,7 @@ session_start();
               labelContainer.childNodes[i].innerHTML = classPrediction;
             }
           }
-        </script>
+        </script> -->
 
       </div>
       <!-- End Container fluid  -->
@@ -286,52 +286,3 @@ session_start();
     }
   }
 </style>
-
-<script>
-  $(".image").magnificPopup({
-    type: "image",
-    removalDelay: 300,
-
-    gallery: {
-      enabled: true,
-      preload: [0, 2]
-    }
-  });
-
-  $(document).ready(function() {
-    var $orderNowBtn = $(".order-now");
-    var $card = $(".card");
-
-    $orderNowBtn.on("click", function() {
-      $(this).parent($card).css("transform", "rotateY(180deg)");
-    });
-
-    console.log('hi');
-  });
-  // () => {
-  //     var value = $(this).val()
-  //     console.log(value);
-  //   }
-  // $(".btn-select-kelas").click(
-  //   console.log("test")
-  // );
-
-
-  // $(".btn-select-kelas").click(function() {
-  //   window.alert("Handler for .click() called.");
-  // });
-
-  // const selectBtn = () => {
-  //   window.alert("Handler for .click() called.");
-  // }
-
-  // function SelectMatkul(kodeMatkul) {
-  //   console.log(valaa)
-  // }
-
-//   $('.btn-select-kelas').on('click', function() {
-//     // var val = $(this).prev().val();
-//     console.log('hi');
-
-// });
-</script>

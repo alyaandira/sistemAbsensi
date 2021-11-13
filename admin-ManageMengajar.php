@@ -90,7 +90,7 @@ if (!isset($_SESSION["currentNIP"])) {
                     include '././db-component/mengajar-add.php';
                     // $matkulModal_daftar_matkulKode = $_POST["matkulModal_daftar_matkulKode"];
                     // $input_nim_mhs = $_POST["selectedMahasiswaNIM"];
-                    var_dump($_POST["matkulModal_mengajar_matkulKode"]);
+                    // var_dump($_POST["matkulModal_mengajar_matkulKode"]);
                     // var_dump($input_nim_mhs);
                 }
 

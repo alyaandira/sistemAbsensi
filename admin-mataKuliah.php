@@ -29,11 +29,6 @@ session_start();
     <link rel="stylesheet" type="text/css" href="./css/beranda-adminstyle.css">
     <script src="src\izitoast\dist\js\iziToast.js" type="text/javascript"></script>
     <link rel="stylesheet" href="src\izitoast\dist\css\iziToast.css">
-    <!-- <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
-	<link rel="stylesheet" type="text/css" href="css/util.css">
-	<link rel="stylesheet" type="text/css" href="./css/table-style.css"> -->
 </head>
 
 <body>
@@ -243,7 +238,11 @@ session_start();
             console.log("Nama kelas baru: " + newNamaKelas);
 
             if (oldNamaKelas == newNamaKelas && oldKodeKelas == newKodeKelas || newNamaKelas == "" || newKodeKelas == "") {
-                window.alert("nothing changed, nothing to submit, pakai izzi toast")
+                iziToast.warning({
+                title: 'Caution',
+                message: 'Nothing changed!',
+                });
+                // window.alert("nothing changed, nothing to submit")
             } else {
                 document.getElementById("ClassModal_bodyForm").submit();
             }

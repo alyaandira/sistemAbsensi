@@ -37,12 +37,12 @@ if ($result) {
     $_SESSION["currentFakultas"] = $dataRow[4];
     $_SESSION["currentJurusan"] = $dataRow[5];
 
-    var_dump($_SESSION["currentNIP"]);
-    var_dump($_SESSION["currentUsername"]);
-    var_dump($_SESSION["currentPassword"]);
-    var_dump($_SESSION["currentEmail"]);
-    var_dump($_SESSION["currentFakultas"]);
-    var_dump($_SESSION["currentJurusan"]);
+    // var_dump($_SESSION["currentNIP"]);
+    // var_dump($_SESSION["currentUsername"]);
+    // var_dump($_SESSION["currentPassword"]);
+    // var_dump($_SESSION["currentEmail"]);
+    // var_dump($_SESSION["currentFakultas"]);
+    // var_dump($_SESSION["currentJurusan"]);
     // redirect to home page
     header("Location: dosen-daftarMatkul.php");
     // exit;

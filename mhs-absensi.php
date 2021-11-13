@@ -193,7 +193,7 @@ if (!isset($_SESSION["currentNIP"])) {
                     <div class="modal-header">
 
                         <input type="hidden" id="pertemuanKode">
-                        <input type="hidden" id="currentNIPmhs" value="<?php echo $currentNIP ?>" >
+                        <input type="hidden" id="currentNIPmhs" value="<?php echo $currentNIP ?>">
 
                         <h5 class="modal-title" id="exampleModalLabel">Prepare your face:D</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -231,7 +231,6 @@ if (!isset($_SESSION["currentNIP"])) {
 
     <script>
         function initializeModal(pertKode) {
-            // const kodePertemuan = document.getElementById(selectedPertKode).innerHTML;
             document.getElementById("pertemuanKode").value = pertKode;
         }
     </script>
@@ -325,21 +324,20 @@ if (!isset($_SESSION["currentNIP"])) {
                             var pertCode = document.getElementById("pertemuanKode").value;
 
                             if (google.maps.geometry.poly.containsLocation(covertedPosition, polygon)) {
-                                alert("The area contains the address");
+                                // alert("The area contains the address");
                                 // $("#absensiForm_" + pertCode).submit()
-                                // initRecognition()
+                                initRecognition()
                             } else {
                                 window.history.replaceState(null, null, window.location.href);
-                                initRecognition()
-                                // Swal.fire({
-                                //     title: 'Error!',
-                                //     text: 'The address is outside of the area.',
-                                //     icon: 'error',
-                                //     confirmButtonText: 'Maap Pak'
-                                // })
+                                // initRecognition()
+                                Swal.fire({
+                                    title: 'Error!',
+                                    text: 'The address is outside of the area.',
+                                    icon: 'error',
+                                    confirmButtonText: 'Sorry'
+                                })
                                 // $("#absensiForm_" + pertCode).submit()
-
-                                alert("The address is outside of the area.");
+                                // alert("The address is outside of the area.");
                             }
 
                         },
@@ -418,7 +416,6 @@ if (!isset($_SESSION["currentNIP"])) {
                 // labelContainer.childNodes[i].innerHTML = classPrediction;
                 // console.log(currentNIPmhs.value);
 
-                //TODO: ganti jadi get NIP dari modal
                 if (prediction[i].className === currentNIPmhs.value) {
                     var predictionRatio = parseFloat(classPrediction.split(": ")[1]);
                     console.log(predictionRatio);
@@ -455,7 +452,7 @@ if (!isset($_SESSION["currentNIP"])) {
 
     #map {
         /* height: 100%; */
-        display: none;
+        /* display: none; */
         height: 500px;
         width: 100%;
     }

@@ -29,12 +29,6 @@ session_start();
     <link rel="stylesheet" type="text/css" href="./css/beranda-adminstyle.css">
     <script src="src\izitoast\dist\js\iziToast.js" type="text/javascript"></script>
     <link rel="stylesheet" href="src\izitoast\dist\css\iziToast.css">
-    <!-- <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
-	<link rel="stylesheet" type="text/css" href="css/util.css">
-	<link rel="stylesheet" type="text/css" href="./css/table-style.css"> -->
-</head>
 
 <body>
     <!-- Preloader - style you can find in spinners.css -->
@@ -280,7 +274,10 @@ session_start();
 
             if (oldNamaMahasiswa == newNamaMahasiswa && oldNIMmahasiswa == newNIMmahasiswa && oldpassMahasiswa == newpassMahasiswa && oldemailMahasiswa == newemailMahasiswa && oldfakultasMahasiswa == newfakultasMahasiswa && oldjurusanMahasiswa == newjurusanMahasiswa ||
                 newNamaMahasiswa == "" || newNIMmahasiswa == "" || newpassMahasiswa == "" || newemailMahasiswa == "" || newfakultasMahasiswa == "" || newjurusanMahasiswa == "") {
-                window.alert("nothing changed, nothing to submit, pakai izzi toast")
+                iziToast.warning({
+                title: 'Caution',
+                message: 'Nothing changed!',
+                });
             } else {
                 document.getElementById("MhsModal_bodyForm").submit();
             }
