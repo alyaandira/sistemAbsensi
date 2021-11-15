@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION["currentNIP"])) {
-    header("location: login.php");
+    header("location: index.php");
 } else if (!isset($_POST["selectedDosenNIP"])) {
     header("location: admin-dosenPage.php");
 } else {

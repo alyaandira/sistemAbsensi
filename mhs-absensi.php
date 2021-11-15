@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION["currentNIP"])) {
-    header("location: login.php");
+    header("location: index.php");
 } else if (!isset($_POST["selectedMataKuliahKode"]) || !isset($_POST["selectedMataKuliahNama"])) {
     header("location: mhs-daftarMatkul.php");
 } else {
@@ -11,28 +11,29 @@ if (!isset($_SESSION["currentNIP"])) {
     <html dir="ltr" lang="en">
 
     <head>
+        <!-- Required meta tags -->
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <!-- Tell the browser to be responsive to screen width -->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="Alya Andira Lubis">
+
         <!-- Favicon icon -->
         <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon.png">
         <title>Sistem Absensi - Pindai Absensi</title>
-        <!-- Custom CSS -->
-        <link href="./assets/extra-libs/c3/c3.min.css" rel="stylesheet">
-        <link href="./assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
-        <link href="./assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
+
         <!-- Custom CSS -->
         <link href="./dist/css/style.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="./css/beranda-adminstyle.css">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+        <!-- Izi Toast -->
         <script src="src\izitoast\dist\js\iziToast.js" type="text/javascript"></script>
         <link rel="stylesheet" href="src\izitoast\dist\css\iziToast.css">
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbe362NY_1XeP_q80kejQ3891jNhitXtc&callback=initMap&libraries=&v=weekly" defer></script>
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+        <!-- Google Maps -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbe362NY_1XeP_q80kejQ3891jNhitXtc&callback=initMap&libraries=&v=weekly" defer></script>
     </head>
 
     <body>
@@ -43,6 +44,7 @@ if (!isset($_SESSION["currentNIP"])) {
                 <div class="lds-pos"></div>
             </div>
         </div>
+        
         <!-- Main wrapper - style you can find in pages.scss -->
         <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
 
@@ -295,11 +297,6 @@ if (!isset($_SESSION["currentNIP"])) {
 
             infoWindow = new google.maps.InfoWindow();
 
-            // const locationButton = document.createElement("button");
-            // locationButton.textContent = "CLICK THIS";
-            // locationButton.classList.add("custom-map-control-button");
-            // map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
-
             // add button click listener
             document.getElementById("modalCheckLocationButton").addEventListener("click", () => {
 
@@ -324,22 +321,16 @@ if (!isset($_SESSION["currentNIP"])) {
                             var pertCode = document.getElementById("pertemuanKode").value;
 
                             if (google.maps.geometry.poly.containsLocation(covertedPosition, polygon)) {
-                                // alert("The area contains the address");
-                                // $("#absensiForm_" + pertCode).submit()
                                 initRecognition()
                             } else {
                                 window.history.replaceState(null, null, window.location.href);
-                                // initRecognition()
                                 Swal.fire({
                                     title: 'Error!',
                                     text: 'The address is outside of the area.',
                                     icon: 'error',
-                                    confirmButtonText: 'Sorry'
+                                    confirmButtonText: 'OK'
                                 })
-                                // $("#absensiForm_" + pertCode).submit()
-                                // alert("The address is outside of the area.");
                             }
-
                         },
                         () => {
                             handleLocationError(true, infoWindow, map.getCenter());
@@ -350,8 +341,6 @@ if (!isset($_SESSION["currentNIP"])) {
                     handleLocationError(false, infoWindow, map.getCenter());
                 }
             });
-
-            // infoWindow = new google.maps.InfoWindow();
         }
 
         function handleLocationError(browserHasGeolocation, infoWindow, pos) {
@@ -379,10 +368,6 @@ if (!isset($_SESSION["currentNIP"])) {
             const modelURL = "src/face/model.json";
             const metadataURL = "src/face/metadata.json";
 
-            // load the model and metadata
-            // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
-            // or files from your local hard drive
-            // Note: the pose library adds "tmImage" object to your window (window.tmImage)
             model = await tmImage.load(modelURL, metadataURL);
             totalClasses = model.getTotalClasses();
 
@@ -452,7 +437,7 @@ if (!isset($_SESSION["currentNIP"])) {
 
     #map {
         /* height: 100%; */
-        /* display: none; */
+        display: none;
         height: 500px;
         width: 100%;
     }

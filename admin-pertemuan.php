@@ -11,22 +11,19 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="Alya Andira Lubis">
+
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon.png">
     <title>Sistem Absensi - Pertemuan</title>
-    <!-- Custom CSS -->
-    <link href="./assets/extra-libs/c3/c3.min.css" rel="stylesheet">
-    <link href="./assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
-    <link href="./assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
+
     <!-- Custom CSS -->
     <link href="./dist/css/style.min.css" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <link rel="stylesheet" type="text/css" href="./css/beranda-adminstyle.css">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="./css/beranda-adminstyle.css">
+    
+    <!-- Izi Toast -->
     <script src="src\izitoast\dist\js\iziToast.js" type="text/javascript"></script>
     <link rel="stylesheet" href="src\izitoast\dist\css\iziToast.css">
 </head>
@@ -57,12 +54,9 @@ session_start();
         <!-- Page wrapper  -->
         <div class="page-wrapper">
             <!-- Bread crumb and right sidebar toggle -->
-            <!-- <div> Halaman Admin </div> -->
             <h1>Meeting Management</h1>
 
-
             <?php
-
             // add class
             if (isset($_POST["PertemuanModal_ActionType"])) {
 
@@ -73,6 +67,7 @@ session_start();
                 }
             }
 
+            // delete class
             if (isset($_POST["delete_pertemuan_action"])) {
                 include '././db-component/pertemuan-delete.php';
             } 
@@ -86,21 +81,21 @@ session_start();
             } else {
 
                 echo "
-        <div class='container-table'>
-            <table class='table table-sm table-hover'>
-                <thead class='thead-dark'>
-                    <tr>
-                        <th>No</th>
-                        <th>Kode Pertemuan</th>
-                        <th>Kode Mata Kuliah</th>
-                        <th>ID Kelas</th>
-                        <th>NIP Dosen</th>
-                        <th>Waktu Mulai</th>
-                        <th>Waktu Akhir</th>
-                        <th>Batas Waktu</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
+            <div class='container-table'>
+                 <table class='table table-sm table-hover'>
+                    <thead class='thead-dark'>
+                        <tr>
+                            <th>No</th>
+                            <th>Kode Pertemuan</th>
+                            <th>Kode Mata Kuliah</th>
+                            <th>ID Kelas</th>
+                            <th>NIP Dosen</th>
+                            <th>Waktu Mulai</th>
+                            <th>Waktu Akhir</th>
+                            <th>Batas Waktu</th>
+                            <th>Action</th>
+                         </tr>
+                    </thead>
                 <tbody>";
 
 
@@ -131,9 +126,12 @@ session_start();
                     </tr>";
                 } //end of foreach
                 echo "
-            </table>";
+                </table>
+            </div>";
             }
             ?>
+        </div>
+    </div>        
 </body>
 
 <!-- Class Modal -->
@@ -212,20 +210,6 @@ session_start();
     </div>
 </div>
 
-<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-
-</html>
-
-
-
-
-</div>
-<!-- End Container fluid  -->
-</div>
-<!-- End Page wrapper  -->
-</div>
-<!-- End Wrapper -->
 <?php
 include '././ui-component/dependenciesImport.php';
 ?>

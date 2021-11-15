@@ -11,22 +11,19 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="Alya Andira Lubis">
+
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon.png">
     <title>Sistem Absensi - Mahasiswa</title>
-    <!-- Custom CSS -->
-    <link href="./assets/extra-libs/c3/c3.min.css" rel="stylesheet">
-    <link href="./assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
-    <link href="./assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
+
     <!-- Custom CSS -->
     <link href="./dist/css/style.min.css" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <link rel="stylesheet" type="text/css" href="./css/beranda-adminstyle.css">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="./css/beranda-adminstyle.css">
+    
+    <!-- Izi Toast -->
     <script src="src\izitoast\dist\js\iziToast.js" type="text/javascript"></script>
     <link rel="stylesheet" href="src\izitoast\dist\css\iziToast.css">
 
@@ -56,9 +53,7 @@ session_start();
         <!-- Page wrapper  -->
         <div class="page-wrapper">
             <!-- Bread crumb and right sidebar toggle -->
-            <!-- <div> Halaman Admin </div> -->
             <h1>Mahasiswa Management</h1>
-
 
             <?php
             if (isset($_POST["MahasiswaModal_ActionType"])) {
@@ -79,53 +74,58 @@ session_start();
             } else {
 
                 echo "
-        <div class='container-table'>
-            <table class='table table-sm table-hover'>
-                <thead class='thead-dark'>
-                    <tr>
-                        <th>No</th>
-                        <th>Name</th>
-                        <th>NIM</th>
-                        <th>Password</th>
-                        <th>Email</th>
-                        <th>Fakultas</th>
-                        <th>Jurusan</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>";
+            <div class='container-table'>
+                <table class='table table-sm table-hover'>
+                    <thead class='thead-dark'>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>NIM</th>
+                            <th>Password</th>
+                            <th>Email</th>
+                            <th>Fakultas</th>
+                            <th>Jurusan</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>";
 
                 foreach ($FetchedMahasiswaList as $primaryKey => $value) {
                     $nomor = $primaryKey + 1;
                     $mahasiswaNIM = $value["mhs_nim"];
                     $mahasiswaNama = $value["mhs_nama"];
                     echo "
-            <tr>
-                <td>$nomor</td>
-                <td id='mahasiswaNama_$primaryKey'>$value[mhs_nama]</td>
-                <td id='mahasiswaNIM_$primaryKey'>$value[mhs_nim]</td>
-                <td id='mahasiswaPass_$primaryKey'>$value[mhs_password]</td>
-                <td id='mahasiswaEmail_$primaryKey'>$value[mhs_email]</td>
-                <td id='mahasiswaFakultas_$primaryKey'>$value[mhs_fakultas]</td>
-                <td id='mahasiswaJurusan_$primaryKey'>$value[mhs_jurusan]</td>
-                <td style='text-align:center;'>
-                    <form method='POST'>
-                        <button type='button' onclick='initializeDeleteMahasiswaModal(&#39;$mahasiswaNIM&#39;);' class='btn btn-danger'>Delete</button>
-                        <button onclick='initializeUpdateMahasiswaModal(&#39;$primaryKey&#39;);' class='btn btn-warning' data-toggle='modal' data-target='#mahasiswa_manage_modal' type='button'>
-                            Update
-                        </button>
-                    </form>
-                    <form method='POST' action='admin-manageDaftar.php'>
-                        <input type='hidden' value='$mahasiswaNIM' name='selectedMahasiswaNIM'>
-                        <input type='hidden' value='$mahasiswaNama' name='selectedMahasiswaName'>
-                        <button type='submit' name='selectedNIM' class='btn waves-effect waves-light btn-dark' >Manage Class</button>
-                    </form>
-                </td>
-            </tr>";
+                    <tr>
+                        <td>$nomor</td>
+                        <td id='mahasiswaNama_$primaryKey'>$value[mhs_nama]</td>
+                        <td id='mahasiswaNIM_$primaryKey'>$value[mhs_nim]</td>
+                        <td id='mahasiswaPass_$primaryKey'>$value[mhs_password]</td>
+                        <td id='mahasiswaEmail_$primaryKey'>$value[mhs_email]</td>
+                        <td id='mahasiswaFakultas_$primaryKey'>$value[mhs_fakultas]</td>
+                        <td id='mahasiswaJurusan_$primaryKey'>$value[mhs_jurusan]</td>
+                        <td style='text-align:center;'>
+                            <form method='POST'>
+                                <button type='button' onclick='initializeDeleteMahasiswaModal(&#39;$mahasiswaNIM&#39;);' class='btn btn-danger'>Delete</button>
+                                <button onclick='initializeUpdateMahasiswaModal(&#39;$primaryKey&#39;);' class='btn btn-warning' data-toggle='modal' data-target='#mahasiswa_manage_modal' type='button'>
+                                    Update
+                                </button>
+                            </form>
+                            <form method='POST' action='admin-manageDaftar.php'>
+                                <input type='hidden' value='$mahasiswaNIM' name='selectedMahasiswaNIM'>
+                                <input type='hidden' value='$mahasiswaNama' name='selectedMahasiswaName'>
+                                <button type='submit' name='selectedNIM' class='btn waves-effect waves-light btn-dark' >Manage Class</button>
+                            </form>
+                        </td>
+                    </tr>";
                 } //end of foreach
-                echo "</table>";
+                echo "
+                </table>
+            </div>";
             }
             ?>
+
+        </div>   
+    </div>    
 </body>
 
 <!-- Mahasiswa Modal -->
@@ -180,12 +180,11 @@ session_start();
     </div>
 </div>
 
-
-<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<?php
+include '././ui-component/dependenciesImport.php';
+?>
 
 </html>
-
 
 <script>
     document.getElementById("adminButton").addEventListener("click", initializeAddMahasiswaModal);
@@ -212,7 +211,7 @@ session_start();
         $('#mahasiswa_manage_modal').modal('toggle')
 
         document.getElementById("MahasiswaModal_ActionType").value = "Add";
-        document.getElementById("MahasiswaModal_PrimaryKey").value = primaryKey;
+        document.getElementById("MahasiswaModal_PrimaryKey").value = "";
         document.getElementById("MahasiswaModal_Nama").value = "";
         document.getElementById("MahasiswaModal_NIM").value = "";
         document.getElementById("MahasiswaModal_Password").value = "";
@@ -231,7 +230,6 @@ session_start();
         document.getElementById("MahasiswaModal_Email").value = "";
         document.getElementById("MahasiswaModal_Fakultas").value = "";
         document.getElementById("MahasiswaModal_Jurusan").value = "";
-        // console.log(primaryKey);
         submitModal()
     }
 
@@ -287,16 +285,6 @@ session_start();
         }
     }
 </script>
-
-</div>
-<!-- End Container fluid  -->
-</div>
-<!-- End Page wrapper  -->
-</div>
-<!-- End Wrapper -->
-<?php
-include '././ui-component/dependenciesImport.php';
-?>
 
 <style>
     table,

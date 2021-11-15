@@ -54,9 +54,7 @@ session_start();
         <!-- Page wrapper  -->
         <div class="page-wrapper">
             <!-- Bread crumb and right sidebar toggle -->
-            <!-- <div> Halaman Dosen </div> -->
             <h1>Meeting Management</h1>
-
 
             <?php
 

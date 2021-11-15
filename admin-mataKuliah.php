@@ -11,22 +11,19 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="Alya Andira Lubis">
+
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon.png">
     <title>Sistem Absensi - Mata Kuliah</title>
-    <!-- Custom CSS -->
-    <link href="./assets/extra-libs/c3/c3.min.css" rel="stylesheet">
-    <link href="./assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
-    <link href="./assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
+
     <!-- Custom CSS -->
     <link href="./dist/css/style.min.css" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <link rel="stylesheet" type="text/css" href="./css/beranda-adminstyle.css">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="./css/beranda-adminstyle.css">
+    
+    <!-- Izi Toast -->
     <script src="src\izitoast\dist\js\iziToast.js" type="text/javascript"></script>
     <link rel="stylesheet" href="src\izitoast\dist\css\iziToast.css">
 </head>
@@ -57,19 +54,12 @@ session_start();
         <!-- Page wrapper  -->
         <div class="page-wrapper">
             <!-- Bread crumb and right sidebar toggle -->
-            <!-- <div> Halaman Admin </div> -->
             <h1>Course Management</h1>
 
 
             <?php
             // add class
             if (isset($_POST["ClassModal_ActionType"])) {
-
-                // var_dump($_POST["ClassModal_ActionType"]);
-                // var_dump($_POST["ClassModal_PrimaryKey"]);
-                // var_dump($_POST["ClassModal_Kode"]);
-                // var_dump($_POST["ClassModal_Nama"]);
-
                 if ($_POST["ClassModal_ActionType"] == "Add") {
                     include '././db-component/matkul-add.php';
                 } else if ($_POST["ClassModal_ActionType"] == "Update") {
@@ -96,38 +86,33 @@ session_start();
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tbody>";
+            <tbody>";
 
                 foreach ($AllCourseList as $primaryKey => $value) {
                     $nomor = $primaryKey + 1;
                     $matkulKode = $value["matkul_kode"];
                     echo "
-            <tr>
-                <td>$nomor</td>
-                <td id='matkulNama_$primaryKey'>$value[matkul_nama]</td>
-                <td id='matkulkode_$primaryKey'>$value[matkul_kode]</td>
-                <td style='text-align:center;'>
-                    <form method='POST'>
-                        <button type='button' onclick='initializeDeleteClassModal(&#39;$matkulKode&#39;);' class='btn btn-danger'>Delete</button>
-                        <button onclick='initializeUpdateClassModal(&#39;$primaryKey&#39;);' class='btn btn-warning' data-toggle='modal' data-target='#class_manage_modal' type='button'>
-                            Update
-                        </button>
-                    </form>
-                    
-                </td>
-            </tr>";
+                    <tr>
+                        <td>$nomor</td>
+                        <td id='matkulNama_$primaryKey'>$value[matkul_nama]</td>
+                        <td id='matkulkode_$primaryKey'>$value[matkul_kode]</td>
+                        <td style='text-align:center;'>
+                            <form method='POST'>
+                                <button type='button' onclick='initializeDeleteClassModal(&#39;$matkulKode&#39;);' class='btn btn-danger'>Delete</button>
+                                <button onclick='initializeUpdateClassModal(&#39;$primaryKey&#39;);' class='btn btn-warning' data-toggle='modal' data-target='#class_manage_modal' type='button'>
+                                    Update
+                                </button>
+                            </form>
+                        </td>
+                    </tr>";
                 } //end of foreach
                 echo "
-               
-            </table>
-      ";
+                </table>
+            </div>";
             }
-
             ?>
-
-            <!-- <h1>Tambah Mata Kuliah</h1>
-            <button type="button" onclick="initializeAddClassModal();" class="btn waves-effect waves-light btn-success" data-toggle="modal" data-target="#class_manage_modal">Add</button> -->
-
+        </div>
+    </div>        
 </body>
 
 <!-- Class Modal -->
@@ -143,8 +128,8 @@ session_start();
             <div class="modal-body">
                 <form method="POST" id='ClassModal_bodyForm'>
 
-                    <input type="text" class="form-control" id="ClassModal_ActionType" name="ClassModal_ActionType">
-                    <input type="text" class="form-control" id="ClassModal_PrimaryKey" name="ClassModal_PrimaryKey">
+                    <input type="hidden" class="form-control" id="ClassModal_ActionType" name="ClassModal_ActionType">
+                    <input type="hidden" class="form-control" id="ClassModal_PrimaryKey" name="ClassModal_PrimaryKey">
 
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Kode Kelas:</label>
@@ -166,12 +151,11 @@ session_start();
     </div>
 </div>
 
-<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<?php
+include '././ui-component/dependenciesImport.php';
+?>
 
 </html>
-
-
 
 <script>
     document.getElementById("adminButton").addEventListener("click", initializeAddClassModal);
@@ -192,7 +176,7 @@ session_start();
         $('#class_manage_modal').modal('toggle')
         //set all the field to empty, because it is a frehs new modal
         document.getElementById("ClassModal_ActionType").value = "Add";
-        document.getElementById("ClassModal_PrimaryKey").value = primaryKey;
+        document.getElementById("ClassModal_PrimaryKey").value = "";
         document.getElementById("ClassModal_Nama").value = "";
         document.getElementById("ClassModal_Kode").value = "";
     }
@@ -228,7 +212,7 @@ session_start();
             // dapatin primary key
             const primaryKey = document.getElementById("ClassModal_PrimaryKey").value;
 
-            // // pakai innetHTML karena dia dialam table, didalam html tag, di select berdasarkan primary key
+            // pakai innetHTML karena dia dialam table, didalam html tag, di select berdasarkan primary key
             const oldNamaKelas = document.getElementById("matkulNama_" + primaryKey).innerHTML;
             const oldKodeKelas = document.getElementById("matkulkode_" + primaryKey).innerHTML;
 
@@ -242,7 +226,6 @@ session_start();
                 title: 'Caution',
                 message: 'Nothing changed!',
                 });
-                // window.alert("nothing changed, nothing to submit")
             } else {
                 document.getElementById("ClassModal_bodyForm").submit();
             }
@@ -252,18 +235,6 @@ session_start();
         }
     }
 </script>
-
-</div>
-<!-- End Container fluid  -->
-</div>
-<!-- End Page wrapper  -->
-</div>
-<!-- End Wrapper -->
-<?php
-include '././ui-component/dependenciesImport.php';
-?>
-
-</html>
 
 <style>
     table,

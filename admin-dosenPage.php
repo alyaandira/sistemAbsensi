@@ -11,22 +11,19 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="Alya Andira Lubis">
+
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon.png">
     <title>Sistem Absensi - Dosen</title>
-    <!-- Custom CSS -->
-    <link href="./assets/extra-libs/c3/c3.min.css" rel="stylesheet">
-    <link href="./assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
-    <link href="./assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
+
     <!-- Custom CSS -->
     <link href="./dist/css/style.min.css" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <link rel="stylesheet" type="text/css" href="./css/beranda-adminstyle.css">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="./css/beranda-adminstyle.css">
+    
+    <!-- Izi Toast -->
     <script src="src\izitoast\dist\js\iziToast.js" type="text/javascript"></script>
     <link rel="stylesheet" href="src\izitoast\dist\css\iziToast.css">
 </head>
@@ -57,9 +54,7 @@ session_start();
         <!-- Page wrapper  -->
         <div class="page-wrapper">
             <!-- Bread crumb and right sidebar toggle -->
-            <!-- <div> Halaman Admin </div> -->
             <h1>Dosen Management</h1>
-
 
             <?php
             if (isset($_POST["DosenModal_ActionType"])) {
@@ -101,37 +96,36 @@ session_start();
                     $dosenNIP = $value["dosen_nip"];
                     $dosenNama = $value["dosen_nama"];
                     echo "
-            <tr>
-                <td>$nomor</td>
-                <td id='dosenNama_$primaryKey'>$value[dosen_nama]</td>
-                <td id='dosenNIP_$primaryKey'>$value[dosen_nip]</td>
-                <td id='dosenPass_$primaryKey'>$value[dosen_password]</td>
-                <td id='dosenEmail_$primaryKey'>$value[dosen_email]</td>
-                <td id='dosenFakultas_$primaryKey'>$value[dosen_fakultas]</td>
-                <td id='dosenJurusan_$primaryKey'>$value[dosen_jurusan]</td>
-                <td style='text-align:center;'>
-                    <form method='POST'>
-                        <button type='button' onclick='initializeDeleteDosenModal(&#39;$dosenNIP&#39;);' class='btn btn-danger'>Delete</button>
-                        <button onclick='initializeUpdateDosenModal(&#39;$primaryKey&#39;);' class='btn btn-warning' data-toggle='modal' data-target='#dosen_manage_modal' type='button'>
-                            Update
-                        </button>
-                    </form>
-                    <form method='POST' action='admin-manageMengajar.php'>
-                        <input type='hidden' value='$dosenNIP' name='selectedDosenNIP'>
-                        <input type='hidden' value='$dosenNama' name='selectedDosenName'>
-                        <button type='submit' name='selectedNIP' class='btn waves-effect waves-light btn-dark' >Manage Mengajar</button>
-                    </form>
-                </td>
-            </tr>";
+                    <tr>
+                        <td>$nomor</td>
+                        <td id='dosenNama_$primaryKey'>$value[dosen_nama]</td>
+                        <td id='dosenNIP_$primaryKey'>$value[dosen_nip]</td>
+                        <td id='dosenPass_$primaryKey'>$value[dosen_password]</td>
+                        <td id='dosenEmail_$primaryKey'>$value[dosen_email]</td>
+                        <td id='dosenFakultas_$primaryKey'>$value[dosen_fakultas]</td>
+                        <td id='dosenJurusan_$primaryKey'>$value[dosen_jurusan]</td>
+                        <td style='text-align:center;'>
+                            <form method='POST'>
+                                <button type='button' onclick='initializeDeleteDosenModal(&#39;$dosenNIP&#39;);' class='btn btn-danger'>Delete</button>
+                                <button onclick='initializeUpdateDosenModal(&#39;$primaryKey&#39;);' class='btn btn-warning' data-toggle='modal' data-target='#dosen_manage_modal' type='button'>
+                                    Update
+                                </button>
+                            </form>
+                            <form method='POST' action='admin-manageMengajar.php'>
+                                <input type='hidden' value='$dosenNIP' name='selectedDosenNIP'>
+                                <input type='hidden' value='$dosenNama' name='selectedDosenName'>
+                                <button type='submit' name='selectedNIP' class='btn waves-effect waves-light btn-dark' >Manage Mengajar</button>
+                            </form>
+                        </td>
+                    </tr>";
                 } //end of foreach
-                echo "</table>";
+                echo "
+            </table>
+        </div>";
             }
             ?>
-
-            <br>
-            <!-- <h1>Tambah Dosen</h1>
-            <button type="button" onclick="initializeAddDosenModal();" class="btn waves-effect waves-light btn-success" data-toggle="modal" data-target="#dosen_manage_modal">Add</button> -->
-
+        </div>
+    </div>        
 </body>
 
 <!-- Dosen Modal -->
@@ -186,12 +180,11 @@ session_start();
     </div>
 </div>
 
-
-<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<?php
+include '././ui-component/dependenciesImport.php';
+?>
 
 </html>
-
 
 <script>
     document.getElementById("adminButton").addEventListener("click", initializeAddDosenModal);
@@ -299,18 +292,6 @@ session_start();
         }
     }
 </script>
-
-</div>
-<!-- End Container fluid  -->
-</div>
-<!-- End Page wrapper  -->
-</div>
-<!-- End Wrapper -->
-<?php
-include '././ui-component/dependenciesImport.php';
-?>
-
-</html>
 
 <style>
     table,
