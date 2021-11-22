@@ -124,6 +124,7 @@ if (!isset($_SESSION["currentNIP"])) {
                         echo "<p>Saat ini tidak terdaftar di kelas manapun</p>";
                     } else {
                     ?>
+                    <div class="table-responsive">
                         <table class="table table-sm">
                             <thead>
                                 <tr>
@@ -156,6 +157,7 @@ if (!isset($_SESSION["currentNIP"])) {
                                 ?>
                             </tbody>
                         </table>
+                    </div>    
                     <?php } ?>
 
                     <?php

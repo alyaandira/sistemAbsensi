@@ -45,30 +45,32 @@ session_start();
         <!-- Page wrapper  -->
         <div class="page-wrapper">
             <h1>My Profile</h1>
-            <table class="table">
-                <tbody>
-                    <tr>
-                        <td>Nama</td>
-                        <td><?php echo $_SESSION["currentUsername"] ?></td>
-                    </tr>
-                    <tr>
-                        <td>NIP</td>
-                        <td><?php echo $_SESSION["currentNIP"] ?></td>
-                    </tr>
-                    <tr>
-                        <td>Email</td>
-                        <td><?php echo $_SESSION["currentEmail"] ?></td>
-                    </tr>
-                    <tr>
-                        <td>Fakultas</td>
-                        <td><?php echo $_SESSION["currentFakultas"] ?></td>
-                    </tr>
-                    <tr>
-                        <td>Jurusan</td>
-                        <td><?php echo $_SESSION["currentJurusan"] ?></td>
-                    </tr>
-                </tbody>
-            </table>
+                <div class="table-responsive">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>Nama</td>
+                                <td><?php echo $_SESSION["currentUsername"] ?></td>
+                            </tr>
+                            <tr>
+                                <td>NIP</td>
+                                <td><?php echo $_SESSION["currentNIP"] ?></td>
+                            </tr>
+                            <tr>
+                                <td>Email</td>
+                                <td><?php echo $_SESSION["currentEmail"] ?></td>
+                            </tr>
+                            <tr>
+                                <td>Fakultas</td>
+                                <td><?php echo $_SESSION["currentFakultas"] ?></td>
+                            </tr>
+                            <tr>
+                                <td>Jurusan</td>
+                                <td><?php echo $_SESSION["currentJurusan"] ?></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>    
         </div>
     </div>
 </body>

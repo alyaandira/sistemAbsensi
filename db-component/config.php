@@ -1,10 +1,17 @@
 <?php
 
+// $base_URL = "https://absensiday.000webhostapp.com/";
+
 // ====== All PHP variables regarding database configuration are listed down here ======
 $hostname = "localhost";
 $username = "root";
 $password = "";
 $dbName = "sistem_absensi";
+
+// $hostname = "localhost";
+// $username = "id17953025_admin_alysa";
+// $password = "ES8!Rp@4S|whOsbh";
+// $dbName = "id17953025_sistem_absensi";
 
 // Tabel Absensi
 $absensi_table = "absensi";
@@ -31,7 +38,7 @@ $dosen_table = "dosen";
 $dosen_nip = "dosen_nip";
 $dosen_nama = "dosen_nama";
 $dosen_password = "dosen_password";
-$dosen_email= "dosen_email";
+$dosen_email = "dosen_email";
 $dosen_fakultas = "dosen_fakultas";
 $dosen_jurusan = "dosen_jurusan";
 
@@ -41,7 +48,7 @@ $mhs_table = "mahasiswa";
 $mhs_nim = "mhs_nim";
 $mhs_nama = "mhs_nama";
 $mhs_password = "mhs_password";
-$mhs_email= "mhs_email";
+$mhs_email = "mhs_email";
 $mhs_fakultas = "mhs_fakultas";
 $mhs_jurusan = "mhs_jurusan";
 

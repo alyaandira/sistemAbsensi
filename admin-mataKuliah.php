@@ -76,39 +76,39 @@ session_start();
             } else {
 
                 echo "
-        <div class='container-table'>
-            <table class='table table-sm table-hover'>
-                <thead class='thead-dark'>
-                    <tr>
-                        <th>No</th>
-                        <th>Name</th>
-                        <th>Kode</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-            <tbody>";
+                    <div class='table-responsive'>
+                        <table class='table table-sm table-hover'>
+                            <thead class='thead-dark'>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Name</th>
+                                    <th>Kode</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                        <tbody>";
 
-                foreach ($AllCourseList as $primaryKey => $value) {
-                    $nomor = $primaryKey + 1;
-                    $matkulKode = $value["matkul_kode"];
-                    echo "
-                    <tr>
-                        <td>$nomor</td>
-                        <td id='matkulNama_$primaryKey'>$value[matkul_nama]</td>
-                        <td id='matkulkode_$primaryKey'>$value[matkul_kode]</td>
-                        <td style='text-align:center;'>
-                            <form method='POST'>
-                                <button type='button' onclick='initializeDeleteClassModal(&#39;$matkulKode&#39;);' class='btn btn-danger'>Delete</button>
-                                <button onclick='initializeUpdateClassModal(&#39;$primaryKey&#39;);' class='btn btn-warning' data-toggle='modal' data-target='#class_manage_modal' type='button'>
-                                    Update
-                                </button>
-                            </form>
-                        </td>
-                    </tr>";
-                } //end of foreach
-                echo "
-                </table>
-            </div>";
+                            foreach ($AllCourseList as $primaryKey => $value) {
+                                $nomor = $primaryKey + 1;
+                                $matkulKode = $value["matkul_kode"];
+                                echo "
+                                <tr>
+                                    <td>$nomor</td>
+                                    <td id='matkulNama_$primaryKey'>$value[matkul_nama]</td>
+                                    <td id='matkulkode_$primaryKey'>$value[matkul_kode]</td>
+                                    <td style='text-align:center;'>
+                                        <form method='POST'>
+                                            <button type='button' onclick='initializeDeleteClassModal(&#39;$matkulKode&#39;);' class='btn btn-danger'>Delete</button>
+                                            <button onclick='initializeUpdateClassModal(&#39;$primaryKey&#39;);' class='btn btn-warning' data-toggle='modal' data-target='#class_manage_modal' type='button'>
+                                                Update
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>";
+                            } //end of foreach
+                            echo "
+                        </table>
+                    </div>";
             }
             ?>
         </div>

@@ -54,7 +54,7 @@ session_start();
         <!-- Page wrapper  -->
         <div class="page-wrapper">
             <!-- Bread crumb and right sidebar toggle -->
-            <h1>Dosen Management</h1>
+            <h1 class="main_title">Dosen Management</h1>
 
             <?php
             if (isset($_POST["DosenModal_ActionType"])) {
@@ -75,53 +75,53 @@ session_start();
             } else {
 
                 echo "
-        <div class='container-table'>
-            <table class='table table-sm table-hover'>
-                <thead class='thead-dark'>
-                    <tr>
-                        <th>No</th>
-                        <th>Nama</th>
-                        <th>NIP</th>
-                        <th>Password</th>
-                        <th>Email</th>
-                        <th>Fakultas</th>
-                        <th>Jurusan</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>";
+                <div class='table-responsive'>
+                    <table class='table table-sm table-hover'>
+                        <thead class='thead-dark'>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama</th>
+                                <th>NIP</th>
+                                <th>Password</th>
+                                <th>Email</th>
+                                <th>Fakultas</th>
+                                <th>Jurusan</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>";
 
-                foreach ($FetchedDosenList as $primaryKey => $value) {
-                    $nomor = $primaryKey + 1;
-                    $dosenNIP = $value["dosen_nip"];
-                    $dosenNama = $value["dosen_nama"];
-                    echo "
-                    <tr>
-                        <td>$nomor</td>
-                        <td id='dosenNama_$primaryKey'>$value[dosen_nama]</td>
-                        <td id='dosenNIP_$primaryKey'>$value[dosen_nip]</td>
-                        <td id='dosenPass_$primaryKey'>$value[dosen_password]</td>
-                        <td id='dosenEmail_$primaryKey'>$value[dosen_email]</td>
-                        <td id='dosenFakultas_$primaryKey'>$value[dosen_fakultas]</td>
-                        <td id='dosenJurusan_$primaryKey'>$value[dosen_jurusan]</td>
-                        <td style='text-align:center;'>
-                            <form method='POST'>
-                                <button type='button' onclick='initializeDeleteDosenModal(&#39;$dosenNIP&#39;);' class='btn btn-danger'>Delete</button>
-                                <button onclick='initializeUpdateDosenModal(&#39;$primaryKey&#39;);' class='btn btn-warning' data-toggle='modal' data-target='#dosen_manage_modal' type='button'>
-                                    Update
-                                </button>
-                            </form>
-                            <form method='POST' action='admin-manageMengajar.php'>
-                                <input type='hidden' value='$dosenNIP' name='selectedDosenNIP'>
-                                <input type='hidden' value='$dosenNama' name='selectedDosenName'>
-                                <button type='submit' name='selectedNIP' class='btn waves-effect waves-light btn-dark' >Manage Mengajar</button>
-                            </form>
-                        </td>
-                    </tr>";
-                } //end of foreach
-                echo "
-            </table>
-        </div>";
+                        foreach ($FetchedDosenList as $primaryKey => $value) {
+                            $nomor = $primaryKey + 1;
+                            $dosenNIP = $value["dosen_nip"];
+                            $dosenNama = $value["dosen_nama"];
+                            echo "
+                            <tr>
+                                <td>$nomor</td>
+                                <td id='dosenNama_$primaryKey'>$value[dosen_nama]</td>
+                                <td id='dosenNIP_$primaryKey'>$value[dosen_nip]</td>
+                                <td id='dosenPass_$primaryKey'>$value[dosen_password]</td>
+                                <td id='dosenEmail_$primaryKey'>$value[dosen_email]</td>
+                                <td id='dosenFakultas_$primaryKey'>$value[dosen_fakultas]</td>
+                                <td id='dosenJurusan_$primaryKey'>$value[dosen_jurusan]</td>
+                                <td style='text-align:center;'>
+                                    <form method='POST'>
+                                        <button type='button' onclick='initializeDeleteDosenModal(&#39;$dosenNIP&#39;);' class='btn btn-danger'>Delete</button>
+                                        <button onclick='initializeUpdateDosenModal(&#39;$primaryKey&#39;);' class='btn btn-warning' data-toggle='modal' data-target='#dosen_manage_modal' type='button'>
+                                            Update
+                                        </button>
+                                    </form>
+                                    <form method='POST' action='admin-manageMengajar.php'>
+                                        <input type='hidden' value='$dosenNIP' name='selectedDosenNIP'>
+                                        <input type='hidden' value='$dosenNama' name='selectedDosenName'>
+                                        <button type='submit' name='selectedNIP' class='btn waves-effect waves-light btn-dark' >Manage Mengajar</button>
+                                    </form>
+                                </td>
+                            </tr>";
+                        } //end of foreach
+                        echo "
+                    </table>
+                </div>";
             }
             ?>
         </div>

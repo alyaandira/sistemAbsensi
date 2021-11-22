@@ -12,3 +12,33 @@
 }
 
 *{font-family: 'Poppins', sans-serif;}
+
+@media (max-width: 480px) {
+   .main_title {
+       font-size: 25px;
+   }
+  }
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .main_title {
+        font-size: 25px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .main_title {
+        font-size: 25px;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1200px) {
+    .main_title {
+        font-size: 25px;
+    }
+}
+
+@media (min-width: 1201px) {
+    .main_title {
+        font-size: 25px;
+    }
+}

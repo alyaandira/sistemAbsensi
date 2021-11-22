@@ -1,6 +1,9 @@
 <?php
 session_start();
 session_unset();
+ob_start();
+ob_clean();
+ob_flush();
 ?>
 
 <!DOCTYPE html>
@@ -35,11 +38,11 @@ session_unset();
         if (isset($_POST["user_type"])) {
 
             if ($_POST["user_type"] == "Mahasiswa") {
-                include '.\.\db-component\mhs-login.php';
+                include '././db-component/mhs-login.php';
             } elseif ($_POST["user_type"] == "Dosen") {
-                include '.\.\db-component\dosen-login.php';
+                include '././db-component/dosen-login.php';
             } elseif ($_POST["user_type"] == "Admin") {
-                include '.\.\db-component\admin-login.php';
+                include '././db-component/admin-login.php';
             }
         } else {
             echo
@@ -102,5 +105,4 @@ session_unset();
         </section>
     </div>
 </body>
-
 </html>

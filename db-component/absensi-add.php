@@ -2,7 +2,6 @@
 include "././db-component/config.php";
 $selectedPertKode = $_POST["selectedPertKode"];
 $tableMhsNim = $_SESSION["currentNIP"];
-$tableAbsenID = $_POST["selectedAbsenID"];
 
 // Create connection
 $conn = new mysqli($hostname, $username, $password, $dbName);
@@ -10,10 +9,10 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-$SQL_query = "INSERT INTO `$absensi_table`(`$absensi_id`,`$absensi_status`,`$absensi_mhs_nim`,`$absensi_pert_kode`) VALUES ('$tableAbsenID','$tableAbsenStatus','$tableMhsNim','$selectedPertKode')";
+$SQL_query = "INSERT INTO `$absensi_table`(`$absensi_status`,`$absensi_mhs_nim`,`$absensi_pert_kode`) 
+VALUES ('$tableAbsenStatus','$tableMhsNim','$selectedPertKode')";
 
 $result = mysqli_query($conn, $SQL_query);
-
 
 if ($result) {
   echo

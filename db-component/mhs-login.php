@@ -1,6 +1,5 @@
 <?php
-
-include './db-component/config.php';
+include '././db-component/config.php';
 $input_mhs_nim = $_POST["user_name"];
 $input_mhs_password = $_POST["user_pass"];
 
@@ -11,6 +10,8 @@ $conn = new mysqli($hostname, $username, $password, $dbName);
 // Check connection
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
+} else {
+  echo "connection established";
 }
 
 //hard coded, nanti ubah sesuai input, employee_email pakai variable from config.php
@@ -44,12 +45,17 @@ if ($result) {
     // var_dump($_SESSION["currentEmail"]);
     // var_dump($_SESSION["currentFakultas"]);
     // var_dump($_SESSION["currentJurusan"]);
+
     // redirect to home page
+    var_dump($dataRow);
+    error_reporting(E_ALL | E_WARNING | E_NOTICE);
+    ini_set('display_errors', TRUE);
+  
     header("Location: mhs-absensi.php");
-    // exit;
+
   } else {
     echo
-      "<script>
+    "<script>
         iziToast.error({
             title: 'Error',
             message: 'user not registered on the system',
@@ -60,10 +66,11 @@ if ($result) {
   $error_message = $conn->error;
   echo ("Error is = " . $error_message);
   echo
-    "<script>
+  "<script>
         iziToast.error({
             title: 'Error',
             message: 'SQL error',
         });
     </script>";
 }
+?>

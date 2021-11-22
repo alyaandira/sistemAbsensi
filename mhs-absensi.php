@@ -97,90 +97,92 @@ if (!isset($_SESSION["currentNIP"])) {
                     include './db-component/mhs-GetAvailablePertemuanBasedOnMatkul.php';
 
                     ?>
-                    <table class="table table-sm">
-                        <thead>
-                            <tr>
-                                <th scope="col">ID Kelas</th>
-                                <th scope="col">Waktu Mulai</th>
-                                <th scope="col">Waktu Akhir</th>
-                                <th scope="col">Batas Waktu</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $selectedMataKuliahKode = $_POST["selectedMataKuliahKode"];
-                            $selectedMataKuliahNama = $_POST["selectedMataKuliahNama"];
-                            $currentNIP = $_SESSION["currentNIP"];
-                            // echo $currentNIP;
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID Kelas</th>
+                                    <th scope="col">Waktu Mulai</th>
+                                    <th scope="col">Waktu Akhir</th>
+                                    <th scope="col">Batas Waktu</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $selectedMataKuliahKode = $_POST["selectedMataKuliahKode"];
+                                $selectedMataKuliahNama = $_POST["selectedMataKuliahNama"];
+                                $currentNIP = $_SESSION["currentNIP"];
+                                // echo $currentNIP;
 
-                            foreach ($absensiPertemuanList as $absensi) {
+                                foreach ($absensiPertemuanList as $absensi) {
 
-                                $tableMhsNim = $absensi[$absensi_mhs_nim];
-                                $tableAbsenID = $absensi[$absensi_id];
-                                $tableAbsenStatus = $absensi[$absensi_status];
+                                    $tableMhsNim = $absensi[$absensi_mhs_nim];
+                                    $tableAbsenID = $absensi[$absensi_id];
+                                    $tableAbsenStatus = $absensi[$absensi_status];
 
-                                if ($tableMhsNim == $_SESSION["currentNIP"] || $tableMhsNim == Null) {
+                                    if ($tableMhsNim == $_SESSION["currentNIP"] || $tableMhsNim == Null) {
 
-                                    $pertKode = $absensi[$pert_kode];
-                                    $kelasID = $absensi[$pert_kelas_id];
-                                    $dosenNIP = $absensi[$pert_dosen_nip];
-                                    $awalWaktu = $absensi[$pert_waktu_mulai];
-                                    $akhirWaktu = $absensi[$pert_waktu_akhir];
-                                    $waktuBatas = $absensi[$pert_batas_waktu];
-                                    $matkulKode = $absensi[$pert_matkul_kode];
+                                        $pertKode = $absensi[$pert_kode];
+                                        $kelasID = $absensi[$pert_kelas_id];
+                                        $dosenNIP = $absensi[$pert_dosen_nip];
+                                        $awalWaktu = $absensi[$pert_waktu_mulai];
+                                        $akhirWaktu = $absensi[$pert_waktu_akhir];
+                                        $waktuBatas = $absensi[$pert_batas_waktu];
+                                        $matkulKode = $absensi[$pert_matkul_kode];
 
 
 
-                                    if ($absensi[$absensi_status] == null) {
-                                        $displayMatkulKode = "-";
-                                        if (check_in_range($awalWaktu, $akhirWaktu, date_default_timezone_get())) {
-                                            $ActionRow =
-                                                "<form method='POST' id='absensiForm_$pertKode' >
-                                                    <input type='hidden' value='$selectedMataKuliahKode' name='selectedMataKuliahKode'>
-                                                    <input type='hidden' value='$selectedMataKuliahNama' name='selectedMataKuliahNama'>
-                                                    <input type='hidden' value='$currentNIP' name='currentNIP'>
-                                                    <input type='hidden' value='$tableMhsNim' name='selectedMahasiswaNIM'>
-                                                    <input type='hidden' value='$tableAbsenID' name='selectedAbsenID'>
-                                                    <input type='hidden' value='$pertKode' name='selectedPertKode'>
-                                                    <input type='hidden' value='$awalWaktu' name='selectedAwalWaktu'>
-                                                    <input type='hidden' value='$waktuBatas' name='selectedWaktuBatas'>
-                                                    <button type='button' name='absensiButton' class='btn waves-effect waves-light btn-dark'
-                                                        onclick='initializeModal(&#39;$pertKode&#39;);'
-                                                        data-toggle='modal' data-target='#exampleModal'>
-                                                    Isi Absensi
-                                                    </button>
-                                                 </form>";
+                                        if ($absensi[$absensi_status] == null) {
+                                            $displayMatkulKode = "-";
+                                            if (check_in_range($awalWaktu, $akhirWaktu, date_default_timezone_get())) {
+                                                $ActionRow =
+                                                    "<form method='POST' id='absensiForm_$pertKode' >
+                                                        <input type='hidden' value='$selectedMataKuliahKode' name='selectedMataKuliahKode'>
+                                                        <input type='hidden' value='$selectedMataKuliahNama' name='selectedMataKuliahNama'>
+                                                        <input type='hidden' value='$currentNIP' name='currentNIP'>
+                                                        <input type='hidden' value='$tableMhsNim' name='selectedMahasiswaNIM'>
+                                                        <input type='hidden' value='$tableAbsenID' name='selectedAbsenID'>
+                                                        <input type='hidden' value='$pertKode' name='selectedPertKode'>
+                                                        <input type='hidden' value='$awalWaktu' name='selectedAwalWaktu'>
+                                                        <input type='hidden' value='$waktuBatas' name='selectedWaktuBatas'>
+                                                        <button type='button' name='absensiButton' class='btn waves-effect waves-light btn-dark'
+                                                            onclick='initializeModal(&#39;$pertKode&#39;);'
+                                                            data-toggle='modal' data-target='#exampleModal'>
+                                                        Isi Absensi
+                                                        </button>
+                                                    </form>";
+                                            } else {
+                                                $ActionRow = "-";
+                                            }
+                                        } else if ($absensi[$absensi_status] == 1) {
+                                            $displayMatkulKode = "Hadir";
+                                            $ActionRow = "-";
+                                        } else if ($absensi[$absensi_status] == 2) {
+                                            $displayMatkulKode = "Terlambat";
+                                            $ActionRow = "-";
                                         } else {
+                                            $displayMatkulKode = "undefined";
                                             $ActionRow = "-";
                                         }
-                                    } else if ($absensi[$absensi_status] == 1) {
-                                        $displayMatkulKode = "Hadir";
-                                        $ActionRow = "-";
-                                    } else if ($absensi[$absensi_status] == 2) {
-                                        $displayMatkulKode = "Terlambat";
-                                        $ActionRow = "-";
-                                    } else {
-                                        $displayMatkulKode = "undefined";
-                                        $ActionRow = "-";
+
+                                        echo "
+                                    <tr>
+                                        <td>$kelasID</td>
+                                        <td>$awalWaktu</td>
+                                        <td>$akhirWaktu</td>
+                                        <td>$waktuBatas</td>
+                                        <td>$displayMatkulKode</td>
+                                        <td style='text-align:center;'>$ActionRow</td>
+                                    </tr>";
                                     }
-
-                                    echo "
-                                <tr>
-                                    <td>$kelasID</td>
-                                    <td>$awalWaktu</td>
-                                    <td>$akhirWaktu</td>
-                                    <td>$waktuBatas</td>
-                                    <td>$displayMatkulKode</td>
-                                    <td style='text-align:center;'>$ActionRow</td>
-                                </tr>";
                                 }
-                            }
-                            ?>
-                        </tbody>
+                                ?>
+                            </tbody>
 
-                    </table>
+                        </table>
+                    </div>    
                 </div>
                 <!-- End Container fluid  -->
             </div>

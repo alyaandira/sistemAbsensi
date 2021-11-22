@@ -73,27 +73,29 @@ if (!isset($_SESSION["currentNIP"])) {
                     // var_dump($matkulTerdaftarList);
                     ?>
                     <h1> DAFTAR MATA KULIAH </h1>
-                    <table class="table table-sm">
-                        <thead>
-                            <tr>
-                                <th scope="col">Kode Mata Kuliah</th>
-                                <th scope="col">Nama Mata Kuliah</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            foreach ($matkulTerdaftarList as $class) {
-                                $matkulKode = $class[$matkul_kode];
-                                $matkulNama = $class[$matkul_nama];
-                                echo "
-                            <tr>
-                                <td>$matkulKode</td>
-                                <td>$matkulNama</td>
-                            </tr>";
-                            }
-                            ?>
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Kode Mata Kuliah</th>
+                                    <th scope="col">Nama Mata Kuliah</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                foreach ($matkulTerdaftarList as $class) {
+                                    $matkulKode = $class[$matkul_kode];
+                                    $matkulNama = $class[$matkul_nama];
+                                    echo "
+                                <tr>
+                                    <td>$matkulKode</td>
+                                    <td>$matkulNama</td>
+                                </tr>";
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>    
                 </div>
                 <!-- End Container fluid  -->
             </div>

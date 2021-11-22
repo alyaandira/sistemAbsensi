@@ -7,5 +7,6 @@
 <script src="./assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
 
 <!-- Template requirement -->
+<script src="./dist/js/app-style-switcher.js"></script>
 <script src="./dist/js/sidebarmenu.js"></script>
 <script src="./dist/js/custom.min.js"></script>

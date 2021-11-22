@@ -74,7 +74,7 @@ session_start();
             } else {
 
                 echo "
-            <div class='container-table'>
+            <div class='table-responsive'>
                 <table class='table table-sm table-hover'>
                     <thead class='thead-dark'>
                         <tr>
