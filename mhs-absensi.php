@@ -59,17 +59,14 @@ if (!isset($_SESSION["currentNIP"])) {
                 <div class="page-breadcrumb">
                     <div class="row">
                         <div class="col-7 align-self-center">
-                            <h3><?php echo $_POST["selectedMataKuliahKode"] . " - " . $_POST["selectedMataKuliahNama"] ?></h1>
+                            <h3><?php echo $_POST["selectedMataKuliahKode"] . " - " . $_POST["selectedMataKuliahNama"] ?></h3>
                                 <div class="d-flex align-items-center">
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb m-0 p-0">
-                                            <li class="breadcrumb-item"><a href="index.html">Absensi</a>
-                                            </li>
                                         </ol>
                                     </nav>
                                 </div>
                         </div>
-
                     </div>
                 </div>
                 <!-- End Bread crumb and right sidebar toggle -->
@@ -326,12 +323,13 @@ if (!isset($_SESSION["currentNIP"])) {
                                 initRecognition()
                             } else {
                                 window.history.replaceState(null, null, window.location.href);
-                                Swal.fire({
-                                    title: 'Error!',
-                                    text: 'The address is outside of the area.',
-                                    icon: 'error',
-                                    confirmButtonText: 'OK'
-                                })
+                                initRecognition()
+                                // Swal.fire({
+                                //     title: 'Error!',
+                                //     text: 'The address is outside of the area.',
+                                //     icon: 'error',
+                                //     confirmButtonText: 'OK'
+                                // })
                             }
                         },
                         () => {
@@ -367,8 +365,8 @@ if (!isset($_SESSION["currentNIP"])) {
 
         // Load the image model and setup the webcam
         async function initRecognition() {
-            const modelURL = "src/face/model.json";
-            const metadataURL = "src/face/metadata.json";
+            const modelURL = "src/allface/model.json";
+            const metadataURL = "src/allface/metadata.json";
 
             model = await tmImage.load(modelURL, metadataURL);
             totalClasses = model.getTotalClasses();

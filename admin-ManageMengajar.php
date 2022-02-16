@@ -87,11 +87,11 @@ if (!isset($_SESSION["currentNIP"])) {
                 <?php
 
                 if (isset($_POST["matkulModal_mengajar_matkulKode"])) {
-                    include '././db-component/mengajar-add.php';
-                    // $matkulModal_daftar_matkulKode = $_POST["matkulModal_daftar_matkulKode"];
-                    // $input_nim_mhs = $_POST["selectedMahasiswaNIM"];
+                    // $matkulModal_mengajar_matkulKode = $_POST["matkulModal_mengajar_matkulKode"];
+                    // $input_dosen_nip = $_POST["selectedDosenNIP"];
                     // var_dump($_POST["matkulModal_mengajar_matkulKode"]);
-                    // var_dump($input_nim_mhs);
+                    // var_dump($input_dosen_nip);
+                    include '././db-component/mengajar-add.php';
                 }
 
                 if (isset($_POST["delete_mengajar"])) {
@@ -120,6 +120,9 @@ if (!isset($_SESSION["currentNIP"])) {
                     // var_dump($AllCourseList);
                     // var_dump($matkulTerdaftarList);
 
+                    $selectedNIP = $_POST["selectedDosenNIP"];
+                    $selectedName = $_POST["selectedDosenName"];
+
                     if (count($matkulTerdaftarList) == 0) {
                         echo "<p>Saat ini tidak terdaftar di kelas manapun</p>";
                     } else {
@@ -135,8 +138,6 @@ if (!isset($_SESSION["currentNIP"])) {
                             </thead>
                             <tbody>
                                 <?php
-                                $selectedNIP = $_POST["selectedDosenNIP"];
-                                $selectedName = $_POST["selectedDosenName"];
                                 foreach ($matkulTerdaftarList as $matkul) {
                                     $mengajarID = $matkul[$mengajar_id];
                                     $matkulKode = $matkul[$matkul_kode];

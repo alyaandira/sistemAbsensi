@@ -113,6 +113,9 @@ if (!isset($_SESSION["currentNIP"])) {
                     include './db-component/admin-GetMatkulByDaftar.php';
                     include './db-component/GetAllMatkul.php';
 
+                    $selectedNIM = $_POST["selectedMahasiswaNIM"];
+                    $selectedName = $_POST["selectedMahasiswaName"];
+
                     if (count($matkulTerdaftarList) == 0) {
                         echo "<p>Saat ini tidak terdaftar di kelas manapun</p>";
                     } else {
@@ -128,8 +131,6 @@ if (!isset($_SESSION["currentNIP"])) {
                             </thead>
                             <tbody>
                                 <?php
-                                $selectedNIM = $_POST["selectedMahasiswaNIM"];
-                                $selectedName = $_POST["selectedMahasiswaName"];
                                 foreach ($matkulTerdaftarList as $matkul) {
                                     $daftarID = $matkul[$daftar_id];
                                     $matkulKode = $matkul[$matkul_kode];

@@ -10,6 +10,7 @@
                  <li class="sidebar-item"> <a class="sidebar-link" href="admin-ruangKelas.php" aria-expanded="false"><i data-feather="book" class="feather-icon"></i><span class="hide-menu">Ruang Kelas</span></a></li>
                  <li class="sidebar-item"> <a class="sidebar-link" href="admin-dosenPage.php" aria-expanded="false"><i data-feather="book" class="feather-icon"></i><span class="hide-menu">Dosen</span></a></li>
                  <li class="sidebar-item"> <a class="sidebar-link" href="admin-mhsPage.php" aria-expanded="false"><i data-feather="book" class="feather-icon"></i><span class="hide-menu">Mahasiswa</span></a></li>
+                 <li class="sidebar-item"> <a class="sidebar-link" href="admin-daftarAbsensi.php" aria-expanded="false"><i data-feather="book" class="feather-icon"></i><span class="hide-menu">Daftar Absensi</span></a></li>
                  <li class="sidebar-item"> <a class="sidebar-link" href="index.php" aria-expanded="false"><i data-feather="power" class="feather-icon"></i><span class="hide-menu">Log Out</span></a></li>
              </ul>
          </nav>
