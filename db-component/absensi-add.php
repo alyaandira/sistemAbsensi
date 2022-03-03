@@ -14,6 +14,7 @@ VALUES ('$tableAbsenStatus','$tableMhsNim','$selectedPertKode')";
 
 $result = mysqli_query($conn, $SQL_query);
 
+
 if ($result) {
   echo
   "<script>

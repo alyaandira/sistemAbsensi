@@ -8,24 +8,21 @@ if ($conn->connect_error) {
 }
 
 // $selectedDosenNIP = $_POST["selectedDosenNIP"];
-$currentNIP = $_SESSION["currentNIP"];
 
-$SQL_query = "SELECT * FROM $pert_table " .
-  "LEFT JOIN $matkul_table " .
-  "ON pertemuan.matkul_kode = mata_kuliah.matkul_kode " .
-  "LEFT JOIN $ruangkelas_table " .
-  "ON pertemuan.kelas_id = ruang_kelas.kelas_id " .
-  "HAVING `$pert_dosen_nip` = $currentNIP ";
+$SQL_query = "SELECT $pert_matkul_kode, `$pert_dosen_nip`, `$pert_kelas_id`, `$pert_waktu_mulai`, `$pert_waktu_akhir`, absensi.absensi_status, absensi.mhs_nim FROM $pert_table " .
+  "LEFT JOIN $absensi_table " .
+  "ON pertemuan.pert_kode = absensi.pert_kode ";
 
-  echo $SQL_query;
+// echo $SQL_query;
+
 $result = mysqli_query($conn, $SQL_query);
 
 if ($result) {
   $row_count = $result->num_rows;
-  $pertemuanList = [];
+  $absenTerdaftarList = [];
 
   if ($row_count > 0) {
-    $pertemuanList = $result->fetch_all(MYSQLI_ASSOC);
+    $absenTerdaftarList = $result->fetch_all(MYSQLI_ASSOC);
   }
 } else {
   $error_message = $conn->error;

@@ -65,7 +65,7 @@ session_start();
                 <!-- Container fluid  -->
                 <div class="container-fluid">
                     <?php
-                    include './db-component/admin-GetAbsensiByPertemuan.php';
+                    include './db-component/admin-GetAbsensiByPertemuan-full.php';
                     // var_dump($matkulTerdaftarList);
                     ?>
                     <h1> DAFTAR ABSENSI </h1>
@@ -85,22 +85,49 @@ session_start();
                             <tbody>
                                 <?php
                                 foreach ($absenTerdaftarList as $class) {
+                                    $pertKode = $class[$pert_kode];
                                     $matkulKode = $class[$pert_matkul_kode];
-                                    $dosenNIP = $class[$pert_dosen_nip];
                                     $kelasID = $class[$pert_kelas_id];
+                                    $dosenNIP = $class[$pert_dosen_nip];
                                     $waktuMulai = $class[$pert_waktu_mulai];
                                     $waktuAkhir = $class[$pert_waktu_akhir];
-                                    $mahasiswaStatus = $class[$absensi_status];
+                                    $batasWaktu = $class[$pert_batas_waktu];
+                                    $matkulKode = $class[$pert_matkul_kode];
+                                    $matkulNama = $class[$matkul_nama];
+                                    $kelasID = $class[$pert_kelas_id];
+                                    $kelasNama = $class[$ruangkelas_nama];
+                                    $dosenNIP = $class[$pert_dosen_nip];
+                                    $dosenNama = $class[$dosen_nama];
+                                    $dosenPass = $class[$dosen_password];
+                                    $dosenEmail = $class[$dosen_email];
+                                    $dosenFakultas = $class[$dosen_fakultas];
+                                    $dosenJurusan = $class[$dosen_jurusan];
+                                    $absensiID = $class[$absensi_id];
+                                    $absensiStatus = $class[$absensi_status];
                                     $mahasiswaNIM = $class[$absensi_mhs_nim];
+                                    $pertKode = $class[$pert_kode];
                                     echo "
                                 <tr>
+                                    <td>$pertKode</td>
                                     <td>$matkulKode</td>
-                                    <td>$dosenNIP</td>
                                     <td>$kelasID</td>
+                                    <td>$dosenNIP</td>
                                     <td>$waktuMulai</td>
                                     <td>$waktuAkhir</td>
-                                    <td>$mahasiswaStatus</td>
+                                    <td>$batasWaktu</td>
+                                    <td>$matkulKode</td>
+                                    <td>$matkulNama</td>
+                                    <td>$kelasID</td>
+                                    <td>$kelasNama</td>
+                                    <td>$dosenNIP</td>
+                                    <td>$dosenNama</td>
+                                    <td>$dosenPass</td>
+                                    <td>$dosenEmail</td>
+                                    <td>$dosenFakultas</td>
+                                    <td>$dosenJurusan</td>
+                                    <td>$absensiStatus</td>
                                     <td>$mahasiswaNIM</td>
+                                    <td>$pertKode</td>
                                 </tr>";
                                 }
                                 ?>

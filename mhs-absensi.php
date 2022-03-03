@@ -111,7 +111,6 @@ if (!isset($_SESSION["currentNIP"])) {
                                 $selectedMataKuliahKode = $_POST["selectedMataKuliahKode"];
                                 $selectedMataKuliahNama = $_POST["selectedMataKuliahNama"];
                                 $currentNIP = $_SESSION["currentNIP"];
-                                // echo $currentNIP;
 
                                 foreach ($absensiPertemuanList as $absensi) {
 
@@ -128,8 +127,6 @@ if (!isset($_SESSION["currentNIP"])) {
                                         $akhirWaktu = $absensi[$pert_waktu_akhir];
                                         $waktuBatas = $absensi[$pert_batas_waktu];
                                         $matkulKode = $absensi[$pert_matkul_kode];
-
-
 
                                         if ($absensi[$absensi_status] == null) {
                                             $displayMatkulKode = "-";
